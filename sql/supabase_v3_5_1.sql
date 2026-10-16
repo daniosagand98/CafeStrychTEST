@@ -1,5 +1,5 @@
 -- =====================================================================
--- Cafe Strych – NAPRAWA TABEL (V3.5.1, 16.10.2026)
+-- Cafe Strych – NAPRAWA TABEL (V3.5.2, 16.10.2026)
 -- Tworzy tabele, których aplikacja potrzebuje, a których brakuje w bazie
 -- (np. message_reads → błąd „Could not find the table ... in the schema cache”),
 -- i dodaje brakujące kolumny. Istniejących danych nie usuwa.
@@ -282,6 +282,29 @@ end $$;
 do $$ begin
   alter publication supabase_realtime add table public.message_reads;
 exception when duplicate_object or undefined_object then null; end $$;
+
+-- ---------- bug_reports: stare kolumny wymagane (np. details) ----------
+-- Starsza wersja tabeli miała obowiązkowe kolumny (np. "details"), których nowa aplikacja
+-- nie zna → błąd „null value in column ... violates not-null constraint”.
+-- Zdejmujemy wymóg NOT NULL ze wszystkich kolumn poza id i created_at oraz stare ograniczenia statusu.
+do $$
+declare c record;
+begin
+  for c in select column_name from information_schema.columns
+           where table_schema = 'public' and table_name = 'bug_reports'
+             and is_nullable = 'NO' and column_name not in ('id','created_at')
+  loop
+    execute format('alter table public.bug_reports alter column %I drop not null', c.column_name);
+    raise notice 'bug_reports.%: zdjęto wymóg NOT NULL', c.column_name;
+  end loop;
+  for c in select con.conname from pg_constraint con join pg_class rel on rel.oid = con.conrelid
+           where rel.relname = 'bug_reports' and con.contype = 'c'
+             and pg_get_constraintdef(con.oid) ilike '%status%'
+  loop
+    execute format('alter table public.bug_reports drop constraint %I', c.conname);
+    raise notice 'bug_reports: usunięto stare ograniczenie %', c.conname;
+  end loop;
+end $$;
 
 -- odśwież listę tabel w API Supabase (usuwa błąd „schema cache”)
 notify pgrst, 'reload schema';
