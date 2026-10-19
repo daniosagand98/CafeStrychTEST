@@ -2,13 +2,17 @@
 
 | Ścieżka | Co to jest |
 |---|---|
-| `index.html` + `img/` | Strona lokalu (v1.1) – aktualności, menu, galeria, rezerwacje |
+| `index.html` + `img/` | Strona lokalu (v1.2) – aktualności, menu, galeria, rezerwacje |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.5.2** (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Strona v1.2 – 19.10.2026
+- Nowa sekcja „Na bieżąco”: najnowsze posty z Instagrama i TikToka (@cafe_strych) przez oficjalne osadzenia obu serwisów – aktualizują się same. Gdy przeglądarka blokuje treści zewnętrzne, pokazuje się karta z linkiem do profilu.
+- Usunięte zdjęcia sprzed remontu 2024 (kominek z zieloną kanapą, bar z gitarami, widok z antresoli, sufit z wentylatorem, kącik przy piecu) – z pokazu na górze, sekcji muzyki i galerii. Galeria sama dopasowuje układ do liczby zdjęć.
 
 ## Strona v1.1 – 19.10.2026 (poprawki od klientki)
 - Godziny otwarcia od 12:00.

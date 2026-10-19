@@ -8,7 +8,7 @@
 <meta name="description" content="Cafe Strych w Gdyni – kawiarnia, bar i pub w chacie rybackiej z 1890 roku. Kawa z kawiarki, piwo z beczki, nalewki spod lady i muzyka na żywo w środy. Plac Kaszubski 7.">
 <meta property="og:title" content="Cafe Strych – Gdynia">
 <meta property="og:description" content="Kawiarnia, bar i pub w najstarszym domu mieszkalnym w Gdyni. Muzyka na żywo w środy.">
-<meta property="og:image" content="img/hero-kominek.webp">
+<meta property="og:image" content="img/hero-witraz.webp">
 <link rel="icon" href="img/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@700&family=Lora:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -243,7 +243,7 @@ mark{background:var(--peach2);color:inherit;border-radius:3px;padding:0 2px}
 
 /* ---------- music ---------- */
 .music{min-height:88vh;display:grid;align-items:center;color:var(--cream);overflow:hidden;background:var(--dark)}
-.music .bg{position:absolute;inset:-12% 0;background:url(img/bar-gitary.webp) center/cover no-repeat;will-change:transform}
+.music .bg{position:absolute;inset:-12% 0;background:url(img/hero-witraz.webp) center/cover no-repeat;will-change:transform}
 .music::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,17,11,.95) 0%,rgba(27,17,11,.78) 42%,rgba(27,17,11,.15) 100%)}
 .music .wrap{position:relative;z-index:2}
 .music .box{max-width:600px}
@@ -263,6 +263,7 @@ mark{background:var(--peach2);color:inherit;border-radius:3px;padding:0 2px}
 .gallery button:nth-child(1){grid-column:span 2;grid-row:span 2}
 .gallery button:nth-child(4){grid-row:span 2}
 .gallery button:nth-child(6){grid-column:span 2}
+.gallery.compact button:nth-child(4){grid-row:auto}.gallery.compact button:nth-child(6){grid-column:auto}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s;filter:saturate(.92)}
 .gallery button:hover img{transform:scale(1.08);filter:saturate(1.1)}
 .gallery button::after{content:attr(data-cap);position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:999px;background:rgba(27,17,11,.75);color:var(--cream);font-size:13px;opacity:0;transform:translateY(8px);transition:.45s var(--ease)}
@@ -313,6 +314,22 @@ mark{background:var(--peach2);color:inherit;border-radius:3px;padding:0 2px}
 .soc svg{width:18px;height:18px;fill:currentColor}.soc:hover{background:var(--brown);color:var(--cream)!important;transform:translateY(-2px)!important}
 footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .soc:hover{background:var(--peach);color:var(--ink)!important}
 
+/* ---------- social ---------- */
+#social .sketch.a{width:120px;right:4%;top:90px}
+.socialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
+.socialCol{min-width:0;padding:18px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -28px rgba(42,27,17,.45)}
+.socialHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socialHead b{display:block;font:600 22px var(--serif)}.socialHead small{color:var(--muted)}.socialHead .btn{margin-left:auto}
+.socIco{width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center;border-radius:14px;color:#fff}.socIco svg{width:24px;height:24px}
+.socIco.ig{background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888)}.socIco.tt{background:#111}
+.embedBox{min-height:420px;display:flex;justify-content:center}
+.embedBox iframe{max-width:100%!important}
+.embedBox blockquote{margin:0!important;width:100%}
+.embedFallback{width:100%;min-height:400px;display:grid;place-content:center;gap:12px;text-align:center;padding:26px;border-radius:16px;border:2px dashed var(--line);color:var(--ink2);background:repeating-linear-gradient(45deg,transparent 0 14px,rgba(235,182,124,.08) 14px 28px)}
+.embedFallback b{font:600 24px var(--serif);color:var(--ink)}.embedFallback .btn{justify-self:center}
+.embedFallback .dots{display:inline-flex;gap:6px;justify-content:center}.embedFallback .dots i{width:8px;height:8px;border-radius:50%;background:var(--brown2);animation:dotp 1.2s infinite}.embedFallback .dots i:nth-child(2){animation-delay:.2s}.embedFallback .dots i:nth-child(3){animation-delay:.4s}
+@keyframes dotp{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:none}}
+.embedFallback.failed .dots{display:none}
+
 /* ---------- footer ---------- */
 footer{background:var(--dark);color:var(--creamMuted);padding:70px 0 34px;font-size:14px}
 .fTop{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--lineD)}
@@ -358,6 +375,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .newsGrid{grid-template-columns:1fr 1fr}.nCard.nFeat{grid-column:span 2}
   .histGrid,.contactGrid{grid-template-columns:1fr}
   .histMedia{min-height:540px;max-width:620px;width:100%;margin-inline:auto}
+  .socialGrid{grid-template-columns:1fr}
   .eventGrid{grid-template-columns:1fr}.eventCard{padding:22px}.eventPhone{margin-left:0}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px 220px}
   .tile:first-child{grid-row:auto;grid-column:span 2}.tile:nth-child(4){grid-column:span 2}
@@ -380,6 +398,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .heroMeta>div{flex:1}
   .newsGrid{grid-template-columns:1fr}.nCard.nFeat{grid-column:auto;flex-direction:column}.nCard.nFeat .nImg{min-height:0;aspect-ratio:16/10}
   .histMedia{min-height:430px}.histMedia .stamp{width:96px;height:96px;font-size:24px;left:58%;top:40%}
+  .socialCol{padding:12px}.socialHead .btn{padding:8px 14px}
   .bento{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}.tile:first-child,.tile:nth-child(4){grid-column:auto}
   .tile span{max-height:none;opacity:1;margin-top:6px}
   .feats{grid-template-columns:1fr}
@@ -410,7 +429,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
 <header id="hdr">
   <a class="logo" href="#start" aria-label="Cafe Strych – na górę strony"><img src="img/logo-strych.webp" alt="Cafe Strych"></a>
   <nav class="main" id="nav" aria-label="Główna nawigacja">
-    <a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka</a><a href="#imprezy">Imprezy</a><a href="#galeria">Galeria</a><a href="#kontakt">Kontakt</a>
+    <a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka</a><a href="#imprezy">Imprezy</a><a href="#galeria">Galeria</a><a href="#social">Social</a><a href="#kontakt">Kontakt</a>
   </nav>
   <div class="hdrRight">
     <span class="openBadge" id="openBadge"><i></i><span>…</span></span>
@@ -423,9 +442,9 @@ dialog[open]{animation:dlg .5s var(--ease)}
 <!-- HERO -->
 <section class="hero" id="start">
   <div class="slides" id="slides">
-    <div class="slide active" style="--img:url(img/hero-kominek.webp)"></div>
-    <div class="slide" style="--img:url(img/hero-witraz.webp)"></div>
+    <div class="slide active" style="--img:url(img/hero-witraz.webp)"></div>
     <div class="slide" style="--img:url(img/hero-antresola.webp)"></div>
+    <div class="slide" style="--img:url(img/strych-antresola.webp)"></div>
   </div>
   <div class="heroShade"></div>
   <div class="wrap">
@@ -580,6 +599,28 @@ dialog[open]{animation:dlg .5s var(--ease)}
   </div>
 </section>
 
+<!-- SOCIAL: najnowsze posty -->
+<section class="paper sec" id="social">
+  <img class="sketch a" src="img/szkic-ziarna.webp" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="secHead reveal">
+      <span class="brush">Na bieżąco</span>
+      <h2>Najnowsze z <em>Instagrama</em> i TikToka</h2>
+      <p>Zdjęcia, filmiki z koncertów i nowości z baru – prosto z naszych profili.</p>
+    </div>
+    <div class="socialGrid">
+      <div class="socialCol reveal" data-embed="instagram">
+        <div class="socialHead"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><div><b>Instagram</b><small class="handle" data-handle="instagram"></small></div><a class="btn btn-ink btn-sm socFollow" data-link="instagram" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="embedBox" id="igEmbed"></div>
+      </div>
+      <div class="socialCol reveal" style="--d:.12s" data-embed="tiktok">
+        <div class="socialHead"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><div><b>TikTok</b><small class="handle" data-handle="tiktok"></small></div><a class="btn btn-ink btn-sm socFollow" data-link="tiktok" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="embedBox" id="ttEmbed"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="paper sec" id="kontakt">
   <div class="wrap">
@@ -615,7 +656,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span>Strona <b>v1.1</b> · aktualizacja 19.10.2026 · projekt i wykonanie: Daniel Wawrzyniak</span>
+      <span>Strona <b>v1.2</b> · aktualizacja 19.10.2026 · projekt i wykonanie: Daniel Wawrzyniak</span>
     </div>
   </div>
 </footer>
@@ -668,9 +709,9 @@ const CONFIG={
 const MENU=[{"id": "kawa", "name": "Kawa", "tab": "kawa", "sizes": [""], "note": "Do wyboru: mleko zwykłe / bez laktozy", "items": [["Kawa aromatyzowana", "podawana tradycyjnie w kawiarce · smaki: czekoladowo-migdałowa, kokosowa, marcepanowa, karmelowa, śliwka z cynamonem, cynamonowa, orzechowo-kremowa", [17]], ["Kawa czarna", "do wyboru: z ekspresu / mielona / rozpuszczalna", [13]], ["Flat White (kawa biała)", "", [16]], ["Cappuccino", "", [16]], ["Latte Macchiato", "", [17]], ["Kawa z bitą śmietaną", "", [22]], ["Espresso, woda", "", [13]], ["Podwójne espresso", "", [20]], ["Espresso z tonikiem i cytryną", "", [20]], ["Kawa mrożona", "", [18]], ["Kawa mrożona z mlekiem i bitą śmietaną 0,4 l", "", [25]], ["Syrop do kawy", "dyniowy, kokosowy, migdałowy, orzechowy, karmelowy, waniliowy, miętowy, różany, czarny bez, czekoladowy, cynamonowy", [3]]]}, {"id": "czekolada", "name": "Czekolada", "tab": "kawa", "sizes": [""], "note": "", "items": [["Gorąca czekolada 0,3 l", "", [17]], ["Gorąca czekolada z bitą śmietaną 0,3 l", "", [23]], ["Gorąca czekolada z konfiturą i bitą śmietaną 0,3 l", "smaki: wiśniowa, truskawkowa, malinowa, jagodowa", [26]], ["Czekolada mrożona z bitą śmietaną 0,4 l", "", [26]], ["Syrop do czekolady", "dyniowy, kokosowy, migdałowy, orzechowy, karmelowy, różany, czarny bez, miętowy, waniliowy, cynamonowy", [3]]]}, {"id": "herbata", "name": "Herbata", "tab": "herbata", "sizes": ["0,3 l"], "note": "", "items": [["Herbata w torebce", "do wyboru: Ceylon / Earl Grey / miętowa / zielona / owoce leśne", [13]], ["Herbata liściasta", "zapytaj obsługę o dostępne smaki :)", [17]], ["Napar", "świeża mięta, świeży imbir, cytryna, goździki, miód", [17]]]}, {"id": "herbata-po-naszemu", "name": "Herbata po naszemu", "tab": "herbata", "sizes": ["0,3 l", "0,5 l"], "note": "", "items": [["Herbata Rybaka", "czarna z sokiem malinowym i plasterkiem cytryny lub czarna z sokiem korzennym i plasterkiem pomarańczy", [16, 21]], ["Herbata Gdyńska", "czarna z miodem, goździkami, plasterkiem cytryny i pomarańczy", [18, 23]], ["Herbata Strychowa", "czarna z imbirem, cynamonem, miodem, jabłkiem i pomarańczą", [18, 23]], ["Herbata Babuni", "czarna z konfiturą · smaki: jagodowa, truskawkowa, wiśniowa, malinowa", [18, null]]]}, {"id": "napoje", "name": "Napoje i soki", "tab": "bezalko", "sizes": ["0,3 l", "1,0 l"], "note": "", "items": [["Coca-Cola", "", [10, 22]], ["Sprite", "", [10, 22]], ["Tonic", "", [10, 22]], ["Sok", "jabłkowy, grejpfrutowy, czarna porzeczka, bananowy, pomarańczowy, ananasowy, winogronowy, pomidorowy", [10, 22]], ["Woda źródlana", "gazowana Żywiec Zdrój / niegazowana Cisowianka", [7, 15]], ["Red Bull 0,25 l", "", [15, null]]]}, {"id": "koktajle-bezalko", "name": "Koktajle bezalkoholowe", "tab": "bezalko", "sizes": ["400 ml"], "note": "", "items": [["Wilk Morski", "syrop Blue Curacao, sok bananowy, sok pomarańczowy", [18]], ["Shrek", "syrop miętowy, sok jabłkowy, sok grejpfrutowy, sok pomarańczowy", [18]], ["Czerwony Kapturek", "syrop Grenadina, cytryna, sok jabłkowy, sok grejpfrutowy", [18]], ["Lemoniada", "zaufaj nam :)", [18]]]}, {"id": "grzance-bezalko", "name": "Grzańce bezalkoholowe", "tab": "bezalko", "sizes": [""], "note": "", "items": [["Wino czerwone z przyprawami 0,2 l", "", [20]], ["Piwo z przyprawami 0,5 l", "", [21]]]}, {"id": "piwo-bezalko", "name": "Piwo bezalkoholowe", "tab": "bezalko", "sizes": ["0,5 l"], "note": "", "items": [["Miłosław IPA 0,0%", "", [17]], ["Lech Smakowy 0,0%", "", [17]], ["Heineken 0,0%", "", [17]], ["Książęce Pszenica 0,0%", "", [17]]]}, {"id": "wino-bezalko", "name": "Wino bezalkoholowe", "tab": "bezalko", "sizes": ["kieliszek", "butelka"], "note": "", "items": [["Wino bezalkoholowe", "zapytaj obsługę :)", [15, 80]]]}, {"id": "piwo-beczka", "name": "Piwo z beczki", "tab": "piwo", "sizes": ["0,3 l", "0,5 l", "1,0 l"], "note": "", "items": [["Tyskie Gronie", "", [13, 16, 30]], ["Książęce Złote Pszeniczne", "", [14, 17, 32]]]}, {"id": "piwo-butelka", "name": "Piwo z butelki", "tab": "piwo", "sizes": ["0,5 l", "1,0 l"], "note": "", "items": [["Lech Premium", "", [16, 30]], ["Perła", "", [16, 30]], ["Pilsner Urquell", "", [17, 32]], ["Heineken", "", [17, 32]], ["Kozel Ciemny", "", [17, 32]], ["Piwo kraftowe", "zapytaj obsługę", [22, 37]]]}, {"id": "syropy-piwo", "name": "Syropy do piwa", "tab": "piwo", "sizes": ["0,3 l", "0,5 l", "1,0 l"], "note": "Smaki: malinowy, wiśniowy, kokosowy, czarny bez, arbuzowy, marakuja, miętowy, korzenny, imbirowy, migdałowy, karmelowy", "items": [["Syrop do piwa", "", [2, 3, 4]]]}, {"id": "wino", "name": "Wino", "tab": "wino", "sizes": ["kieliszek", "butelka"], "note": "", "items": [["Winiarnia Zamojska", "polskie wino różowe półsłodkie – lekka czerwona porzeczka", [14, 80]], ["Luna Argenta Moscato", "białe włoskie półwytrawne, intensywny bukiet egzotycznych owoców, nuty kwiatowe i miód", [15, 90]], ["Beauvillion", "białe francuskie półwytrawne, delikatne, o świeżym owocowym bukiecie", [14, 85]], ["Cono Sur", "białe chilijskie wytrawne, orzeźwiające, o owocowym aromacie", [14, 80]], ["Sheep Dreams Sauvignon Blanc", "białe nowozelandzkie wytrawne, owoce tropikalne, nuta agrestu i brzoskwini", [17, 110]], ["Los Pagos", "czerwone chilijskie wytrawne o przyjemnym owocowym aromacie", [14, 80]], ["Primitivo Puglia", "czerwone włoskie półwytrawne, aromatyczne i pikantne", [14, 80]], ["Primitivo di Manduria", "czerwone włoskie wytrawne, aromaty śliwek i wiśni", [16, 110]], ["Wino spod lady", "zapytaj obsługę, co ciekawego trzymamy na barze :)", [15, 90]]]}, {"id": "prosecco", "name": "Prosecco", "tab": "wino", "sizes": ["kieliszek", "butelka"], "note": "", "items": [["Martini Prosecco", "białe włoskie musujące wytrawne", [15, 90]]]}, {"id": "wermuty", "name": "Wermuty", "tab": "wino", "sizes": [""], "note": "", "items": [["Martini Bianco", "białe włoskie słodkie, nuta wanilii i aromat ziół", [14]], ["Martini Rosso", "czerwone włoskie słodkie, nuta karmelu i aromat ziół", [14]]]}, {"id": "drinki", "name": "Drinki tradycyjne", "tab": "drinki", "sizes": [""], "note": "", "items": [["Cuba Libre", "rum Bacardi, Coca-Cola, limonka lub cytryna", [26]], ["Whisky Sour", "whisky Jim Beam, sok z cytryny, syrop cukrowy, białko", [32]], ["Mojito", "rum Bacardi, mięta, limonka, cukier, Sprite", [32]], ["Aperol Spritz", "likier Aperol, Martini Prosecco, woda gazowana, plasterek pomarańczy", [30]], ["Margarita", "tequila złota Olmeca, sok z limonki, likier Triple Sec, sól", [28]], ["Caipiroska", "wódka, limonka, cukier trzcinowy", [27]], ["Krwawa Mary", "wódka, sok pomidorowy, przyprawy", [28]], ["Sex on the Beach", "wódka, likier Archers brzoskwiniowy, sok pomarańczowy, syrop Grenadina", [28]], ["Tequila Sour", "tequila Olmeca, sok z limonki, sok z cytryny, cukier, białko", [30]], ["Negroni", "gin, Campari, Martini Rosso", [30]], ["Hugo", "Martini Prosecco, woda gazowana, syrop z czarnego bzu, świeża limonka, świeża mięta", [27]]]}, {"id": "nasze-drinki", "name": "Nasze pomysły na drinka", "tab": "drinki", "sizes": [""], "note": "", "items": [["Początek", "Martini Bianco, Sprite, cytryna", [24]], ["Wspomnienie", "likier Campari, sok pomarańczowy", [24]], ["Przytulny Kącik", "wódka żurawinowa, syrop Grenadina, sok pomarańczowy", [25]], ["Rok 1926", "wódka Żubrówka trawiasta, sok jabłkowy", [25]], ["Strychowy", "likier Blue Curacao, wódka, Sprite, sok z cytryny", [26]], ["Samotna Dziewczyna", "likier bananowy, wódka, syrop Blue Curacao, sok ananasowy", [26]], ["Marzenie", "likier Passoa, wódka, sok pomarańczowy", [27]], ["Satyra", "likier Jagermeister, sok z cytryny, sok jabłkowy", [27]], ["Stały Bywalec", "likier Carambola, nalewka cytrynowa, sok grejpfrutowy, syrop Blue Curacao", [27]], ["Poezja", "likier melonowy, wódka, sok winogronowy, woda, sok z cytryny", [27]], ["Ojciec Chrzestny", "rum Malibu, wódka, sok z czarnej porzeczki, sok pomarańczowy", [27]], ["Zachód Słońca", "wódka, sok pomarańczowy, cytryna, syrop Grenadina", [27]], ["Miętowy Lodowiec", "nalewka cytrynowa, sok grejpfrutowy, syrop Blue Curacao", [28]], ["Zazdrosna Żona", "tequila Olmeca, likier Blue Curacao, sok grejpfrutowy", [30]], ["Melancholia", "whisky Johnnie Walker, Martini Bianco, sok grejpfrutowy", [32]], ["Krwawy Zdzisiu", "rum czarny Bacardi, likier Campari, sok pomarańczowy, syrop marakuja", [32]], ["Na Pożegnanie", "tequila srebrna, rum Malibu, sok pomarańczowy", [32]]]}, {"id": "shoty", "name": "Shoty", "tab": "drinki", "sizes": ["40 ml"], "note": "", "items": [["Wściekły Pies", "wódka, sok malinowy, Tabasco", [12]], ["Małpi Mózg", "likier Archers, krem Bailey’s, syrop Grenadina", [13]], ["Kamikadze – set 4 shoty", "wódka, sok z cytryny, likier Blue Curacao", [34]], ["Tequila złota", "tequila Olmeca, pomarańcza, cynamon", [15]], ["Tequila srebrna", "tequila Olmeca, cytryna, sól", [15]]]}, {"id": "wodka", "name": "Wódka", "tab": "alkohole", "sizes": ["40 ml", "butelka 0,5 l"], "note": "", "items": [["Luksusowa", "", [10, 100]], ["Finlandia", "", [11, 115]], ["Biały Bocian", "", [11, 115]]]}, {"id": "wodki-smakowe", "name": "Wódki smakowe", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Żurawinowa", "", [10]], ["Wiśniówka", "", [10]], ["Malinówka", "", [10]], ["Pigwówka", "", [10]], ["Żubrówka Trawiasta", "", [10]]]}, {"id": "nalewki", "name": "Nalewki spod lady", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Kieliszek nalewki", "zapytaj obsługę o dostępne smaki :)", [13]]]}, {"id": "whisky", "name": "Whisky", "tab": "alkohole", "sizes": ["40 ml", "butelka 0,7 l"], "note": "", "items": [["Ballantine's", "", [16, 220]], ["Johnnie Walker", "", [16, 220]], ["Jameson Irish", "", [17, 240]], ["Jim Beam White Bourbon", "", [16, null]], ["Jack Daniel's", "", [18, 260]], ["Chivas Regal", "", [20, null]]]}, {"id": "likiery", "name": "Likiery", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Blue Curacao", "", [14]], ["Melon", "", [14]], ["Banan", "", [14]], ["Amaretto", "", [14]], ["Kahlua", "", [15]], ["Passoa", "", [14]], ["Archers", "", [15]], ["Triple Sec", "", [14]], ["Jagermeister", "", [14]], ["Fernet Blanca", "", [16]], ["Campari", "", [15]]]}, {"id": "kremy", "name": "Kremy", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Baileys", "", [16]], ["Advocaat", "", [10]]]}, {"id": "gin", "name": "Gin", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Seagram's", "", [14]], ["Lubuski", "", [14]]]}, {"id": "rum", "name": "Rum", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Bacardi", "białe lub czarne", [16]], ["Havana Club", "brązowy", [16]], ["Captain Morgan", "brązowy", [16]]]}, {"id": "brandy", "name": "Brandy", "tab": "alkohole", "sizes": ["40 ml"], "note": "", "items": [["Stock 84", "", [17]]]}, {"id": "na-slodko", "name": "Na słodko", "tab": "jedzenie", "sizes": [""], "note": "", "items": [["Ciasto domowej roboty", "podawane z porcją bitej śmietany · do wyboru: sernik / jabłecznik", [21]], ["Ciasto spod lady", "skuś się, bo warto :)", [24]], ["Lody w pucharku", "3 gałki, bita śmietana, polewa", [28]]]}, {"id": "przekaski", "name": "Przekąski", "tab": "jedzenie", "sizes": [""], "note": "", "items": [["Paluszki Lajkonik", "", [16]], ["Orzeszki solone", "", [16]], ["Chipsy", "paprykowe / solone", [16]], ["Nachos z sosem serowym", "", [23]]]}, {"id": "zakaski", "name": "Zakąski", "tab": "jedzenie", "sizes": [""], "note": "", "items": [["Pajda chleba", "2 kromki chleba z domowym smalcem i ogórkiem", [17]], ["Domowe tosty na ciepło", "zapiekane 4 trójkąty", [17]], ["Panini", "do wyboru: szynka / mozzarella / sałata rzymska lub pomidor / mozzarella / pesto", [18]], ["Krokiety na ciepło (2 szt.)", "zapytaj obsługę, co dziś mamy", [17]], ["Łazanki na ciepło", "z kapustą i grzybami", [18]], ["Deska rozmaitości dla 2 osób", "do wyboru: deska serów / deska wędlin", [38]]]}];
 const TABS=[["kawa", "Kawa i czekolada"], ["herbata", "Herbata"], ["bezalko", "Bez procentów"], ["piwo", "Piwo"], ["wino", "Wino"], ["drinki", "Drinki i shoty"], ["alkohole", "Mocniejsze"], ["jedzenie", "Do jedzenia"]];
 const GALLERY=[
-  ['hero-kominek','Piec i zielona kanapa'],['hero-witraz','Sala z witrażem'],['bar-gitary','Bar, pianino i gitary'],['strych-antresola','Antresola na strychu'],
-  ['hero-antresola','Sala z antresolą'],['strych-stolik','Stolik pod dachem'],['brama','Malowana brama od podwórza'],['sala-z-gory','Widok z antresoli'],
-  ['sala-sufit','Belki, piec i wentylator'],['kominek-kacik','Kącik przy piecu']
+  // tylko zdjęcia po remoncie 2024 – nowe dopisuj tutaj: ['nazwa-pliku-bez-.webp','Podpis']
+  ['hero-witraz','Sala z witrażem'],['hero-antresola','Sala z antresolą i białym piecem'],['strych-antresola','Antresola na strychu'],
+  ['strych-stolik','Stolik pod dachem'],['brama','Malowana brama od podwórza']
 ];
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -765,7 +806,7 @@ let st;$('#menuSearch').addEventListener('input',()=>{clearTimeout(st);st=setTim
 renderMenu(false);requestAnimationFrame(movePill);
 
 /* ---------- gallery + lightbox ---------- */
-(()=>{const g=$('#gallery');g.innerHTML=GALLERY.map(([f,c],i)=>`<button type="button" class="reveal zoom" style="--d:${(i%4)*.08}s" data-i="${i}" data-cap="${esc(c)}"><img src="img/${f}.webp" alt="${esc(c)}" loading="lazy"></button>`).join('');observe(g);
+(()=>{const g=$('#gallery');g.classList.toggle('compact',GALLERY.length<8);g.innerHTML=GALLERY.map(([f,c],i)=>`<button type="button" class="reveal zoom" style="--d:${(i%4)*.08}s" data-i="${i}" data-cap="${esc(c)}"><img src="img/${f}.webp" alt="${esc(c)}" loading="lazy"></button>`).join('');observe(g);
   const lb=$('#lb'),img=$('#lbImg'),cap=$('#lbCap');let i=0;
   const show=k=>{i=(k+GALLERY.length)%GALLERY.length;img.style.opacity=0;setTimeout(()=>{img.src='img/'+GALLERY[i][0]+'.webp';img.alt=GALLERY[i][1];cap.textContent=GALLERY[i][1];img.onload=()=>img.style.opacity=1;if(img.complete)img.style.opacity=1},120)};
   const open=k=>{show(k);lb.classList.add('open');document.body.style.overflow='hidden';$('#lbClose').focus()},close=()=>{lb.classList.remove('open');document.body.style.overflow=''};
@@ -792,6 +833,23 @@ async function loadNews(){
   NEWS=r.error?[]:(r.data||[]);if(r.error)console.warn('Aktualności:',r.error.message);renderNews()}
 loadNews();
 if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'public',table:'site_news'},()=>{clearTimeout(nt);nt=setTimeout(loadNews,400)}).subscribe()}
+
+/* ---------- social: najnowsze posty (oficjalne osadzenia Instagram i TikTok) ---------- */
+(()=>{const user=(url,re)=>{const m=re.exec(url||'');return m?m[1]:''},ig=user(CONFIG.instagram,/instagram\.com\/([^/?#]+)/),tt=user(CONFIG.tiktok,/tiktok\.com\/@([^/?#]+)/);
+  const sec=$('#social');if(!ig&&!tt){sec.remove();$$('a[href="#social"]').forEach(a=>a.remove());return}
+  if(!ig)sec.querySelector('[data-embed="instagram"]').remove();if(!tt)sec.querySelector('[data-embed="tiktok"]').remove();
+  $$('[data-handle="instagram"]').forEach(e=>e.textContent='@'+ig);$$('[data-handle="tiktok"]').forEach(e=>e.textContent='@'+tt);
+  $$('[data-link="instagram"]').forEach(a=>a.href=CONFIG.instagram);$$('[data-link="tiktok"]').forEach(a=>a.href=CONFIG.tiktok);
+  const fb=(name,href,handle)=>`<div class="embedFallback"><span class="dots"><i></i><i></i><i></i></span><b>@${esc(handle)}</b><span class="fbTxt">Wczytujemy najnowsze posty z ${name}…</span><a class="btn btn-gold btn-sm" href="${esc(href)}" target="_blank" rel="noopener">Otwórz ${name} →</a></div>`;
+  const igBox=$('#igEmbed'),ttBox=$('#ttEmbed');
+  if(igBox)igBox.innerHTML=`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/${esc(ig)}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="max-width:540px;min-width:280px;width:100%;border:0;background:transparent">${fb('Instagrama',CONFIG.instagram,ig)}</blockquote>`;
+  if(ttBox)ttBox.innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(tt)}" data-unique-id="${esc(tt)}" data-embed-type="creator" style="max-width:720px;min-width:280px;width:100%"><section>${fb('TikToka',CONFIG.tiktok,tt)}</section></blockquote>`;
+  const load=src=>new Promise(r=>{const sc=document.createElement('script');sc.async=true;sc.src=src;sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
+  const giveUp=box=>setTimeout(()=>{if(box&&!box.querySelector('iframe'))box.querySelectorAll('.embedFallback').forEach(f=>{f.classList.add('failed');const t=f.querySelector('.fbTxt');if(t)t.textContent='Podgląd postów nie wczytał się (np. przez blokadę treści zewnętrznych). Zobacz je bezpośrednio:'})},9000);
+  if(window.STRYCH_PREVIEW){[igBox,ttBox].forEach(giveUp);return}
+  new IntersectionObserver(async(es,o)=>{if(!es[0].isIntersecting)return;o.disconnect();
+    if(igBox){const ok=await load('https://www.instagram.com/embed.js');if(ok&&window.instgrm)instgrm.Embeds.process();giveUp(igBox)}
+    if(ttBox){await load('https://www.tiktok.com/embed.js');giveUp(ttBox)}},{rootMargin:'600px'}).observe(sec)})();
 
 /* ---------- dialogs ---------- */
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))e.target.closest('dialog')?.close();const d=e.target.tagName==='DIALOG'?e.target:null;if(d)d.close()});

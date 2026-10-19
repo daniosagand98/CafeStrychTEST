@@ -27,7 +27,7 @@ demo=f"""<script>window.STRYCH_IMG={json.dumps(imgs)};function IMG(n){{return wi
 window.STRYCH_PREVIEW={{news:[
  {{id:'n1',title:'Muzyka na żywo w każdą środę',body:'W październiku grają u nas: Michał Mantaj (nowy muzyk!), Maciej Smycz, Daria Piórek, Tymoteusz Walko i Mateusz Barański-Kledzik.\\n\\nStart o 20:00, wstęp wolny. Stoliki warto rezerwować wcześniej.',image_url:'{poster}',event_date:d((3-new Date().getDay()+7)%7||7),pinned:true,created_at:new Date().toISOString()}},
  {{id:'n2',title:'Wieczór poetycki na Strychu',body:'Przynieś swój ulubiony wiersz albo po prostu posłuchaj. Herbata Strychowa w cenie promocyjnej.',image_url:null,event_date:d(9),pinned:false,created_at:new Date().toISOString()}},
- {{id:'n3',title:'Rozgrzewające grzańce już w karcie',body:'Wróciły grzańce bezalkoholowe: wino czerwone z przyprawami i piwo z przyprawami. Idealne na jesienne wieczory przy piecu.',image_url:IMG('hero-kominek'),event_date:null,pinned:false,created_at:new Date(Date.now()-86400000*2).toISOString()}}
+ {{id:'n3',title:'Rozgrzewające grzańce już w karcie',body:'Wróciły grzańce bezalkoholowe: wino czerwone z przyprawami i piwo z przyprawami. Idealne na jesienne wieczory przy piecu.',image_url:IMG('hero-antresola'),event_date:null,pinned:false,created_at:new Date(Date.now()-86400000*2).toISOString()}}
 ]}}}})();</script>"""
 pv=pv.replace('<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>',demo)
 pv=pv.replace('<title>Cafe Strych – kawiarnia','<title>PODGLĄD – Cafe Strych – kawiarnia')
