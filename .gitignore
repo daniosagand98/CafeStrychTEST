@@ -1,0 +1,4 @@
+PRYWATNE*
+*.key
+.env
+__pycache__/

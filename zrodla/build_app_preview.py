@@ -37,6 +37,10 @@ st = s.index('const SUPABASE_URL='); en = s.index('\n', s.index('const sb=supaba
 s = s[:st] + mock + s[en:]
 rep('src="logo.webp"', f'src="{logo}"', 2)
 rep('<title>Cafe Strych</title>', '<title>Cafe Strych – PODGLĄD</title>')
+icon = lambda f: 'data:image/png;base64,' + base64.b64encode(open(f'{R}/do-wgrania/aplikacja/{f}', 'rb').read()).decode()
+rep('<link rel="manifest" href="manifest.webmanifest">', '')
+rep('href="favicon-32.png"', f'href="{icon("favicon-32.png")}"')
+rep('href="apple-touch-icon.png"', f'href="{icon("apple-touch-icon.png")}"')
 rep('<div id="toast" class="toast">Zapisano</div>', '<div id="toast" class="toast">Zapisano</div><div style="position:fixed;z-index:200;right:8px;top:8px;padding:5px 10px;border-radius:999px;background:#e0ad67;color:#27150c;font:800 11px system-ui;pointer-events:none">PODGLĄD • dane demo</div>')
 open(f'{R}/podglad/aplikacja-podglad.html', 'w', encoding='utf-8').write(s)
 print('ok', len(s))
