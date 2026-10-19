@@ -3,13 +3,16 @@
 | Ścieżka | Co to jest |
 |---|---|
 | `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
-| `panel/` | Aplikacja **Cafe Strych Manager V3.6** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
+| `panel/` | Aplikacja **Cafe Strych Manager V3.6.1** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia) |
 | `supabase/functions/notify-booking/` | Funkcja wysyłająca powiadomienia push – konfiguracja w `POWIADOMIENIA.md` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Aplikacja V3.6.1 – 19.10.2026
+- Okno zmiany w grafiku: „Usuń zmianę” i „Zapisz” w jednej linii (także na telefonie).
 
 ## Aplikacja V3.6 – 19.10.2026
 - Powiadomienia push o nowych rezerwacjach (także gdy aplikacja jest zamknięta) dla kierowników i administratorów: menu konta → 🔔 Powiadomienia. Stuknięcie powiadomienia otwiera ten dzień w Rezerwacjach. Konfiguracja: `POWIADOMIENIA.md`.
