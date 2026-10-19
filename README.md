@@ -2,13 +2,17 @@
 
 | Ścieżka | Co to jest |
 |---|---|
-| `index.html` + `img/` | Strona lokalu (v1.2) – aktualności, menu, galeria, rezerwacje |
+| `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.5.2** (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Strona v1.2.1 – 19.10.2026
+- Formularz rezerwacji: liczbę osób wpisuje się ręcznie (1–120, powyżej – prośba o telefon); pola daty i godziny nie wychodzą już poza okno na iPhonie.
+- Nowa stopka: równe kolumny (logo i social media, nawigacja, kontakt, godziny otwarcia), na telefonie wyśrodkowana; „Projekt i wykonanie DWSystem” z linkiem do dwsystem.eu.
 
 ## Strona v1.2 – 19.10.2026
 - Nowa sekcja „Na bieżąco”: najnowsze posty z Instagrama i TikToka (@cafe_strych) przez oficjalne osadzenia obu serwisów – aktualizują się same. Gdy przeglądarka blokuje treści zewnętrzne, pokazuje się karta z linkiem do profilu.

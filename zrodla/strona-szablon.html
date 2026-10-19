@@ -331,14 +331,27 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 .embedFallback.failed .dots{display:none}
 
 /* ---------- footer ---------- */
-footer{background:var(--dark);color:var(--creamMuted);padding:70px 0 34px;font-size:14px}
-.fTop{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--lineD)}
-.fTop img{width:130px}
-.fTop b{display:block;margin-bottom:10px;color:var(--cream);font:600 18px var(--serif)}
-.fTop a{display:block;padding:3px 0;text-decoration:none;color:var(--creamMuted);transition:color .3s,transform .3s}
-.fTop a:hover{color:var(--peach);transform:translateX(4px)}
-.fBottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:24px;font-size:12.5px}
-.fBottom span b{color:var(--peach2);font-weight:600}
+footer{background:var(--dark);color:var(--creamMuted);padding:64px 0 28px;font-size:14px;line-height:1.6}
+.fTop{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:40px;align-items:start;padding-bottom:36px;border-bottom:1px solid var(--lineD)}
+.fBrand img{width:118px;display:block}
+.fBrand p{max-width:300px;margin:14px 0 16px}
+.fCol{display:flex;flex-direction:column;gap:9px;min-width:0}
+.fCol>b{display:block;margin:0 0 6px;padding-bottom:10px;border-bottom:1px solid var(--lineD);color:var(--cream);font:600 18px/1.2 var(--serif)}
+.fLinks{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px}
+footer a,.fLine{color:var(--creamMuted);text-decoration:none;transition:color .25s}
+footer a:hover{color:var(--peach)}
+.fLine{display:block;background:none;border:0;padding:0;text-align:left;font:inherit;cursor:pointer}
+.fReserve{color:var(--peach2)}.fReserve:hover{color:var(--peach)}
+.fHours{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.fHours li{display:flex;justify-content:space-between;gap:12px}.fHours li span:last-child{color:var(--cream);font-weight:600;white-space:nowrap}
+.fSocial{display:flex;gap:8px}
+footer .soc{width:40px;height:40px;padding:0!important;justify-content:center;border-radius:50%;border:1px solid var(--lineD);color:var(--creamMuted)!important}
+footer .soc span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+footer .soc:hover{background:var(--peach);border-color:var(--peach);color:var(--ink)!important}
+.fBottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding-top:22px;font-size:12.5px}
+.fBottom .fVer{text-align:center;opacity:.75}
+.fMade{justify-self:end;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--lineD);border-radius:999px}
+.fMade b{color:var(--peach2);letter-spacing:.04em}.fMade:hover{border-color:var(--peach)}
 
 /* ---------- dialogs ---------- */
 dialog{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:26px;background:var(--paper);color:var(--ink);box-shadow:0 40px 90px rgba(0,0,0,.5);overflow:auto}
@@ -350,9 +363,9 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .dlgTop h3{margin:10px 0 0;font:600 30px/1.15 var(--serif)}
 .x{flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--cream);font-size:20px;cursor:pointer}
 .form{display:grid;gap:14px;margin-top:22px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--ink2)}
-.form input,.form select,.form textarea{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--cream);outline:none;transition:border-color .3s,box-shadow .3s}
+.row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.row2>label{min-width:0}
+.form label{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;min-width:0;font-size:13px;font-weight:600;color:var(--ink2)}
+.form input,.form select,.form textarea{display:block;width:100%;max-width:100%;min-width:0;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--cream);outline:none;transition:border-color .3s,box-shadow .3s}
 .form textarea{min-height:84px;resize:vertical}
 .form input:focus,.form select:focus,.form textarea:focus{border-color:var(--brown2);box-shadow:0 0 0 4px rgba(141,90,44,.12)}
 .form .check{display:flex;align-items:flex-start;gap:10px;font-weight:400;font-size:13px}
@@ -363,6 +376,13 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .done h4{margin:0;font:700 34px var(--script);color:var(--brown)}
 .newsDlgImg{width:100%;max-height:340px;object-fit:cover}
 .newsDlgBody{white-space:pre-line;color:var(--ink2)}
+
+/* data i godzina: ten sam wygląd i szerokość co inne pola na iPhonie/Androidzie */
+.form input[type=date],.form input[type=time]{-webkit-appearance:none;appearance:none;min-height:48px;text-align:left;line-height:1.3;font-size:16px}
+.form input[type=date]::-webkit-date-and-time-value,.form input[type=time]::-webkit-date-and-time-value{text-align:left;margin:0}
+.form input[type=date]::-webkit-calendar-picker-indicator,.form input[type=time]::-webkit-calendar-picker-indicator{opacity:.6;cursor:pointer}
+.form input,.form select,.form textarea{font-size:16px}
+.form input[type=number]{-moz-appearance:textfield}.form input[type=number]::-webkit-inner-spin-button{opacity:.5}
 
 /* ---------- responsive ---------- */
 @media(max-width:1020px){
@@ -382,7 +402,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .feats{grid-template-columns:1fr 1fr}
   .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:190px}
   .gallery button:nth-child(4){grid-row:auto}
-  .fTop{grid-template-columns:1fr 1fr}.fTop>div:first-child{grid-column:span 2}
+  .fTop{grid-template-columns:1fr 1fr;gap:34px 28px}
 }
 @media(max-width:640px){
   .wrap{width:calc(100% - 32px)}
@@ -412,7 +432,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .cCard{padding:22px}.map{min-height:320px}
   .cta{padding:26px}.cta img{display:none}
   .row2{grid-template-columns:1fr}
-  .fTop{grid-template-columns:1fr}.fTop>div:first-child{grid-column:auto}
+  footer{text-align:center}.fTop{grid-template-columns:1fr;gap:30px}.fBrand{display:flex;flex-direction:column;align-items:center}.fBrand p{margin-inline:auto}.fCol{align-items:stretch}.fLine{text-align:center}.fLinks{max-width:280px;margin:0 auto}.fHours{max-width:280px;width:100%;margin:0 auto}.fBottom{grid-template-columns:1fr;justify-items:center;text-align:center}.fMade{justify-self:center}
   .sketch{display:none}
   .lbPrev,.lbNext{top:auto;bottom:22px}
 }
@@ -650,13 +670,30 @@ dialog[open]{animation:dlg .5s var(--ease)}
 <footer>
   <div class="wrap">
     <div class="fTop">
-      <div><img src="img/logo-strych.webp" alt="Cafe Strych"><p style="max-width:340px;margin-top:16px">Kawiarnia, bar i pub w najstarszym domu mieszkalnym w Gdyni. Od 1999 roku.</p></div>
-      <div><b>Na stronie</b><a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka na żywo</a><a href="#imprezy">Rezerwacja sali i lokalu</a><a href="#galeria">Galeria</a></div>
-      <div><b>Odwiedź nas</b><span id="fAddress"></span><a id="fPhone"></a><span class="fSocial" id="fSocial"></span></div>
+      <div class="fBrand">
+        <a href="#start" aria-label="Na górę strony"><img src="img/logo-strych.webp" alt="Cafe Strych"></a>
+        <p>Kawiarnia, bar i pub w najstarszym domu mieszkalnym w Gdyni. Od 1999 roku.</p>
+        <div class="fSocial" id="fSocial"></div>
+      </div>
+      <nav class="fCol" aria-label="Na stronie">
+        <b>Na stronie</b>
+        <div class="fLinks"><a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka</a><a href="#imprezy">Imprezy</a><a href="#galeria">Galeria</a></div>
+      </nav>
+      <div class="fCol">
+        <b>Kontakt</b>
+        <span class="fLine">📍 <span id="fAddress"></span></span>
+        <a class="fLine" id="fPhone"></a>
+        <button class="fLine fReserve reserve" type="button">🗓️ Zarezerwuj stolik</button>
+      </div>
+      <div class="fCol">
+        <b>Godziny otwarcia</b>
+        <ul class="fHours" id="fHours"></ul>
+      </div>
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span>Strona <b>v1.2</b> · aktualizacja 19.10.2026 · projekt i wykonanie: Daniel Wawrzyniak</span>
+      <span class="fVer">Strona v1.2.1 · aktualizacja 19.10.2026</span>
+      <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
 </footer>
@@ -668,7 +705,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     <form class="form" id="resForm" novalidate>
       <div class="row2"><label>Imię i nazwisko<input name="fullname" required maxlength="60" autocomplete="name"></label><label>Telefon<input name="phone" type="tel" required maxlength="20" autocomplete="tel" placeholder="np. 600 100 200"></label></div>
       <div class="row2"><label>Data<input name="date" type="date" required></label><label>Godzina<input name="time" type="time" required step="900" value="18:00"></label></div>
-      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala</option><option value="lokal">Cały lokal (impreza zamknięta)</option></select></label><label>Liczba osób<select name="guests"></select></label></div>
+      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala</option><option value="lokal">Cały lokal (impreza zamknięta)</option></select></label><label>Liczba osób<input name="guests" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="np. 4"></label></div>
       <label>Uwagi (opcjonalnie)<textarea name="notes" maxlength="400" placeholder="np. urodziny, stolik na strychu, przy piecu…"></textarea></label>
       <label class="check"><input type="checkbox" name="consent" required><span>Zgadzam się na kontakt telefoniczny w sprawie tej rezerwacji. Dane wykorzystamy tylko do jej obsługi.</span></label>
       <p class="formMsg" id="resMsg" role="alert"></p>
@@ -771,7 +808,9 @@ renderHours();setInterval(renderHours,60000);
 /* ---------- contact ---------- */
 (()=>{const tel=CONFIG.phone.replace(/\s/g,''),q=encodeURIComponent(CONFIG.mapQuery);
   $('#cAddress').textContent=CONFIG.address;$('#evPhone').textContent='📞 '+CONFIG.phone;$('#evPhone').href='tel:'+tel;$('#fAddress').textContent=CONFIG.address;
-  for(const id of ['#cPhone','#fPhone']){$(id).textContent=CONFIG.phone;$(id).href='tel:'+tel}
+  for(const id of ['#cPhone','#fPhone']){$(id).textContent=CONFIG.phone;$(id).href='tel:'+tel}$('#fPhone').textContent='📞 '+CONFIG.phone;
+  const SH=['Nd','Pn','Wt','Śr','Czw','Pt','Sb'],ord=[1,2,3,4,5,6,0],grp=[];ord.forEach(d=>{const h=CONFIG.hours[d].join('–'),g=grp[grp.length-1];if(g&&g.h===h)g.d.push(d);else grp.push({h,d:[d]})});
+  $('#fHours').innerHTML=grp.map(g=>`<li><span>${SH[g.d[0]]}${g.d.length>1?'–'+SH[g.d[g.d.length-1]]:''}</span><span>${g.h}</span></li>`).join('');
   const SOC=[['facebook','Facebook','<path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/>'],['instagram','Instagram','<rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3"/>'],['tiktok','TikTok','<path d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/>']].filter(([k])=>CONFIG[k]);
   const socHtml=SOC.map(([k,n,svg])=>`<a class="soc" href="${esc(CONFIG[k])}" target="_blank" rel="noopener" aria-label="${n}"><svg viewBox="0 0 24 24" aria-hidden="true">${svg}</svg><span>${n}</span></a>`).join('');
   $('#cSocial').innerHTML=socHtml;$('#fSocial').innerHTML=socHtml;
@@ -854,19 +893,20 @@ if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'pu
 /* ---------- dialogs ---------- */
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))e.target.closest('dialog')?.close();const d=e.target.tagName==='DIALOG'?e.target:null;if(d)d.close()});
 const resDlg=$('#resDlg'),resForm=$('#resForm');
-resForm.guests.innerHTML=Array.from({length:20},(_,i)=>`<option value="${i+1}" ${i===1?'selected':''}>${i+1} ${i===0?'osoba':i<4?'osoby':'osób'}</option>`).join('')+[25,30,40,50,60,80].map(n=>`<option value="${n}">ok. ${n} osób</option>`).join('');
 const KIND={stolik:['Zarezerwuj stolik','Wyślij prośbę o rezerwację','np. urodziny, stolik na strychu, przy piecu…'],sala:['Zapytaj o salę','Wyślij zapytanie o salę','np. urodziny 30 osób, potrzebny tort i nagłośnienie…'],lokal:['Zapytaj o cały lokal','Wyślij zapytanie o lokal','np. impreza zamknięta, menu, godziny, dekoracje…']};
-function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];if(k!=='stolik'&&+resForm.guests.value<10)resForm.guests.value='25'}
+function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];resForm.guests.placeholder=k==='stolik'?'np. 4':'np. 30'}
 resForm.kind.addEventListener('change',()=>setKind(resForm.kind.value));
 function openReservation(wed=false,kind='stolik'){setKind(kind);$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
   const t=new Date(),min=isoDay(t);resForm.date.min=min;let d=new Date(t);if(wed){d.setDate(d.getDate()+((3-d.getDay()+7)%7||0));}else if(t.getHours()>=20)d.setDate(d.getDate()+1);
   if(!resForm.date.value||resForm.date.value<min||wed)resForm.date.value=isoDay(d);resDlg.showModal()}
 document.addEventListener('click',e=>{const b=e.target.closest('.reserve');if(b){e.preventDefault();openReservation(!!b.dataset.wed,b.dataset.type||'stolik')}});
 resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,msg=$('#resMsg'),btn=$('#resBtn');msg.textContent='';
-  const name=f.fullname.value.trim(),phone=f.phone.value.trim(),start=new Date(`${f.date.value}T${f.time.value}`);
+  const name=f.fullname.value.trim(),phone=f.phone.value.trim(),start=new Date(`${f.date.value}T${f.time.value}`),guests=Number(f.guests.value);
   if(name.length<2)return msg.textContent='Podaj imię i nazwisko.';
   if(!/^[+\d][\d\s-]{6,}$/.test(phone))return msg.textContent='Podaj poprawny numer telefonu.';
   if(!f.date.value||!f.time.value||isNaN(start))return msg.textContent='Wybierz datę i godzinę.';
+  if(!Number.isInteger(guests)||guests<1)return msg.textContent='Wpisz liczbę osób.';
+  if(guests>120)return msg.textContent='Dla grup powyżej 120 osób zadzwoń do nas: '+CONFIG.phone;
   if(start<new Date(Date.now()+30*60000))return msg.textContent='Rezerwację online przyjmujemy najpóźniej 30 minut wcześniej – na teraz zadzwoń: '+CONFIG.phone;
   if(!f.consent.checked)return msg.textContent='Zaznacz zgodę na kontakt w sprawie rezerwacji.';
   btn.disabled=true;btn.textContent='Wysyłanie…';
@@ -874,7 +914,7 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
     if(window.STRYCH_PREVIEW){await new Promise(r=>setTimeout(r,700))}
     else{if(!sb)throw new Error('offline');
       const kindTxt={stolik:'',sala:'REZERWACJA SALI',lokal:'REZERWACJA CAŁEGO LOKALU'}[f.kind.value]||'',notes=[kindTxt,`tel. ${phone}`,f.notes.value.trim()].filter(Boolean).join(' • ');
-      const r=await sb.from('bookings').insert({title:name,guests_count:+f.guests.value,start_at:start.toISOString(),end_at:new Date(start.getTime()+2*3600000).toISOString(),notes,booking_status:'pending',source:'www'});
+      const r=await sb.from('bookings').insert({title:name,guests_count:guests,start_at:start.toISOString(),end_at:new Date(start.getTime()+2*3600000).toISOString(),notes,booking_status:'pending',source:'www'});
       if(r.error)throw r.error}
     f.reset();f.hidden=true;$('#resDone').hidden=false}
   catch(err){console.warn(err);msg.textContent='Nie udało się wysłać prośby. Zadzwoń do nas: '+CONFIG.phone}
