@@ -15,7 +15,7 @@ Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `z
 - Nowa sekcja „Imprezy i spotkania”: rezerwacja stolika, sali lub całego lokalu; formularz ma rodzaj rezerwacji, a zapytania trafiają do aplikacji jako rezerwacje oczekujące z dopiskiem REZERWACJA SALI / CAŁEGO LOKALU.
 - Historia: 2024 – remont generalny.
 - Pasek z napisami pod zdjęciem jest prosty (bez przechylenia).
-- Instagram i TikTok: gotowe miejsca w kontakcie i stopce – pojawią się po wpisaniu linków w `CONFIG`.
+- Instagram (@cafe_strych) i TikTok (@cafe_strych) obok Facebooka – w kontakcie i w stopce.
 - `sql/supabase_v3_4.sql`: rezerwacja ze strony do 120 osób (wcześniej 40).
 
 ## V3.5.2 – 16.10.2026
