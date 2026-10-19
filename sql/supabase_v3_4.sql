@@ -286,7 +286,7 @@ create policy "bookings: prośba o rezerwację ze strony" on public.bookings
     booking_status = 'pending'
     and source = 'www'
     and created_by is null
-    and guests_count between 1 and 40
+    and guests_count between 1 and 120
     and start_at > now()
     and start_at < now() + interval '180 days'
     and char_length(title) between 2 and 80

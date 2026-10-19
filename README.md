@@ -2,13 +2,21 @@
 
 | Ścieżka | Co to jest |
 |---|---|
-| `index.html` + `img/` | Strona lokalu (v1.0) – aktualności, menu, galeria, rezerwacje |
+| `index.html` + `img/` | Strona lokalu (v1.1) – aktualności, menu, galeria, rezerwacje |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.5.2** (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Strona v1.1 – 19.10.2026 (poprawki od klientki)
+- Godziny otwarcia od 12:00.
+- Nowa sekcja „Imprezy i spotkania”: rezerwacja stolika, sali lub całego lokalu; formularz ma rodzaj rezerwacji, a zapytania trafiają do aplikacji jako rezerwacje oczekujące z dopiskiem REZERWACJA SALI / CAŁEGO LOKALU.
+- Historia: 2024 – remont generalny.
+- Pasek z napisami pod zdjęciem jest prosty (bez przechylenia).
+- Instagram i TikTok: gotowe miejsca w kontakcie i stopce – pojawią się po wpisaniu linków w `CONFIG`.
+- `sql/supabase_v3_4.sql`: rezerwacja ze strony do 120 osób (wcześniej 40).
 
 ## V3.5.2 – 16.10.2026
 - Naprawa: wysyłanie zgłoszenia błędu kończyło się „null value in column "details" of relation "bug_reports" violates not-null constraint” – starsza tabela miała wymaganą kolumnę `details`. Aplikacja wypełnia ją teraz automatycznie, a `sql/supabase_v3_5_1.sql` zdejmuje wymóg NOT NULL i stare ograniczenie statusu z `bug_reports`.
