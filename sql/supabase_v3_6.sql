@@ -46,6 +46,8 @@ exception when others then
   return new;
 end $$;
 
+revoke execute on function public.notify_new_booking() from public, anon, authenticated;
+
 drop trigger if exists bookings_notify_push on public.bookings;
 create trigger bookings_notify_push
   after insert on public.bookings

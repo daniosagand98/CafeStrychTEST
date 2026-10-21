@@ -13,8 +13,9 @@ const orders=[
  {id:'o1',order_no:'Rachunek 1',table_id:'t1',customer_name:null,status:'new',created_at:at(0,17,10)},
  {id:'o2',order_no:'Rachunek 2',table_id:'t3',customer_name:'Urodziny Kasi',status:'preparing',created_at:at(0,18,0)},
  {id:'o3',order_no:'Rachunek 3',table_id:null,customer_name:null,status:'paid',created_at:at(0,12,0),closed_at:at(0,12,40)},
- {id:'o4',order_no:'Rachunek 4',table_id:'t4',customer_name:null,status:'paid',created_at:at(0,14,0),closed_at:at(0,15,5)}];
-const items=[['o1','Tyskie Gronie 0,5 l',2],['o1','Pajda chleba',1],['o2','Aperol Spritz',4],['o2','Mojito',3],['o3','Cappuccino',2],['o3','Ciasto domowej roboty',2],['o4','Los Pagos kieliszek',3]].map(([order_id,nm,qty])=>{const m=menu.find(x=>x.name===nm);return{id:uid(),order_id,menu_item_id:m.id,item_name:m.name,qty,unit_price:m.price,tax_rate:m.tax_rate,created_at:at(0,12)}});
+ {id:'o4',order_no:'Rachunek 4',table_id:'t4',customer_name:null,status:'paid',created_at:at(0,14,0),closed_at:at(0,15,5)},
+ {id:'o5',order_no:'Rachunek 5',table_id:'t2',customer_name:null,status:'cancelled',created_at:at(0,13,0),closed_at:at(0,13,20),cancelled_at:at(0,13,40),cancelled_by:'u-admin',cancel_reason:'Pomyłka – nabite na zły stolik'}];
+const items=[['o1','Tyskie Gronie 0,5 l',2],['o1','Pajda chleba',1],['o2','Aperol Spritz',4],['o2','Mojito',3],['o3','Cappuccino',2],['o3','Ciasto domowej roboty',2],['o4','Los Pagos kieliszek',3],['o5','Cappuccino',1]].map(([order_id,nm,qty])=>{const m=menu.find(x=>x.name===nm);return{id:uid(),order_id,menu_item_id:m.id,item_name:m.name,qty,unit_price:m.price,tax_rate:m.tax_rate,created_at:at(0,12)}});
 const tot=o=>items.filter(i=>i.order_id===o).reduce((n,i)=>n+i.qty*i.unit_price,0);
 const DB={
  profiles:[{id:'u-admin',full_name:'Daniel Wawrzyniak',email:'admin@demo.pl',role:'admin',active:true},{id:'u2',full_name:'Anna Kowalska',email:'anna@demo.pl',role:'manager',active:true},{id:'u3',full_name:'Piotr Nowak',email:'piotr@demo.pl',role:'user',active:true},{id:'u-new',full_name:'Kasia Nowa',email:'kasia@demo.pl',role:'user',active:false}],
@@ -24,7 +25,7 @@ const DB={
  shopping:[{id:uid(),title:'Mleko owsiane',quantity:'6 l',created_at:at(0,9)},{id:uid(),title:'Cytryny',quantity:'2 kg',created_at:at(0,9)}],
  reservation_places:[{id:'p1',name:'Sala główna',capacity:40,active:true,sort_order:1,room_id:'r1'},{id:'p2',name:'Strych',capacity:20,active:true,sort_order:2,room_id:'r2'},{id:'p3',name:'Ogródek',capacity:30,active:true,sort_order:3,room_id:null,description:'tylko w sezonie'}],
  cafe_rooms:rooms,cafe_tables:tables,menu_items:menu,pos_orders:orders,pos_order_items:items,
- pos_payments:[{id:uid(),order_id:'o3',amount:tot('o3'),method:'card',created_at:at(0,12,40)},{id:uid(),order_id:'o4',amount:tot('o4'),method:'cash',created_at:at(0,15,5)}],
+ pos_payments:[{id:uid(),order_id:'o3',amount:tot('o3'),method:'card',created_at:at(0,12,40)},{id:uid(),order_id:'o4',amount:tot('o4'),method:'cash',created_at:at(0,15,5)},{id:uid(),order_id:'o5',amount:tot('o5'),method:'card',created_at:at(0,13,20)}],
  employee_permissions:[{employee_id:'e3',can_pos:true,can_bookings:true,can_schedule:true,can_shopping:false}],
  availability:[{id:uid(),user_id:'u-admin',employee_id:'e1',work_date:dISO(4),start_time:'10:00:00',end_time:'22:00:00',status:'available'},
   ...[0,1,2,3,4,5,6].flatMap(o=>[['e2','u2',o%3!==2],['e3','u3',o%2===0],['e4','u4',o!==3]].map(([employee_id,user_id,ok])=>({id:uid(),user_id,employee_id,work_date:dISO(o),start_time:ok?'14:00:00':null,end_time:ok?'23:00:00':null,status:ok?'available':'unavailable'})))],

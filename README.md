@@ -3,13 +3,18 @@
 | Ścieżka | Co to jest |
 |---|---|
 | `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
-| `panel/` | Aplikacja **Cafe Strych Manager V3.7** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
-| `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo) |
+| `panel/` | Aplikacja **Cafe Strych Manager V3.8** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
+| `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo), `supabase_v3_8.sql` (powiadomienia + anulowanie rachunków; zawiera v3.6) |
 | `supabase/functions/notify-booking/` | Funkcja wysyłająca powiadomienia push – konfiguracja w `POWIADOMIENIA.md` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Aplikacja V3.8 – 21.10.2026 (+ `sql/supabase_v3_8.sql`)
+- Rachunków opłaconych nie da się już usunąć: zamiast „Usuń” jest „Anuluj” z obowiązkowym powodem – opłacony rachunek anuluje tylko administrator, otwarty – kierownik. Anulowany rachunek zostaje w historii (filtr Wszystkie / Opłacone / Anulowane) i nie liczy się do utargu.
+- Baza pilnuje tego sama: płatności są nieusuwalne, pozycji zamkniętego rachunku nie da się zmienić, płatność zatwierdza tylko kierownik/admin, anulowanego rachunku nie da się przywrócić.
+- Funkcja powiadomień `notify-booking` jest wdrożona w Supabase (21.10); do działania brakuje sekretów VAPID – patrz `POWIADOMIENIA.md`.
 
 ## Aplikacja V3.7 – 21.10.2026 (+ `sql/supabase_v3_7.sql`)
 - Rezerwacje: nakładanie blokuje już tylko rezerwację **całej sali** (nowa opcja w formularzu dla kierownika). Wcześniej dwa stoliki w tej samej sali o tej samej porze kończyły się błędem.

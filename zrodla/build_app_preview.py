@@ -1,15 +1,16 @@
 # Buduje podgląd aplikacji bez logowania (dane demo, nic nie trafia do bazy):
 #   python3 build_app_preview.py
-# wejście:  do-wgrania/aplikacja/index.html + zrodla/podglad-mock.js
+# wejście:  panel/index.html + zrodla/podglad-mock.js
 # wyjście:  podglad/aplikacja-podglad.html
 import base64, io
 from PIL import Image, ImageDraw, ImageFont
 
-R = '/home/claude/CafeStrych'
-app = open(f'{R}/do-wgrania/aplikacja/index.html', encoding='utf-8').read()
+import os
+R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # katalog repozytorium
+app = open(f'{R}/panel/index.html', encoding='utf-8').read()
 mock = open(f'{R}/zrodla/podglad-mock.js', encoding='utf-8').read()
 poster = open(f'{R}/zrodla/podglad-plakat.txt').read().strip()
-logo = 'data:image/webp;base64,' + base64.b64encode(open(f'{R}/do-wgrania/aplikacja/logo.webp', 'rb').read()).decode()
+logo = 'data:image/webp;base64,' + base64.b64encode(open(f'{R}/panel/logo.webp', 'rb').read()).decode()
 
 # przykładowy „zrzut ekranu” do demo zgłoszenia błędu
 im = Image.new('RGB', (520, 300), (28, 16, 12)); d = ImageDraw.Draw(im)
@@ -37,7 +38,7 @@ st = s.index('const SUPABASE_URL='); en = s.index('\n', s.index('const sb=supaba
 s = s[:st] + mock + s[en:]
 rep('src="logo.webp"', f'src="{logo}"', 2)
 rep('<title>Cafe Strych</title>', '<title>Cafe Strych – PODGLĄD</title>')
-icon = lambda f: 'data:image/png;base64,' + base64.b64encode(open(f'{R}/do-wgrania/aplikacja/{f}', 'rb').read()).decode()
+icon = lambda f: 'data:image/png;base64,' + base64.b64encode(open(f'{R}/panel/{f}', 'rb').read()).decode()
 rep('<link rel="manifest" href="manifest.webmanifest">', '')
 rep('href="favicon-32.png"', f'href="{icon("favicon-32.png")}"')
 rep('href="apple-touch-icon.png"', f'href="{icon("apple-touch-icon.png")}"')

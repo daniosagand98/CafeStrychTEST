@@ -22,6 +22,10 @@ Deno.serve(async (req) => {
     id = String(body?.id ?? body?.record?.id ?? "");
   } catch { /* puste body */ }
   if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "brak id rezerwacji" }, 400);
+  if (!Deno.env.get("VAPID_PUBLIC_KEY") || !Deno.env.get("VAPID_PRIVATE_KEY")) {
+    console.error("Brak sekretów VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY – dodaj je w Edge Functions → Secrets");
+    return json({ error: "brak sekretów VAPID" }, 500);
+  }
 
   const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
     auth: { persistSession: false },
@@ -59,7 +63,7 @@ Deno.serve(async (req) => {
   const when = start.toLocaleDateString("pl-PL", { timeZone: tz, weekday: "short", day: "numeric", month: "numeric" }) +
     ", " + start.toLocaleTimeString("pl-PL", { timeZone: tz, hour: "2-digit", minute: "2-digit" });
   const notes = String(booking.notes ?? "");
-  const kind = notes.includes("CAŁEGO LOKALU") ? " • cały lokal" : notes.includes("SALI") ? " • sala" : "";
+  const kind = booking.whole_room ? " • cała sala" : notes.includes("CAŁEGO LOKALU") ? " • cały lokal" : notes.includes("SALI") ? " • sala" : "";
   const appUrl = (Deno.env.get("APP_URL") ?? "./").replace(/\/?$/, "/");
 
   const payload = JSON.stringify({

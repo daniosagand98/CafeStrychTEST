@@ -5,7 +5,10 @@ baza wywołuje funkcję `notify-booking` w Supabase, a ta wysyła powiadomienie 
 kierowników i administratorów, którzy włączyli powiadomienia w aplikacji.
 Działa także, gdy aplikacja jest zamknięta.
 
-## 1. Funkcja w Supabase (Edge Function)
+## 1. Funkcja w Supabase (Edge Function) – ✅ wdrożona 21.10.2026
+
+(Poniższe kroki są potrzebne tylko przy ponownym wdrożeniu na inny projekt.)
+
 
 1. Supabase → **Edge Functions** → **Deploy a new function** → **Via Editor**.
 2. Nazwa funkcji: **`notify-booking`** (dokładnie tak).
@@ -27,7 +30,7 @@ Supabase → **Edge Functions** → **Secrets** → dodaj 4 wartości z pliku
 
 ## 3. Baza danych
 
-Supabase → **SQL Editor** → wklej `supabase_v3_6.sql` → **Run**.
+Supabase → **SQL Editor** → wklej `supabase_v3_8.sql` (zawiera część z v3.6) → **Run**.
 Tworzy tabelę urządzeń `push_subscriptions` i włącza wywołanie funkcji po dodaniu rezerwacji.
 Jeśli wysyłka powiadomienia się nie uda, rezerwacja i tak się zapisze.
 
