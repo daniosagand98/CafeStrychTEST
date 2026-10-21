@@ -26,7 +26,7 @@ Supabase → **Edge Functions** → **Secrets** → dodaj 4 wartości z pliku
 | `VAPID_PUBLIC_KEY` | klucz publiczny z pliku |
 | `VAPID_PRIVATE_KEY` | klucz prywatny z pliku |
 | `VAPID_SUBJECT` | `mailto:` + Twój e-mail |
-| `APP_URL` | adres panelu, np. `https://daniosagand98.github.io/CafeStrychTEST/panel/` (później `https://cafestrych.pl/panel/`) |
+| `APP_URL` | adres panelu, np. `https://daniosagand98.github.io/CafeStrychTEST/panel/` (później `https://cafestrychgdynia.pl/panel/`) |
 
 ## 3. Baza danych
 

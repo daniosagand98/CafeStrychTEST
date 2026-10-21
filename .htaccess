@@ -1,0 +1,56 @@
+# =====================================================================
+# Cafe Strych – cafestrychgdynia.pl (hosting OVH)
+# Wgraj ten plik do katalogu głównego (www) RAZEM z nową stroną,
+# dopiero przy podmianie (krok 3 w WDROZENIE-OVH.md) – nie wcześniej.
+# Na GitHub Pages ten plik jest ignorowany.
+# =====================================================================
+
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+AddType application/manifest+json .webmanifest
+AddType image/webp .webp
+
+RewriteEngine On
+
+# --- 1) HTTPS i adres bez „www” --------------------------------------
+# Usuń znaki # z 5 linii poniżej DOPIERO PO włączeniu certyfikatu SSL
+# w panelu OVH (Hosting → Multisite → SSL). Wcześniej strona przestałaby działać.
+# RewriteCond %{HTTPS} off [OR]
+# RewriteCond %{HTTP_HOST} ^www\. [NC]
+# RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+# RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+# (OVH czasem podaje HTTPS przez proxy – jeśli pojawi się pętla przekierowań, zakomentuj z powrotem)
+
+# --- 2) Kopia starej strony WordPress – niedostępna z internetu -------
+RewriteRule ^_stara-strona(/|$) - [F,L]
+
+# --- 3) Stare adresy WordPressa → nowa strona główna ------------------
+RewriteRule ^(wp-admin|wp-content|wp-includes|wp-json)(/.*)?$ / [L,R=301]
+RewriteRule ^(wp-login\.php|xmlrpc\.php|feed|comments)(/.*)?$ / [L,R=301]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat|m)=
+RewriteRule ^$ /? [L,R=301]
+
+# --- 4) Każdy inny nieistniejący adres → strona główna ----------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/panel(/|$)
+RewriteRule ^ / [L,R=301]
+
+# --- 5) Pamięć podręczna przeglądarki ---------------------------------
+<IfModule mod_headers.c>
+  # zawsze świeże: strona, aplikacja i obsługa powiadomień
+  <FilesMatch "(^index\.html|^sw\.js|\.webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # zdjęcia i ikony: 30 dni
+  <FilesMatch "\.(webp|png|jpe?g|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json application/manifest+json image/svg+xml
+</IfModule>

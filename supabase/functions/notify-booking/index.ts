@@ -3,7 +3,7 @@
 // Wysyła powiadomienie na telefony kierowników i administratorów, którzy je włączyli.
 //
 // Sekrety (Supabase → Edge Functions → Secrets):
-//   VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT (mailto:...), APP_URL (adres panelu, np. https://cafestrych.pl/panel/)
+//   VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT (mailto:...), APP_URL (adres panelu, np. https://cafestrychgdynia.pl/panel/)
 // SUPABASE_URL i SUPABASE_SERVICE_ROLE_KEY Supabase podaje funkcji automatycznie.
 // Ustawienie funkcji: „Verify JWT” WYŁĄCZONE (baza wywołuje ją bez logowania; ochrona jest niżej).
 

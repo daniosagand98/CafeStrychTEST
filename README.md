@@ -3,6 +3,7 @@
 | Ścieżka | Co to jest |
 |---|---|
 | `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
+| `.htaccess` + `WDROZENIE-OVH.md` | Ustawienia serwera OVH (przekierowania ze starego WordPressa, HTTPS, pamięć podręczna) i instrukcja wgrania na cafestrychgdynia.pl |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.8** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo), `supabase_v3_8.sql` (powiadomienia + anulowanie rachunków; zawiera v3.6) |
 | `supabase/functions/notify-booking/` | Funkcja wysyłająca powiadomienia push – konfiguracja w `POWIADOMIENIA.md` |
