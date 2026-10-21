@@ -3,13 +3,20 @@
 | Ścieżka | Co to jest |
 |---|---|
 | `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
-| `panel/` | Aplikacja **Cafe Strych Manager V3.6.1** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
-| `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia) |
+| `panel/` | Aplikacja **Cafe Strych Manager V3.7** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
+| `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo) |
 | `supabase/functions/notify-booking/` | Funkcja wysyłająca powiadomienia push – konfiguracja w `POWIADOMIENIA.md` |
 | `podglad/` | Wersje bez logowania na danych demo – do testów, nic nie zapisują w bazie |
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Aplikacja V3.7 – 21.10.2026 (+ `sql/supabase_v3_7.sql`)
+- Rezerwacje: nakładanie blokuje już tylko rezerwację **całej sali** (nowa opcja w formularzu dla kierownika). Wcześniej dwa stoliki w tej samej sali o tej samej porze kończyły się błędem.
+- Nowe konta czekają na zatwierdzenie przez admina (Ustawienia → Konta i role → „✓ Zatwierdź”); do tego czasu nie widzą żadnych danych. Rejestracja łączy się z istniejącym pracownikiem o tym samym e-mailu lub imieniu i nazwisku.
+- Zabezpieczenia bazy: dane (pracownicy, rezerwacje, POS, grafik, zakupy, menu) tylko dla zatwierdzonego zespołu; dyspozycyjność – własna lub kierownik; pracownik nie zatwierdzi sam swojej rezerwacji; zablokowana stara funkcja płatności i wywoływanie funkcji bez logowania.
+- Odświeżanie na żywo dla wszystkich tabel aplikacji (wcześniej nie działało m.in. dla rezerwacji i POS).
+- Rezerwacje ze strony do 120 osób.
 
 ## Aplikacja V3.6.1 – 19.10.2026
 - Okno zmiany w grafiku: „Usuń zmianę” i „Zapisz” w jednej linii (także na telefonie).
