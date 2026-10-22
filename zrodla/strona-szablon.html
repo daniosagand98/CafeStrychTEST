@@ -319,13 +319,22 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 
 /* ---------- social ---------- */
 #social .sketch.a{width:120px;right:4%;top:90px}
-.profRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.profCard{display:flex;align-items:center;gap:14px;padding:18px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);text-decoration:none;color:var(--ink);box-shadow:0 18px 40px -30px rgba(42,27,17,.45);transition:transform .45s var(--ease),box-shadow .45s,opacity 1s var(--ease)}
-.profCard:hover{transform:translateY(-4px);box-shadow:0 26px 46px -28px rgba(42,27,17,.55)}
-.profTxt{min-width:0;flex:1}.profTxt b{display:block;font:600 21px/1.2 var(--serif)}.profTxt small{display:block;color:var(--muted);font-size:14px}
-.profGo{flex:0 0 auto;font-size:13px;font-weight:700;color:var(--brown);white-space:nowrap}
-.socIco{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:15px;color:#fff}.socIco svg{width:26px;height:26px}
+.socGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.socCol{min-width:0;display:flex;flex-direction:column;padding:16px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(42,27,17,.45)}
+.socHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socHead .btn{margin-left:auto;padding:9px 14px}
+.profTxt{min-width:0;flex:1}.profTxt b{display:block;font:600 20px/1.2 var(--serif)}.profTxt small{display:block;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.socIco{width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center;border-radius:14px;color:#fff}.socIco svg{width:24px;height:24px}
 .socIco.fb{background:#1877f2}.socIco.ig{background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888)}.socIco.tt{background:#111}
+.embedBox{position:relative;min-height:540px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.embedLayer{position:absolute;inset:0;z-index:0;display:grid;place-content:center;justify-items:center;gap:12px;padding:20px;text-align:center;color:var(--ink2);font-size:14px}
+.embedSlot{position:relative;z-index:1;display:flex;justify-content:center;min-height:540px}
+.embedSlot:empty{min-height:0}
+.embedSlot>blockquote{margin:0!important;width:100%!important;min-width:0!important;max-width:100%!important;border:0!important;box-shadow:none!important;background:transparent!important}
+.embedSlot iframe{max-width:100%!important;border:0}
+.embedSlot blockquote section,.embedSlot blockquote a{font:14px var(--sans)}
+.embedFoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:13px}
+.embedFoot a{color:var(--brown);font-weight:700;text-decoration:none}
+.embedRetry{border:0;background:none;padding:4px 0;color:var(--ink2);font:600 13px var(--sans);cursor:pointer}.embedRetry:hover{color:var(--brown)}
 .feedWrap{margin-top:34px}
 .feedHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.feedHead h3{margin:0;font:600 26px var(--serif)}
 .feedArrows{display:flex;gap:8px}.feedArrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--cream);font-size:24px;line-height:1;cursor:pointer;color:var(--ink)}
@@ -407,6 +416,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .form input[type=number]{-moz-appearance:textfield}.form input[type=number]::-webkit-inner-spin-button{opacity:.5}
 
 /* ---------- responsive ---------- */
+@media(max-width:1180px) and (min-width:1021px){.socGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.socCol[data-net="facebook"]{grid-column:1/-1}}
 @media(max-width:1020px){
   nav.main{position:fixed;inset:0;z-index:-1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;background:rgba(27,17,11,.97);opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s}
   nav.main a{font:600 30px var(--serif);letter-spacing:0;text-transform:none;opacity:0;transform:translateY(16px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
@@ -417,7 +427,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .newsGrid{grid-template-columns:1fr 1fr}.nCard.nFeat{grid-column:span 2}
   .histGrid,.contactGrid{grid-template-columns:1fr}
   .histMedia{min-height:540px;max-width:620px;width:100%;margin-inline:auto}
-  .profRow{grid-template-columns:minmax(0,1fr)}
+  .socGrid{grid-template-columns:minmax(0,1fr)}
   .eventGrid{grid-template-columns:1fr}.eventCard{padding:22px}.eventPhone{margin-left:0}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px 220px}
   .tile:first-child{grid-row:auto;grid-column:span 2}.tile:nth-child(4){grid-column:span 2}
@@ -440,7 +450,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .heroMeta>div{flex:1}
   .newsGrid{grid-template-columns:1fr}.nCard.nFeat{grid-column:auto;flex-direction:column}.nCard.nFeat .nImg{min-height:0;aspect-ratio:16/10}
   .histMedia{min-height:430px}.histMedia .stamp{width:96px;height:96px;font-size:24px;left:58%;top:40%}
-  .feed{grid-auto-columns:86%}.feedArrows{display:none}.profCard{padding:14px}
+  .feed{grid-auto-columns:86%}.feedArrows{display:none}.socCol{padding:12px}.embedBox,.embedSlot{min-height:480px}
   .bento{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}.tile:first-child,.tile:nth-child(4){grid-column:auto}
   .tile span{max-height:none;opacity:1;margin-top:6px}
   .feats{grid-template-columns:1fr}
@@ -648,15 +658,27 @@ dialog[open]{animation:dlg .5s var(--ease)}
     <div class="secHead reveal">
       <span class="brush">Na bieżąco</span>
       <h2>Strych w <em>mediach społecznościowych</em></h2>
-      <p>Zdjęcia, filmiki z koncertów i nowości zza baru – zajrzyj i obserwuj.</p>
+      <p>Najnowsze zdjęcia, filmiki z koncertów i wpisy prosto z naszych profili.</p>
     </div>
-    <div class="profRow">
-      <a class="profCard reveal" style="--d:0s" data-net="instagram" data-link="instagram" target="_blank" rel="noopener"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><span class="profTxt"><b>Instagram</b><small data-handle="instagram">@</small></span><span class="profGo">Obserwuj →</span></a>
-      <a class="profCard reveal" style="--d:.08s" data-net="tiktok" data-link="tiktok" target="_blank" rel="noopener"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><span class="profTxt"><b>TikTok</b><small data-handle="tiktok">@</small></span><span class="profGo">Obserwuj →</span></a>
-      <a class="profCard reveal" style="--d:.16s" data-net="facebook" data-link="facebook" target="_blank" rel="noopener"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><span class="profTxt"><b>Facebook</b><small data-handle="facebook">Cafe Strych</small></span><span class="profGo">Obserwuj →</span></a>
+    <div class="socGrid">
+      <article class="socCol reveal" style="--d:0s" data-net="instagram">
+        <div class="socHead"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><span class="profTxt"><b>Instagram</b><small data-handle="instagram">@</small></span><a class="btn btn-ink btn-sm" data-link="instagram" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="embedBox" id="emb-instagram"><div class="embedLayer"><span class="dots"><i></i><i></i><i></i></span><span class="embedMsg">Wczytujemy najnowsze posty…</span></div><div class="embedSlot"></div></div>
+        <div class="embedFoot"><button type="button" class="embedRetry" data-retry="instagram">↻ Odśwież podgląd</button><a data-link="instagram" target="_blank" rel="noopener">Otwórz profil ↗</a></div>
+      </article>
+      <article class="socCol reveal" style="--d:.08s" data-net="tiktok">
+        <div class="socHead"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><span class="profTxt"><b>TikTok</b><small data-handle="tiktok">@</small></span><a class="btn btn-ink btn-sm" data-link="tiktok" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="embedBox" id="emb-tiktok"><div class="embedLayer"><span class="dots"><i></i><i></i><i></i></span><span class="embedMsg">Wczytujemy najnowsze posty…</span></div><div class="embedSlot"></div></div>
+        <div class="embedFoot"><button type="button" class="embedRetry" data-retry="tiktok">↻ Odśwież podgląd</button><a data-link="tiktok" target="_blank" rel="noopener">Otwórz profil ↗</a></div>
+      </article>
+      <article class="socCol reveal" style="--d:.16s" data-net="facebook">
+        <div class="socHead"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><span class="profTxt"><b>Facebook</b><small data-handle="facebook">Najnowsze posty</small></span><a class="btn btn-ink btn-sm" data-link="facebook" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="embedBox" id="emb-facebook"><div class="embedLayer"><span class="dots"><i></i><i></i><i></i></span><span class="embedMsg">Wczytujemy najnowsze posty…</span></div><div class="embedSlot"></div></div>
+        <div class="embedFoot"><button type="button" class="embedRetry" data-retry="facebook">↻ Odśwież podgląd</button><a data-link="facebook" target="_blank" rel="noopener">Otwórz profil ↗</a></div>
+      </article>
     </div>
     <div class="feedWrap" id="feedWrap" hidden>
-      <div class="feedHead"><h3>Najnowsze posty</h3><div class="feedArrows"><button type="button" class="feedArrow" data-dir="-1" aria-label="Poprzednie">‹</button><button type="button" class="feedArrow" data-dir="1" aria-label="Następne">›</button></div></div>
+      <div class="feedHead"><h3>Wybrane posty</h3><div class="feedArrows"><button type="button" class="feedArrow" data-dir="-1" aria-label="Poprzednie">‹</button><button type="button" class="feedArrow" data-dir="1" aria-label="Następne">›</button></div></div>
       <div class="feed" id="feed"></div>
     </div>
   </div>
@@ -713,7 +735,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.4.1 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.5 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -910,7 +932,20 @@ if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'pu
   if(!sec.querySelector('[data-net]')){sec.remove();$$('a[href="#social"]').forEach(a=>a.remove());return}
   const ICO={instagram:['ig','Instagram','Instagrama'],tiktok:['tt','TikTok','TikToka'],facebook:['fb','Facebook','Facebooka']},svg=k=>sec.querySelector(`.socIco.${ICO[k][0]}`)?.innerHTML||'';
   const feed=$('#feed'),wrap=$('#feedWrap');let loadedIG=false;
-  const loadScript=src=>new Promise(r=>{const sc=document.createElement('script');sc.async=true;sc.src=src;sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
+  const loadScript=(src,fresh)=>new Promise(r=>{if(fresh)$$(`script[src^="${src}"]`).forEach(x=>x.remove());const sc=document.createElement('script');sc.async=true;sc.src=src+(fresh?`?r=${Date.now()}`:'');sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
+  // ---- automatyczny podgląd profili (oficjalne osadzenia Instagram, TikTok, Facebook)
+  const slot=k=>$(`#emb-${k} .embedSlot`),msg=(k,t)=>{const m=$(`#emb-${k} .embedMsg`);if(m)m.textContent=t};
+  const later=(k,ms=12000)=>setTimeout(()=>{if(!slot(k)?.querySelector('iframe'))msg(k,`Podgląd ${ICO[k][2]} się nie wczytał – kliknij „Odśwież podgląd” albo otwórz profil.`)},ms);
+  const EMB={
+    instagram:async(fresh)=>{slot('instagram').innerHTML=`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/${esc(H.instagram)}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>`;
+      if(window.instgrm&&!fresh)instgrm.Embeds.process();else{await loadScript('https://www.instagram.com/embed.js',fresh);window.instgrm?.Embeds.process()}later('instagram')},
+    tiktok:async(fresh)=>{slot('tiktok').innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(H.tiktok)}" data-unique-id="${esc(H.tiktok)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section></section></blockquote>`;
+      await loadScript('https://www.tiktok.com/embed.js',true);later('tiktok')},
+    facebook:async()=>{const box=$('#emb-facebook'),w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=Math.max(480,box.clientHeight||540);
+      slot('facebook').innerHTML=`<iframe title="Najnowsze posty Cafe Strych na Facebooku" style="width:${w}px;height:${h}px" allow="encrypted-media" src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(CONFIG.facebook)}&tabs=timeline&width=${w}&height=${h}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL&r=${Date.now()}"></iframe>`;later('facebook')}};
+  const nets=['instagram','tiktok','facebook'].filter(k=>$(`#emb-${k}`));
+  const startEmbeds=()=>{if(window.STRYCH_PREVIEW){nets.forEach(k=>msg(k,`Tu pokażą się najnowsze posty z ${ICO[k][2]} (w podglądzie czatu się nie wczytują).`));return}nets.forEach(k=>EMB[k](false))};
+  sec.addEventListener('click',e=>{const b=e.target.closest('[data-retry]');if(!b||window.STRYCH_PREVIEW)return;const k=b.dataset.retry;msg(k,'Wczytujemy ponownie…');slot(k).innerHTML='';EMB[k](true)});
   function body(p){const u=esc(p.url),wait=`<div class="postLoading"><span class="dots"><i></i><i></i><i></i></span><span>Wczytujemy post…</span><a href="${u}" target="_blank" rel="noopener">Otwórz post →</a></div>`;
     if(window.STRYCH_PREVIEW)return `<div class="postLoading"><b style="font:600 18px var(--serif);color:var(--ink)">Tu pojawi się post z ${ICO[p.platform][2]}</b><span>(w podglądzie czatu się nie wczytuje)</span></div>`;
     if(p.platform==='instagram')return wait+`<blockquote class="instagram-media" data-instgrm-permalink="${u}?utm_source=ig_embed" data-instgrm-version="14"><a href="${u}" target="_blank" rel="noopener">Zobacz post na Instagramie</a></blockquote>`;
@@ -925,7 +960,7 @@ if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'pu
   async function load(){if(window.STRYCH_PREVIEW)return render(window.STRYCH_PREVIEW.social||[]);if(!sb)return;
     const r=await sb.from('site_social_posts').select('platform,url,created_at').eq('published',true).order('created_at',{ascending:false}).limit(9);
     if(r.error)console.warn('Posty:',r.error.message);render(r.data||[])}
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();load();if(sb){let t;sb.channel('www-social').on('postgres_changes',{event:'*',schema:'public',table:'site_social_posts'},()=>{clearTimeout(t);t=setTimeout(load,500)}).subscribe()}}},{rootMargin:'600px'}).observe(sec);
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();startEmbeds();load();if(sb){let t;sb.channel('www-social').on('postgres_changes',{event:'*',schema:'public',table:'site_social_posts'},()=>{clearTimeout(t);t=setTimeout(load,500)}).subscribe()}}},{rootMargin:'600px'}).observe(sec);
   sec.querySelectorAll('.feedArrow').forEach(b=>b.addEventListener('click',()=>feed.scrollBy({left:(+b.dataset.dir)*(feed.clientWidth*.8),behavior:reduce?'auto':'smooth'})));
 })();
 
