@@ -329,6 +329,8 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 .embedLayer{position:absolute;inset:0;z-index:0;display:grid;place-content:center;justify-items:center;gap:12px;padding:20px;text-align:center;color:var(--ink2);font-size:14px}
 .embedSlot{position:relative;z-index:1;display:flex;justify-content:center;min-height:540px}
 .embedSlot:empty{min-height:0}
+.embedBox.ready{min-height:0;background:transparent;border-color:transparent;overflow:visible}.embedBox.ready .embedSlot{min-height:0}.embedBox.ready .embedLayer{display:none}
+.embedBox.ready .embedSlot iframe{border-radius:12px}
 .embedSlot>blockquote{margin:0!important;width:100%!important;min-width:0!important;max-width:100%!important;border:0!important;box-shadow:none!important;background:transparent!important}
 .embedSlot iframe{max-width:100%!important;border:0}
 .embedSlot blockquote section,.embedSlot blockquote a{font:14px var(--sans)}
@@ -450,7 +452,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .heroMeta>div{flex:1}
   .newsGrid{grid-template-columns:1fr}.nCard.nFeat{grid-column:auto;flex-direction:column}.nCard.nFeat .nImg{min-height:0;aspect-ratio:16/10}
   .histMedia{min-height:430px}.histMedia .stamp{width:96px;height:96px;font-size:24px;left:58%;top:40%}
-  .feed{grid-auto-columns:86%}.feedArrows{display:none}.socCol{padding:12px}.embedBox,.embedSlot{min-height:480px}
+  .feed{grid-auto-columns:86%}.feedArrows{display:none}.socCol{padding:12px}.embedBox:not(.ready),.embedBox:not(.ready) .embedSlot{min-height:480px}
   .bento{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}.tile:first-child,.tile:nth-child(4){grid-column:auto}
   .tile span{max-height:none;opacity:1;margin-top:6px}
   .feats{grid-template-columns:1fr}
@@ -735,7 +737,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.5 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.5.1 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -935,17 +937,21 @@ if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'pu
   const loadScript=(src,fresh)=>new Promise(r=>{if(fresh)$$(`script[src^="${src}"]`).forEach(x=>x.remove());const sc=document.createElement('script');sc.async=true;sc.src=src+(fresh?`?r=${Date.now()}`:'');sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
   // ---- automatyczny podgląd profili (oficjalne osadzenia Instagram, TikTok, Facebook)
   const slot=k=>$(`#emb-${k} .embedSlot`),msg=(k,t)=>{const m=$(`#emb-${k} .embedMsg`);if(m)m.textContent=t};
+  // gdy serwis wstawi podgląd – pole dopasowuje się do jego wysokości (bez pustego białego miejsca)
+  const watch=k=>{const box=$(`#emb-${k}`),sl=slot(k);box.classList.remove('ready');const done=()=>box.classList.add('ready');
+    const hook=f=>{if(f.dataset.cs)return;f.dataset.cs=1;f.addEventListener('load',()=>setTimeout(done,300));setTimeout(done,2500)};
+    sl.querySelectorAll('iframe').forEach(hook);const mo=new MutationObserver(()=>sl.querySelectorAll('iframe').forEach(hook));mo.observe(sl,{childList:true,subtree:true});setTimeout(()=>mo.disconnect(),20000)};
   const later=(k,ms=12000)=>setTimeout(()=>{if(!slot(k)?.querySelector('iframe'))msg(k,`Podgląd ${ICO[k][2]} się nie wczytał – kliknij „Odśwież podgląd” albo otwórz profil.`)},ms);
   const EMB={
-    instagram:async(fresh)=>{slot('instagram').innerHTML=`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/${esc(H.instagram)}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>`;
+    instagram:async(fresh)=>{watch('instagram');slot('instagram').innerHTML=`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/${esc(H.instagram)}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>`;
       if(window.instgrm&&!fresh)instgrm.Embeds.process();else{await loadScript('https://www.instagram.com/embed.js',fresh);window.instgrm?.Embeds.process()}later('instagram')},
-    tiktok:async(fresh)=>{slot('tiktok').innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(H.tiktok)}" data-unique-id="${esc(H.tiktok)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section></section></blockquote>`;
+    tiktok:async(fresh)=>{watch('tiktok');slot('tiktok').innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(H.tiktok)}" data-unique-id="${esc(H.tiktok)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section></section></blockquote>`;
       await loadScript('https://www.tiktok.com/embed.js',true);later('tiktok')},
-    facebook:async()=>{const box=$('#emb-facebook'),w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=Math.max(480,box.clientHeight||540);
-      slot('facebook').innerHTML=`<iframe title="Najnowsze posty Cafe Strych na Facebooku" style="width:${w}px;height:${h}px" allow="encrypted-media" src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(CONFIG.facebook)}&tabs=timeline&width=${w}&height=${h}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL&r=${Date.now()}"></iframe>`;later('facebook')}};
+    facebook:async()=>{$('#emb-facebook').classList.remove('ready');const box=$('#emb-facebook'),w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=Math.max(480,box.clientHeight||540);
+      slot('facebook').innerHTML=`<iframe title="Najnowsze posty Cafe Strych na Facebooku" style="width:${w}px;height:${h}px" allow="encrypted-media" src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(CONFIG.facebook)}&tabs=timeline&width=${w}&height=${h}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL&r=${Date.now()}"></iframe>`;watch('facebook');later('facebook')}};
   const nets=['instagram','tiktok','facebook'].filter(k=>$(`#emb-${k}`));
   const startEmbeds=()=>{if(window.STRYCH_PREVIEW){nets.forEach(k=>msg(k,`Tu pokażą się najnowsze posty z ${ICO[k][2]} (w podglądzie czatu się nie wczytują).`));return}nets.forEach(k=>EMB[k](false))};
-  sec.addEventListener('click',e=>{const b=e.target.closest('[data-retry]');if(!b||window.STRYCH_PREVIEW)return;const k=b.dataset.retry;msg(k,'Wczytujemy ponownie…');slot(k).innerHTML='';EMB[k](true)});
+  sec.addEventListener('click',e=>{const b=e.target.closest('[data-retry]');if(!b||window.STRYCH_PREVIEW)return;const k=b.dataset.retry;$(`#emb-${k}`).classList.remove('ready');msg(k,'Wczytujemy ponownie…');slot(k).innerHTML='';EMB[k](true)});
   function body(p){const u=esc(p.url),wait=`<div class="postLoading"><span class="dots"><i></i><i></i><i></i></span><span>Wczytujemy post…</span><a href="${u}" target="_blank" rel="noopener">Otwórz post →</a></div>`;
     if(window.STRYCH_PREVIEW)return `<div class="postLoading"><b style="font:600 18px var(--serif);color:var(--ink)">Tu pojawi się post z ${ICO[p.platform][2]}</b><span>(w podglądzie czatu się nie wczytuje)</span></div>`;
     if(p.platform==='instagram')return wait+`<blockquote class="instagram-media" data-instgrm-permalink="${u}?utm_source=ig_embed" data-instgrm-version="14"><a href="${u}" target="_blank" rel="noopener">Zobacz post na Instagramie</a></blockquote>`;

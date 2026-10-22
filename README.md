@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.5.1 – 22.10.2026
+- Pola podglądu Instagrama, TikToka i Facebooka dopasowują się do wysokości postów (bez pustego białego miejsca i podwójnej ramki).
+
 ## Strona v1.5 – 22.10.2026
 - „Na bieżąco”: przywrócony **automatyczny** podgląd profili Instagram, TikTok i Facebook (oficjalne osadzenia, wczytywane przy przewinięciu do sekcji). Pod każdym przycisk „↻ Odśwież podgląd” (gdy serwis chwilowo nie odda postów) i „Otwórz profil”.
 - Ręcznie dodawane posty z aplikacji zostają jako karuzela „Wybrane posty” (pokazuje się tylko, gdy są jakieś posty).
