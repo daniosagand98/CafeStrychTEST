@@ -22,6 +22,7 @@
   --serif:"Lora",Georgia,serif;--script:"Lobster Two","Lora",serif;--sans:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.7 var(--sans);overflow-x:hidden}
 img{max-width:100%;display:block}
@@ -57,6 +58,8 @@ header.scrolled .logo img{width:74px}
 nav.main{display:flex;gap:26px}
 nav.main a{position:relative;text-decoration:none;color:var(--cream);font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:6px 0}
 nav.main a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:var(--peach);transform:scaleX(0);transform-origin:right;transition:transform .35s var(--ease)}
+nav.main a.navReserve{color:var(--peach)}
+@media(min-width:1021px){nav.main a.navReserve{display:none}}
 nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1);transform-origin:left}
 .hdrRight{display:flex;align-items:center;gap:12px}
 .openBadge{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--cream);background:rgba(251,243,228,.1);border:1px solid var(--lineD);white-space:nowrap}
@@ -316,23 +319,30 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 
 /* ---------- social ---------- */
 #social .sketch.a{width:120px;right:4%;top:90px}
-.socialGrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
-.socialSide{display:grid;gap:22px;min-width:0}
-.socialCol{min-width:0;padding:20px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -28px rgba(42,27,17,.45)}
-.socialHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socialHead b{display:block;font:600 22px var(--serif);color:var(--ink)}.socialHead small{display:block;color:var(--muted);font-size:13px}.socialHead .btn{margin-left:auto}
-.socIco{width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center;border-radius:14px;color:#fff}.socIco svg{width:24px;height:24px}
+.profRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.profCard{display:flex;align-items:center;gap:14px;padding:18px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);text-decoration:none;color:var(--ink);box-shadow:0 18px 40px -30px rgba(42,27,17,.45);transition:transform .45s var(--ease),box-shadow .45s,opacity 1s var(--ease)}
+.profCard:hover{transform:translateY(-4px);box-shadow:0 26px 46px -28px rgba(42,27,17,.55)}
+.profTxt{min-width:0;flex:1}.profTxt b{display:block;font:600 21px/1.2 var(--serif)}.profTxt small{display:block;color:var(--muted);font-size:14px}
+.profGo{flex:0 0 auto;font-size:13px;font-weight:700;color:var(--brown);white-space:nowrap}
+.socIco{width:50px;height:50px;flex:0 0 auto;display:grid;place-items:center;border-radius:15px;color:#fff}.socIco svg{width:26px;height:26px}
 .socIco.fb{background:#1877f2}.socIco.ig{background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888)}.socIco.tt{background:#111}
-.fbFrame{position:relative;min-height:560px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
-.fbFrame iframe{display:block;width:100%;height:560px;border:0;position:relative;z-index:1}
-.embedLoading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;color:var(--ink2);font-size:14px;text-align:center;padding:20px}
+.feedWrap{margin-top:34px}
+.feedHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.feedHead h3{margin:0;font:600 26px var(--serif)}
+.feedArrows{display:flex;gap:8px}.feedArrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--cream);font-size:24px;line-height:1;cursor:pointer;color:var(--ink)}
+.feedArrow:hover{background:var(--paper2)}
+.feed{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(300px,340px);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 18px;scrollbar-width:thin}
+.post{scroll-snap-align:start;min-width:0;display:flex;flex-direction:column;border-radius:18px;background:#fff;border:1px solid var(--line);overflow:hidden;box-shadow:0 18px 40px -30px rgba(42,27,17,.45)}
+.postTop{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:13px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--line);background:var(--cream)}
+.postTop .socIco{width:26px;height:26px;border-radius:8px}.postTop .socIco svg{width:15px;height:15px}
+.postTop a{margin-left:auto;color:var(--brown);text-decoration:none;font-weight:600}
+.postBody{position:relative;flex:1;min-height:420px;display:flex;justify-content:center;background:#fff}
+.postBody .instagram-media{margin:0!important;min-width:0!important;width:100%!important;max-width:100%!important;border:0!important;box-shadow:none!important}
+.postBody iframe{display:block;width:100%;border:0}
+.postBody .tt{aspect-ratio:9/16;height:auto;max-height:600px}
+.postLoading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;padding:20px;text-align:center;color:var(--ink2);font-size:14px}
+.postLoading a{color:var(--brown);font-weight:700;text-decoration:none}
 .dots{display:inline-flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--brown2);animation:dotp 1.2s infinite}.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
 @keyframes dotp{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:none}}
-.socMore{display:block;margin-top:12px;font-size:14px;font-weight:600;color:var(--brown);text-decoration:none}.socMore:hover{text-decoration:underline}
-.socTxt{margin:0 0 16px;color:var(--ink2);font-size:15px}
-.socBtns{display:grid;gap:10px}
-.socBig{width:100%;justify-content:center}.socBig svg{width:20px;height:20px;flex:0 0 auto}
-.ttBox{margin-top:16px;min-height:120px;display:flex;justify-content:center}
-.ttBox blockquote{margin:0!important;width:100%;max-width:100%!important;min-width:0!important}.ttBox iframe{max-width:100%!important}
 
 /* ---------- footer ---------- */
 footer{background:var(--dark);color:var(--creamMuted);padding:64px 0 28px;font-size:14px;line-height:1.6}
@@ -378,6 +388,13 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .done{padding:20px 0 6px;text-align:center}
 .done .tick{width:74px;height:74px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:var(--peach);font-size:34px;animation:pop .7s var(--ease)}
 .done h4{margin:0;font:700 34px var(--script);color:var(--brown)}
+.done[hidden]{display:none}.done{animation:dlg .5s var(--ease)}
+.doneLead{margin:6px 0 16px;color:var(--ink2)}
+.doneSum{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0 auto 16px;max-width:380px;padding:16px 18px;border-radius:16px;background:var(--cream);border:1px solid var(--line);text-align:left;font-size:15px}
+.doneSum dt{color:var(--muted)}.doneSum dd{margin:0;font-weight:600;color:var(--ink)}
+.doneNote{margin:0 auto 18px;max-width:400px;font-size:14px;color:var(--ink2)}.doneNote a{color:var(--brown);font-weight:700;text-decoration:none;white-space:nowrap}
+.doneBtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn-ghostInk{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn-ghostInk::before{background:var(--paper2)}
 .newsDlgImg{width:100%;max-height:340px;object-fit:cover}
 .newsDlgBody{white-space:pre-line;color:var(--ink2)}
 
@@ -399,7 +416,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .newsGrid{grid-template-columns:1fr 1fr}.nCard.nFeat{grid-column:span 2}
   .histGrid,.contactGrid{grid-template-columns:1fr}
   .histMedia{min-height:540px;max-width:620px;width:100%;margin-inline:auto}
-  .socialGrid{grid-template-columns:minmax(0,1fr)}.fbFrame,.fbFrame iframe{min-height:520px;height:520px}
+  .profRow{grid-template-columns:minmax(0,1fr)}
   .eventGrid{grid-template-columns:1fr}.eventCard{padding:22px}.eventPhone{margin-left:0}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px 220px}
   .tile:first-child{grid-row:auto;grid-column:span 2}.tile:nth-child(4){grid-column:span 2}
@@ -422,7 +439,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .heroMeta>div{flex:1}
   .newsGrid{grid-template-columns:1fr}.nCard.nFeat{grid-column:auto;flex-direction:column}.nCard.nFeat .nImg{min-height:0;aspect-ratio:16/10}
   .histMedia{min-height:430px}.histMedia .stamp{width:96px;height:96px;font-size:24px;left:58%;top:40%}
-  .socialCol{padding:14px}.socialHead .btn{padding:8px 14px}
+  .feed{grid-auto-columns:86%}.feedArrows{display:none}.profCard{padding:14px}
   .bento{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}.tile:first-child,.tile:nth-child(4){grid-column:auto}
   .tile span{max-height:none;opacity:1;margin-top:6px}
   .feats{grid-template-columns:1fr}
@@ -453,7 +470,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
 <header id="hdr">
   <a class="logo" href="#start" aria-label="Cafe Strych – na górę strony"><img src="img/logo-strych.webp" alt="Cafe Strych"></a>
   <nav class="main" id="nav" aria-label="Główna nawigacja">
-    <a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka</a><a href="#imprezy">Imprezy</a><a href="#galeria">Galeria</a><a href="#social">Social</a><a href="#kontakt">Kontakt</a>
+    <a href="#aktualnosci">Aktualności</a><a href="#historia">Historia</a><a href="#menu">Menu</a><a href="#muzyka">Muzyka</a><a href="#imprezy">Imprezy</a><a href="#galeria">Galeria</a><a href="#social">Social</a><a href="#kontakt">Kontakt</a><a href="#rezerwacja" class="reserve navReserve">Rezerwacja</a>
   </nav>
   <div class="hdrRight">
     <span class="openBadge" id="openBadge"><i></i><span>…</span></span>
@@ -623,34 +640,23 @@ dialog[open]{animation:dlg .5s var(--ease)}
   </div>
 </section>
 
-<!-- SOCIAL: Facebook (najnowsze posty) + Instagram + TikTok -->
+<!-- SOCIAL: profile + najnowsze posty (linki dodawane w aplikacji) -->
 <section class="paper sec" id="social">
   <img class="sketch a" src="img/szkic-ziarna.webp" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="secHead reveal">
       <span class="brush">Na bieżąco</span>
       <h2>Strych w <em>mediach społecznościowych</em></h2>
-      <p>Najnowsze wpisy z Facebooka, a na Instagramie i TikToku – zdjęcia i filmiki z koncertów i zza baru.</p>
+      <p>Zdjęcia, filmiki z koncertów i nowości zza baru – zajrzyj i obserwuj.</p>
     </div>
-    <div class="socialGrid">
-      <article class="socialCol socFb reveal" data-net="facebook">
-        <div class="socialHead"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><div><b>Facebook</b><small>Najnowsze posty</small></div><a class="btn btn-ink btn-sm" data-link="facebook" target="_blank" rel="noopener">Obserwuj</a></div>
-        <div class="fbFrame" id="fbFrame"><div class="embedLoading"><span class="dots"><i></i><i></i><i></i></span>Wczytujemy posty z Facebooka…</div></div>
-        <a class="socMore" data-link="facebook" target="_blank" rel="noopener">Nie widzisz postów? Otwórz nasz profil na Facebooku →</a>
-      </article>
-      <div class="socialSide">
-        <article class="socialCol reveal" style="--d:.1s" data-net="instagram">
-          <div class="socialHead"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><div><b>Instagram</b><small data-handle="instagram"></small></div></div>
-          <p class="socTxt">Zdjęcia z wieczorów na Strychu, nowe drinki i ciasta prosto z baru.</p>
-          <a class="btn btn-gold socBig" data-link="instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg>Obserwuj na Instagramie</a>
-        </article>
-        <article class="socialCol reveal" style="--d:.2s" data-net="tiktok">
-          <div class="socialHead"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><div><b>TikTok</b><small data-handle="tiktok"></small></div></div>
-          <p class="socTxt">Krótkie filmiki z koncertów i z życia lokalu.</p>
-          <div class="socBtns"><a class="btn btn-gold socBig" data-link="tiktok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg>Obserwuj na TikToku</a><button class="btn btn-ink socBig" type="button" id="ttShow">▶ Pokaż filmiki tutaj</button></div>
-          <div class="ttBox" id="ttBox" hidden></div>
-        </article>
-      </div>
+    <div class="profRow">
+      <a class="profCard reveal" style="--d:0s" data-net="instagram" data-link="instagram" target="_blank" rel="noopener"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><span class="profTxt"><b>Instagram</b><small data-handle="instagram">@</small></span><span class="profGo">Obserwuj →</span></a>
+      <a class="profCard reveal" style="--d:.08s" data-net="tiktok" data-link="tiktok" target="_blank" rel="noopener"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><span class="profTxt"><b>TikTok</b><small data-handle="tiktok">@</small></span><span class="profGo">Obserwuj →</span></a>
+      <a class="profCard reveal" style="--d:.16s" data-net="facebook" data-link="facebook" target="_blank" rel="noopener"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><span class="profTxt"><b>Facebook</b><small data-handle="facebook">Cafe Strych</small></span><span class="profGo">Obserwuj →</span></a>
+    </div>
+    <div class="feedWrap" id="feedWrap" hidden>
+      <div class="feedHead"><h3>Najnowsze posty</h3><div class="feedArrows"><button type="button" class="feedArrow" data-dir="-1" aria-label="Poprzednie">‹</button><button type="button" class="feedArrow" data-dir="1" aria-label="Następne">›</button></div></div>
+      <div class="feed" id="feed"></div>
     </div>
   </div>
 </section>
@@ -706,7 +712,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.3 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.4 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -725,7 +731,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
       <p class="formMsg" id="resMsg" role="alert"></p>
       <button class="btn btn-ink" type="submit" id="resBtn">Wyślij prośbę o rezerwację</button>
     </form>
-    <div class="done" id="resDone" hidden><div class="tick">✓</div><h4>Dziękujemy!</h4><p>Prośba trafiła do obsługi. Zadzwonimy, żeby potwierdzić rezerwację.</p><button class="btn btn-ink" type="button" data-close>Zamknij</button></div>
+    <div class="done" id="resDone" hidden><div class="tick">✓</div><h4 id="doneHello">Dziękujemy!</h4><p class="doneLead">Twoja prośba o rezerwację trafiła do obsługi.</p><dl class="doneSum" id="doneSum"></dl><p class="doneNote">📞 To jeszcze nie jest potwierdzenie – <b>zadzwonimy</b> na podany numer, żeby potwierdzić rezerwację. W pilnej sprawie: <a id="donePhone"></a></p><div class="doneBtns"><button class="btn btn-ink" type="button" data-close>Zamknij</button><button class="btn btn-ghostInk" type="button" id="doneAgain">Nowa rezerwacja</button></div></div>
   </div>
 </dialog>
 
@@ -887,29 +893,31 @@ async function loadNews(){
 loadNews();
 if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'public',table:'site_news'},()=>{clearTimeout(nt);nt=setTimeout(loadNews,400)}).subscribe()}
 
-/* ---------- social: Facebook (posty), Instagram i TikTok ---------- */
+/* ---------- social: profile + najnowsze posty (dodawane w aplikacji: Aktualności → Posty z social mediów) ---------- */
 (()=>{const sec=$('#social');if(!sec)return;
-  const user=(url,re)=>{const m=re.exec(url||'');return m?m[1]:''},ig=user(CONFIG.instagram,/instagram\.com\/([^/?#]+)/),tt=user(CONFIG.tiktok,/tiktok\.com\/@([^/?#]+)/);
-  if(!CONFIG.facebook)sec.querySelector('[data-net="facebook"]')?.remove();
-  if(!ig)sec.querySelector('[data-net="instagram"]')?.remove();if(!tt)sec.querySelector('[data-net="tiktok"]')?.remove();
+  const user=(url,re)=>{const m=re.exec(url||'');return m?m[1]:''},H={instagram:user(CONFIG.instagram,/instagram\.com\/([^/?#]+)/),tiktok:user(CONFIG.tiktok,/tiktok\.com\/@([^/?#]+)/)};
+  ['instagram','tiktok','facebook'].forEach(k=>{if(!CONFIG[k])sec.querySelector(`[data-net="${k}"]`)?.remove();else $$(`[data-link="${k}"]`).forEach(a=>a.href=CONFIG[k])});
+  ['instagram','tiktok'].forEach(k=>$$(`[data-handle="${k}"]`).forEach(e=>e.textContent='@'+H[k]));
   if(!sec.querySelector('[data-net]')){sec.remove();$$('a[href="#social"]').forEach(a=>a.remove());return}
-  $$('[data-handle="instagram"]').forEach(e=>e.textContent='@'+ig);$$('[data-handle="tiktok"]').forEach(e=>e.textContent='@'+tt);
-  ['facebook','instagram','tiktok'].forEach(k=>$$(`[data-link="${k}"]`).forEach(a=>a.href=CONFIG[k]||'#'));
-  // Facebook: oficjalna wtyczka strony – oś czasu z najnowszymi postami (ładowana dopiero przy przewinięciu)
-  const box=$('#fbFrame');
-  if(box&&CONFIG.facebook){
-    const show=()=>{const w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=box.clientHeight||560;
-      if(window.STRYCH_PREVIEW){box.querySelector('.embedLoading').innerHTML='<b style="font:600 20px var(--serif);color:var(--ink)">Tu pojawią się najnowsze posty z Facebooka</b><span>(w podglądzie czatu Facebook się nie wczytuje)</span>';return}
-      const f=document.createElement('iframe');f.title='Najnowsze posty Cafe Strych na Facebooku';f.loading='lazy';f.allow='encrypted-media';f.setAttribute('scrolling','yes');f.style.width=w+'px';f.style.margin='0 auto';
-      f.src='https://www.facebook.com/plugins/page.php?href='+encodeURIComponent(CONFIG.facebook)+`&tabs=timeline&width=${w}&height=${h}&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL`;
-      box.appendChild(f);setTimeout(()=>{const l=box.querySelector('.embedLoading');if(l)l.innerHTML='<span>Jeśli posty się nie pokazały, przeglądarka mogła zablokować treści z Facebooka.</span>'},8000)};
-    new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();show()}},{rootMargin:'500px'}).observe(box)}
-  // TikTok: filmiki dopiero po kliknięciu (TikTok ogranicza liczbę automatycznych wczytań)
-  const ttBtn=$('#ttShow'),ttBox=$('#ttBox');
-  if(ttBtn&&ttBox)ttBtn.addEventListener('click',()=>{ttBtn.remove();ttBox.hidden=false;
-    if(window.STRYCH_PREVIEW){ttBox.innerHTML='<p class="socTxt">Tu wczytają się filmiki z TikToka (w podglądzie czatu TikTok się nie wczytuje).</p>';return}
-    ttBox.innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(tt)}" data-unique-id="${esc(tt)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section><div class="embedLoading" style="position:static"><span class="dots"><i></i><i></i><i></i></span>Wczytujemy filmiki…</div></section></blockquote>`;
-    const sc=document.createElement('script');sc.async=true;sc.src='https://www.tiktok.com/embed.js';document.body.appendChild(sc)});
+  const ICO={instagram:['ig','Instagram','Instagrama'],tiktok:['tt','TikTok','TikToka'],facebook:['fb','Facebook','Facebooka']},svg=k=>sec.querySelector(`.socIco.${ICO[k][0]}`)?.innerHTML||'';
+  const feed=$('#feed'),wrap=$('#feedWrap');let loadedIG=false;
+  const loadScript=src=>new Promise(r=>{const sc=document.createElement('script');sc.async=true;sc.src=src;sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
+  function body(p){const u=esc(p.url),wait=`<div class="postLoading"><span class="dots"><i></i><i></i><i></i></span><span>Wczytujemy post…</span><a href="${u}" target="_blank" rel="noopener">Otwórz post →</a></div>`;
+    if(window.STRYCH_PREVIEW)return `<div class="postLoading"><b style="font:600 18px var(--serif);color:var(--ink)">Tu pojawi się post z ${ICO[p.platform][2]}</b><span>(w podglądzie czatu się nie wczytuje)</span></div>`;
+    if(p.platform==='instagram')return wait+`<blockquote class="instagram-media" data-instgrm-permalink="${u}?utm_source=ig_embed" data-instgrm-version="14"><a href="${u}" target="_blank" rel="noopener">Zobacz post na Instagramie</a></blockquote>`;
+    if(p.platform==='tiktok'){const id=(/\/video\/(\d+)/.exec(p.url)||[])[1];return wait+`<iframe class="tt" src="https://www.tiktok.com/player/v1/${id}?music_info=0&description=1&rel=0" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy" title="Filmik z TikToka"></iframe>`}
+    const video=/\/(videos|reel|watch)\b|fb\.watch/i.test(p.url),src=`https://www.facebook.com/plugins/${video?'video':'post'}.php?href=${encodeURIComponent(p.url)}&show_text=true&width=340`;
+    return wait+`<iframe src="${src}" height="${video?480:560}" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen title="Post z Facebooka"></iframe>`}
+  function render(list){if(!list.length){wrap.hidden=true;feed.innerHTML='';return}
+    wrap.hidden=false;feed.innerHTML=list.map(p=>`<article class="post"><div class="postTop"><span class="socIco ${ICO[p.platform][0]}">${svg(p.platform)}</span>${ICO[p.platform][1]}<a href="${esc(p.url)}" target="_blank" rel="noopener">Otwórz ↗</a></div><div class="postBody">${body(p)}</div></article>`).join('');
+    feed.querySelectorAll('.postBody iframe').forEach(f=>f.addEventListener('load',()=>{f.style.position='relative';f.style.zIndex=1;f.parentElement.querySelector('.postLoading')?.style.setProperty('display','none')}));
+    if(list.some(p=>p.platform==='instagram')&&!window.STRYCH_PREVIEW){const go=()=>{window.instgrm?.Embeds.process();setTimeout(()=>feed.querySelectorAll('.postBody').forEach(b=>{if(b.querySelector('iframe.instagram-media'))b.querySelector('.postLoading')?.remove()}),2500)};
+      if(loadedIG)go();else{loadedIG=true;loadScript('https://www.instagram.com/embed.js').then(go)}}}
+  async function load(){if(window.STRYCH_PREVIEW)return render(window.STRYCH_PREVIEW.social||[]);if(!sb)return;
+    const r=await sb.from('site_social_posts').select('platform,url,created_at').eq('published',true).order('created_at',{ascending:false}).limit(9);
+    if(r.error)console.warn('Posty:',r.error.message);render(r.data||[])}
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();load();if(sb){let t;sb.channel('www-social').on('postgres_changes',{event:'*',schema:'public',table:'site_social_posts'},()=>{clearTimeout(t);t=setTimeout(load,500)}).subscribe()}}},{rootMargin:'600px'}).observe(sec);
+  sec.querySelectorAll('.feedArrow').forEach(b=>b.addEventListener('click',()=>feed.scrollBy({left:(+b.dataset.dir)*(feed.clientWidth*.8),behavior:reduce?'auto':'smooth'})));
 })();
 
 /* ---------- dialogs ---------- */
@@ -918,7 +926,8 @@ const resDlg=$('#resDlg'),resForm=$('#resForm');
 const KIND={stolik:['Zarezerwuj stolik','Wyślij prośbę o rezerwację','np. urodziny, stolik na strychu, przy piecu…'],sala:['Zapytaj o salę','Wyślij zapytanie o salę','np. urodziny 30 osób, potrzebny tort i nagłośnienie…'],lokal:['Zapytaj o cały lokal','Wyślij zapytanie o lokal','np. impreza zamknięta, menu, godziny, dekoracje…']};
 function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];resForm.guests.placeholder=k==='stolik'?'np. 4':'np. 30'}
 resForm.kind.addEventListener('change',()=>setKind(resForm.kind.value));
-function openReservation(wed=false,kind='stolik'){setKind(kind);$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
+$('#doneAgain').addEventListener('click',()=>openReservation());
+function openReservation(wed=false,kind='stolik'){setKind(kind);$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
   const t=new Date(),min=isoDay(t);resForm.date.min=min;let d=new Date(t);if(wed){d.setDate(d.getDate()+((3-d.getDay()+7)%7||0));}else if(t.getHours()>=20)d.setDate(d.getDate()+1);
   if(!resForm.date.value||resForm.date.value<min||wed)resForm.date.value=isoDay(d);resDlg.showModal()}
 document.addEventListener('click',e=>{const b=e.target.closest('.reserve');if(b){e.preventDefault();openReservation(!!b.dataset.wed,b.dataset.type||'stolik')}});
@@ -938,7 +947,11 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
       const kindTxt={stolik:'',sala:'REZERWACJA SALI',lokal:'REZERWACJA CAŁEGO LOKALU'}[f.kind.value]||'',notes=[kindTxt,`tel. ${phone}`,f.notes.value.trim()].filter(Boolean).join(' • ');
       const r=await sb.from('bookings').insert({title:name,guests_count:guests,start_at:start.toISOString(),end_at:new Date(start.getTime()+2*3600000).toISOString(),notes,booking_status:'pending',source:'www'});
       if(r.error)throw r.error}
-    f.reset();f.hidden=true;$('#resDone').hidden=false}
+    const KN={stolik:'Stolik',sala:'Sala',lokal:'Cały lokal'},gN=n=>n===1?'osoba':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?'osoby':'osób';
+    $('#doneHello').textContent=`Dziękujemy, ${name.split(' ')[0]}!`;
+    $('#doneSum').innerHTML=[['Rodzaj',KN[f.kind.value]||'Stolik'],['Kiedy',start.toLocaleDateString('pl-PL',{weekday:'long',day:'numeric',month:'long'})+', '+f.time.value],['Ile osób',guests+' '+gN(guests)],['Telefon',phone]].map(([a,b])=>`<dt>${a}</dt><dd>${esc(b)}</dd>`).join('');
+    const tel=CONFIG.phone.replace(/\s/g,'');$('#donePhone').textContent=CONFIG.phone;$('#donePhone').href='tel:'+tel;
+    f.reset();f.hidden=true;$('#resDone').hidden=false;$('#resDlg .brush').textContent='Wysłano';$('#resTitle').textContent='Prośba o rezerwację wysłana';resDlg.scrollTop=0}
   catch(err){console.warn(err);msg.textContent='Nie udało się wysłać prośby. Zadzwoń do nas: '+CONFIG.phone}
   finally{btn.disabled=false;btn.textContent=KIND[f.kind.value]?.[1]||'Wyślij prośbę o rezerwację'}});
 
