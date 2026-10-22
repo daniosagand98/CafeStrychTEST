@@ -2,7 +2,7 @@
 
 | Ścieżka | Co to jest |
 |---|---|
-| `index.html` + `img/` | Strona lokalu (v1.4) – aktualności, menu, galeria, rezerwacje |
+| `index.html` + `img/` | Strona lokalu (v1.4.1) – aktualności, menu, galeria, rezerwacje |
 | `.htaccess` + `WDROZENIE-OVH.md` | Ustawienia serwera OVH (przekierowania ze starego WordPressa, HTTPS, pamięć podręczna) i instrukcja wgrania na cafestrychgdynia.pl |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.9** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo), `supabase_v3_8.sql` (powiadomienia + anulowanie rachunków; zawiera v3.6) |
@@ -11,6 +11,10 @@
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Strona v1.4.1 – 22.10.2026
+- Rezerwacja **stolika** tylko w godzinach otwarcia (ostatnia 1 h przed zamknięciem, z uwzględnieniem nocy po północy w pt–sb); sala i cały lokal – bez ograniczeń.
+- Po wysłaniu rezerwacji nagłówek okna „Prośba o rezerwację wysłana” jest wyśrodkowany.
 
 ## Strona v1.4 + aplikacja V3.9 – 22.10.2026 (+ `sql/supabase_v3_9.sql`)
 - „Na bieżąco”: karty profili Instagram / TikTok / Facebook + karuzela **Najnowsze posty**. Posty dodaje kierownik w aplikacji: Aktualności (strona) → **Posty z social mediów** → wklej link do posta/filmiku. Strona pokazuje 9 najnowszych przez oficjalne osadzenie pojedynczych postów (bez limitów, w przeciwieństwie do automatycznego podglądu profilu).

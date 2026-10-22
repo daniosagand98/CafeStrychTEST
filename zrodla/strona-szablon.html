@@ -374,6 +374,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
 @keyframes dlg{from{opacity:0;transform:translateY(26px) scale(.97)}}
 .dlgIn{padding:30px}
 .dlgTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dlgIn.isDone .dlgTop{position:relative;justify-content:center;text-align:center;padding:0 46px}.dlgIn.isDone .dlgTop .x{position:absolute;right:0;top:0}
 .dlgTop h3{margin:10px 0 0;font:600 30px/1.15 var(--serif)}
 .x{flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--cream);font-size:20px;cursor:pointer}
 .form{display:grid;gap:14px;margin-top:22px}
@@ -712,7 +713,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.4 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.4.1 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -817,6 +818,14 @@ observe();
 /* ---------- opening hours ---------- */
 const DAYS=['Niedziela','Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota'];
 const mins=t=>{const[a,b]=t.split(':').map(Number);return a*60+b};
+const LAST_TABLE_MIN=60; // ostatnia rezerwacja stolika: 60 min przed zamknięciem
+const hhmm=m=>{m=((m%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')};
+function tableSlotCheck(start){const d=start.getDay(),m=start.getHours()*60+start.getMinutes();
+  const span=k=>{const[o,c]=CONFIG.hours[k].map(mins);return[o,c<=o?c+1440:c]};
+  const[o,c]=span(d);if(m>=o&&m<=c-LAST_TABLE_MIN)return null;
+  const p=(d+6)%7,[po,pc]=span(p);if(pc>1440&&m<=pc-1440-LAST_TABLE_MIN)return null;
+  const WHEN=['W niedzielę','W poniedziałek','We wtorek','W środę','W czwartek','W piątek','W sobotę'];
+  return `W tym czasie lokal jest zamknięty. ${WHEN[d]} stoliki rezerwujemy od ${CONFIG.hours[d][0]} do ${hhmm(c-LAST_TABLE_MIN)} (otwarte do ${CONFIG.hours[d][1]}). Salę lub cały lokal na imprezę możesz zarezerwować także poza godzinami otwarcia.`}
 function openState(now=new Date()){const d=now.getDay(),m=now.getHours()*60+now.getMinutes();
   const [o,c]=CONFIG.hours[d].map(mins),close=c<=o?c+1440:c;if(m>=o&&m<close)return{open:true,until:CONFIG.hours[d][1]};
   const [po,pc]=CONFIG.hours[(d+6)%7].map(mins);if(pc<=po&&m<pc)return{open:true,until:CONFIG.hours[(d+6)%7][1]};
@@ -927,7 +936,7 @@ const KIND={stolik:['Zarezerwuj stolik','Wyślij prośbę o rezerwację','np. ur
 function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];resForm.guests.placeholder=k==='stolik'?'np. 4':'np. 30'}
 resForm.kind.addEventListener('change',()=>setKind(resForm.kind.value));
 $('#doneAgain').addEventListener('click',()=>openReservation());
-function openReservation(wed=false,kind='stolik'){setKind(kind);$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
+function openReservation(wed=false,kind='stolik'){setKind(kind);$('#resDlg .dlgIn').classList.remove('isDone');$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
   const t=new Date(),min=isoDay(t);resForm.date.min=min;let d=new Date(t);if(wed){d.setDate(d.getDate()+((3-d.getDay()+7)%7||0));}else if(t.getHours()>=20)d.setDate(d.getDate()+1);
   if(!resForm.date.value||resForm.date.value<min||wed)resForm.date.value=isoDay(d);resDlg.showModal()}
 document.addEventListener('click',e=>{const b=e.target.closest('.reserve');if(b){e.preventDefault();openReservation(!!b.dataset.wed,b.dataset.type||'stolik')}});
@@ -938,6 +947,7 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
   if(!f.date.value||!f.time.value||isNaN(start))return msg.textContent='Wybierz datę i godzinę.';
   if(!Number.isInteger(guests)||guests<1)return msg.textContent='Wpisz liczbę osób.';
   if(guests>120)return msg.textContent='Dla grup powyżej 120 osób zadzwoń do nas: '+CONFIG.phone;
+  if(f.kind.value==='stolik'){const why=tableSlotCheck(start);if(why)return msg.textContent=why}
   if(start<new Date(Date.now()+30*60000))return msg.textContent='Rezerwację online przyjmujemy najpóźniej 30 minut wcześniej – na teraz zadzwoń: '+CONFIG.phone;
   if(!f.consent.checked)return msg.textContent='Zaznacz zgodę na kontakt w sprawie rezerwacji.';
   btn.disabled=true;btn.textContent='Wysyłanie…';
@@ -951,7 +961,7 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
     $('#doneHello').textContent=`Dziękujemy, ${name.split(' ')[0]}!`;
     $('#doneSum').innerHTML=[['Rodzaj',KN[f.kind.value]||'Stolik'],['Kiedy',start.toLocaleDateString('pl-PL',{weekday:'long',day:'numeric',month:'long'})+', '+f.time.value],['Ile osób',guests+' '+gN(guests)],['Telefon',phone]].map(([a,b])=>`<dt>${a}</dt><dd>${esc(b)}</dd>`).join('');
     const tel=CONFIG.phone.replace(/\s/g,'');$('#donePhone').textContent=CONFIG.phone;$('#donePhone').href='tel:'+tel;
-    f.reset();f.hidden=true;$('#resDone').hidden=false;$('#resDlg .brush').textContent='Wysłano';$('#resTitle').textContent='Prośba o rezerwację wysłana';resDlg.scrollTop=0}
+    f.reset();f.hidden=true;$('#resDone').hidden=false;$('#resDlg .brush').textContent='Wysłano';$('#resDlg .dlgIn').classList.add('isDone');$('#resTitle').textContent='Prośba o rezerwację wysłana';resDlg.scrollTop=0}
   catch(err){console.warn(err);msg.textContent='Nie udało się wysłać prośby. Zadzwoń do nas: '+CONFIG.phone}
   finally{btn.disabled=false;btn.textContent=KIND[f.kind.value]?.[1]||'Wyślij prośbę o rezerwację'}});
 
