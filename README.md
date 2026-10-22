@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.5.3 – 22.10.2026
+- Kolumny Instagram / TikTok / Facebook mają równą wysokość, stopki „Odśwież podgląd / Otwórz profil” w jednej linii.
+- Facebook: nagłówek strony (zdjęcie, obserwujący) + karta „Zobacz posty na Facebooku” zamiast osi czasu, której Facebook nie wyświetla poza facebook.com dla tej strony.
+
 ## Strona v1.5.2 – 22.10.2026
 - Pasek „Jak to działa?” w sekcji imprez przebudowany: numerowane kroki w równych kolumnach, telefon jako przycisk „Zadzwoń” (komputer, tablet i telefon).
 

@@ -324,7 +324,7 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 
 /* ---------- social ---------- */
 #social .sketch.a{width:120px;right:4%;top:90px}
-.socGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.socGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
 .socCol{min-width:0;display:flex;flex-direction:column;padding:16px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -30px rgba(42,27,17,.45)}
 .socHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socHead .btn{margin-left:auto;padding:9px 14px}
 .profTxt{min-width:0;flex:1}.profTxt b{display:block;font:600 20px/1.2 var(--serif)}.profTxt small{display:block;color:var(--muted);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -334,12 +334,21 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 .embedLayer{position:absolute;inset:0;z-index:0;display:grid;place-content:center;justify-items:center;gap:12px;padding:20px;text-align:center;color:var(--ink2);font-size:14px}
 .embedSlot{position:relative;z-index:1;display:flex;justify-content:center;min-height:540px}
 .embedSlot:empty{min-height:0}
-.embedBox.ready{min-height:0;background:transparent;border-color:transparent;overflow:visible}.embedBox.ready .embedSlot{min-height:0}.embedBox.ready .embedLayer{display:none}
+.embedBox.ready .embedSlot{flex-direction:column;align-items:center}
+.fbHeadFrame{display:block;width:100%;height:130px;border:0;border-radius:12px;background:#fff}
+.fbCard{width:100%;margin-top:12px;padding:18px 16px;border-radius:12px;background:linear-gradient(160deg,#1877f2 0%,#0f5bc4 100%);color:#fff;text-align:center}
+.fbCard svg{width:32px;height:32px;margin-bottom:6px}.fbCard b{display:block;font:600 19px/1.25 var(--serif);margin-bottom:6px}
+.fbCard p{margin:0 0 14px;font-size:13.5px;line-height:1.5;opacity:.92}
+.fbCard ul{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;font-size:12.5px}
+.fbCard li{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.15);white-space:nowrap}
+.fbCard a{display:inline-flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:11px 14px;border-radius:999px;background:#fff;color:#1877f2;font-weight:700;text-decoration:none;transition:transform .2s var(--ease)}
+.fbCard a:hover{transform:translateY(-1px)}
+.embedBox.ready{min-height:0;margin-bottom:auto;background:transparent;border-color:transparent;overflow:visible}.embedBox.ready .embedSlot{min-height:0}.embedBox.ready .embedLayer{display:none}
 .embedBox.ready .embedSlot iframe{border-radius:12px}
 .embedSlot>blockquote{margin:0!important;width:100%!important;min-width:0!important;max-width:100%!important;border:0!important;box-shadow:none!important;background:transparent!important}
 .embedSlot iframe{max-width:100%!important;border:0}
 .embedSlot blockquote section,.embedSlot blockquote a{font:14px var(--sans)}
-.embedFoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:13px}
+.embedFoot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:12px;font-size:13px}
 .embedFoot a{color:var(--brown);font-weight:700;text-decoration:none}
 .embedRetry{border:0;background:none;padding:4px 0;color:var(--ink2);font:600 13px var(--sans);cursor:pointer}.embedRetry:hover{color:var(--brown)}
 .feedWrap{margin-top:34px}
@@ -679,7 +688,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
         <div class="embedFoot"><button type="button" class="embedRetry" data-retry="tiktok">↻ Odśwież podgląd</button><a data-link="tiktok" target="_blank" rel="noopener">Otwórz profil ↗</a></div>
       </article>
       <article class="socCol reveal" style="--d:.16s" data-net="facebook">
-        <div class="socHead"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><span class="profTxt"><b>Facebook</b><small data-handle="facebook">Najnowsze posty</small></span><a class="btn btn-ink btn-sm" data-link="facebook" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="socHead"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><span class="profTxt"><b>Facebook</b><small data-handle="facebook">Cafe Strych Gdynia</small></span><a class="btn btn-ink btn-sm" data-link="facebook" target="_blank" rel="noopener">Obserwuj</a></div>
         <div class="embedBox" id="emb-facebook"><div class="embedLayer"><span class="dots"><i></i><i></i><i></i></span><span class="embedMsg">Wczytujemy najnowsze posty…</span></div><div class="embedSlot"></div></div>
         <div class="embedFoot"><button type="button" class="embedRetry" data-retry="facebook">↻ Odśwież podgląd</button><a data-link="facebook" target="_blank" rel="noopener">Otwórz profil ↗</a></div>
       </article>
@@ -742,7 +751,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.5.2 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.5.3 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -952,8 +961,9 @@ if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'pu
       if(window.instgrm&&!fresh)instgrm.Embeds.process();else{await loadScript('https://www.instagram.com/embed.js',fresh);window.instgrm?.Embeds.process()}later('instagram')},
     tiktok:async(fresh)=>{watch('tiktok');slot('tiktok').innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(H.tiktok)}" data-unique-id="${esc(H.tiktok)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section></section></blockquote>`;
       await loadScript('https://www.tiktok.com/embed.js',true);later('tiktok')},
-    facebook:async()=>{$('#emb-facebook').classList.remove('ready');const box=$('#emb-facebook'),w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=Math.max(480,box.clientHeight||540);
-      slot('facebook').innerHTML=`<iframe title="Najnowsze posty Cafe Strych na Facebooku" style="width:${w}px;height:${h}px" allow="encrypted-media" src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(CONFIG.facebook)}&tabs=timeline&width=${w}&height=${h}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL&r=${Date.now()}"></iframe>`;watch('facebook');later('facebook')}};
+    facebook:async()=>{const box=$('#emb-facebook');box.classList.remove('ready');const w=Math.max(180,Math.min(500,Math.floor(box.clientWidth)));
+      // Facebook nie pokazuje osi czasu tej strony poza facebook.com (ograniczenie strony) – pokazujemy nagłówek strony + kartę z linkiem
+      slot('facebook').innerHTML=`<iframe class="fbHeadFrame" title="Cafe Strych na Facebooku" allow="encrypted-media" src="https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(CONFIG.facebook)}&tabs=&width=${w}&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=pl_PL&r=${Date.now()}"></iframe><div class="fbCard"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg><b>Bądź na bieżąco na Facebooku</b><p>Tam na bieżąco wrzucamy, co się dzieje na Strychu.</p><ul><li>🎵 Koncerty i wydarzenia</li><li>📸 Zdjęcia z wieczorów</li><li>🍰 Nowości w karcie</li></ul><a href="${esc(CONFIG.facebook)}" target="_blank" rel="noopener">Zobacz posty na Facebooku ↗</a></div>`;watch('facebook');later('facebook')}};
   const nets=['instagram','tiktok','facebook'].filter(k=>$(`#emb-${k}`));
   const startEmbeds=()=>{if(window.STRYCH_PREVIEW){nets.forEach(k=>msg(k,`Tu pokażą się najnowsze posty z ${ICO[k][2]} (w podglądzie czatu się nie wczytują).`));return}nets.forEach(k=>EMB[k](false))};
   sec.addEventListener('click',e=>{const b=e.target.closest('[data-retry]');if(!b||window.STRYCH_PREVIEW)return;const k=b.dataset.retry;$(`#emb-${k}`).classList.remove('ready');msg(k,'Wczytujemy ponownie…');slot(k).innerHTML='';EMB[k](true)});
