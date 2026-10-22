@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.6 + Aplikacja V3.9.1 – 22.10.2026
+- Na życzenie klientki: sekcja „Na bieżąco” pokazuje tylko ikonki i nazwy Instagram / TikTok / Facebook z przyciskiem „Obserwuj” – bez podglądu postów.
+- Aplikacja: usunięta sekcja „Posty z social mediów” w Aktualnościach (tabela site_social_posts zostaje w bazie, nieużywana).
+
 ## Strona v1.5.3 – 22.10.2026
 - Kolumny Instagram / TikTok / Facebook mają równą wysokość, stopki „Odśwież podgląd / Otwórz profil” w jednej linii.
 - Facebook: nagłówek strony (zdjęcie, obserwujący) + karta „Zobacz posty na Facebooku” zamiast osi czasu, której Facebook nie wyświetla poza facebook.com dla tej strony.
