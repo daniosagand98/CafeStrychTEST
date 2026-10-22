@@ -2,7 +2,7 @@
 
 | Ścieżka | Co to jest |
 |---|---|
-| `index.html` + `img/` | Strona lokalu (v1.2.1) – aktualności, menu, galeria, rezerwacje |
+| `index.html` + `img/` | Strona lokalu (v1.3) – aktualności, menu, galeria, rezerwacje |
 | `.htaccess` + `WDROZENIE-OVH.md` | Ustawienia serwera OVH (przekierowania ze starego WordPressa, HTTPS, pamięć podręczna) i instrukcja wgrania na cafestrychgdynia.pl |
 | `panel/` | Aplikacja **Cafe Strych Manager V3.8** (instalowana na telefonie, z powiadomieniami) (logowanie przez Supabase) |
 | `sql/` | Skrypty do Supabase – uruchamiać po kolei: `supabase_v3_5_1.sql` (naprawa tabel), `supabase_v3_4.sql`, `supabase_v3_5.sql`, `supabase_v3_6.sql` (powiadomienia), `supabase_v3_7.sql` (bezpieczeństwo), `supabase_v3_8.sql` (powiadomienia + anulowanie rachunków; zawiera v3.6) |
@@ -11,6 +11,10 @@
 | `zrodla/` | Karta menu (`menu_data.py`) i skrypty budujące stronę oraz podgląd |
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
+
+## Strona v1.3 – 22.10.2026
+- Sekcja „Na bieżąco”: najnowsze posty z **Facebooka** (oficjalna wtyczka strony, ładowana przy przewinięciu).
+- Instagram i TikTok jako karty z przyciskiem „Obserwuj”; filmiki z TikToka wczytują się dopiero po kliknięciu „Pokaż filmiki tutaj” (TikTok blokował automatyczne wczytywanie – „ratelimit triggered”, a podgląd profilu Instagrama był pusty).
 
 ## Aplikacja V3.8 – 21.10.2026 (+ `sql/supabase_v3_8.sql`)
 - Rachunków opłaconych nie da się już usunąć: zamiast „Usuń” jest „Anuluj” z obowiązkowym powodem – opłacony rachunek anuluje tylko administrator, otwarty – kierownik. Anulowany rachunek zostaje w historii (filtr Wszystkie / Opłacone / Anulowane) i nie liczy się do utargu.

@@ -316,19 +316,23 @@ footer .soc{border-color:var(--lineD);color:var(--creamMuted)!important}footer .
 
 /* ---------- social ---------- */
 #social .sketch.a{width:120px;right:4%;top:90px}
-.socialGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start}
-.socialCol{min-width:0;padding:18px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -28px rgba(42,27,17,.45)}
-.socialHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socialHead b{display:block;font:600 22px var(--serif)}.socialHead small{color:var(--muted)}.socialHead .btn{margin-left:auto}
+.socialGrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.socialSide{display:grid;gap:22px;min-width:0}
+.socialCol{min-width:0;padding:20px;border-radius:var(--r);background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 40px -28px rgba(42,27,17,.45)}
+.socialHead{display:flex;align-items:center;gap:12px;margin-bottom:14px}.socialHead b{display:block;font:600 22px var(--serif);color:var(--ink)}.socialHead small{display:block;color:var(--muted);font-size:13px}.socialHead .btn{margin-left:auto}
 .socIco{width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center;border-radius:14px;color:#fff}.socIco svg{width:24px;height:24px}
-.socIco.ig{background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888)}.socIco.tt{background:#111}
-.embedBox{min-height:420px;display:flex;justify-content:center}
-.embedBox iframe{max-width:100%!important}
-.embedBox blockquote{margin:0!important;width:100%}
-.embedFallback{width:100%;min-height:400px;display:grid;place-content:center;gap:12px;text-align:center;padding:26px;border-radius:16px;border:2px dashed var(--line);color:var(--ink2);background:repeating-linear-gradient(45deg,transparent 0 14px,rgba(235,182,124,.08) 14px 28px)}
-.embedFallback b{font:600 24px var(--serif);color:var(--ink)}.embedFallback .btn{justify-self:center}
-.embedFallback .dots{display:inline-flex;gap:6px;justify-content:center}.embedFallback .dots i{width:8px;height:8px;border-radius:50%;background:var(--brown2);animation:dotp 1.2s infinite}.embedFallback .dots i:nth-child(2){animation-delay:.2s}.embedFallback .dots i:nth-child(3){animation-delay:.4s}
+.socIco.fb{background:#1877f2}.socIco.ig{background:linear-gradient(45deg,#f09433,#dc2743 50%,#bc1888)}.socIco.tt{background:#111}
+.fbFrame{position:relative;min-height:560px;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.fbFrame iframe{display:block;width:100%;height:560px;border:0;position:relative;z-index:1}
+.embedLoading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:12px;color:var(--ink2);font-size:14px;text-align:center;padding:20px}
+.dots{display:inline-flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--brown2);animation:dotp 1.2s infinite}.dots i:nth-child(2){animation-delay:.2s}.dots i:nth-child(3){animation-delay:.4s}
 @keyframes dotp{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:none}}
-.embedFallback.failed .dots{display:none}
+.socMore{display:block;margin-top:12px;font-size:14px;font-weight:600;color:var(--brown);text-decoration:none}.socMore:hover{text-decoration:underline}
+.socTxt{margin:0 0 16px;color:var(--ink2);font-size:15px}
+.socBtns{display:grid;gap:10px}
+.socBig{width:100%;justify-content:center}.socBig svg{width:20px;height:20px;flex:0 0 auto}
+.ttBox{margin-top:16px;min-height:120px;display:flex;justify-content:center}
+.ttBox blockquote{margin:0!important;width:100%;max-width:100%!important;min-width:0!important}.ttBox iframe{max-width:100%!important}
 
 /* ---------- footer ---------- */
 footer{background:var(--dark);color:var(--creamMuted);padding:64px 0 28px;font-size:14px;line-height:1.6}
@@ -395,7 +399,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .newsGrid{grid-template-columns:1fr 1fr}.nCard.nFeat{grid-column:span 2}
   .histGrid,.contactGrid{grid-template-columns:1fr}
   .histMedia{min-height:540px;max-width:620px;width:100%;margin-inline:auto}
-  .socialGrid{grid-template-columns:1fr}
+  .socialGrid{grid-template-columns:minmax(0,1fr)}.fbFrame,.fbFrame iframe{min-height:520px;height:520px}
   .eventGrid{grid-template-columns:1fr}.eventCard{padding:22px}.eventPhone{margin-left:0}
   .bento{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px 220px}
   .tile:first-child{grid-row:auto;grid-column:span 2}.tile:nth-child(4){grid-column:span 2}
@@ -418,7 +422,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   .heroMeta>div{flex:1}
   .newsGrid{grid-template-columns:1fr}.nCard.nFeat{grid-column:auto;flex-direction:column}.nCard.nFeat .nImg{min-height:0;aspect-ratio:16/10}
   .histMedia{min-height:430px}.histMedia .stamp{width:96px;height:96px;font-size:24px;left:58%;top:40%}
-  .socialCol{padding:12px}.socialHead .btn{padding:8px 14px}
+  .socialCol{padding:14px}.socialHead .btn{padding:8px 14px}
   .bento{grid-template-columns:1fr;grid-template-rows:repeat(4,240px)}.tile:first-child,.tile:nth-child(4){grid-column:auto}
   .tile span{max-height:none;opacity:1;margin-top:6px}
   .feats{grid-template-columns:1fr}
@@ -619,23 +623,33 @@ dialog[open]{animation:dlg .5s var(--ease)}
   </div>
 </section>
 
-<!-- SOCIAL: najnowsze posty -->
+<!-- SOCIAL: Facebook (najnowsze posty) + Instagram + TikTok -->
 <section class="paper sec" id="social">
   <img class="sketch a" src="data:image/webp;base64,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" alt="" aria-hidden="true">
   <div class="wrap">
     <div class="secHead reveal">
       <span class="brush">Na bieżąco</span>
-      <h2>Najnowsze z <em>Instagrama</em> i TikToka</h2>
-      <p>Zdjęcia, filmiki z koncertów i nowości z baru – prosto z naszych profili.</p>
+      <h2>Strych w <em>mediach społecznościowych</em></h2>
+      <p>Najnowsze wpisy z Facebooka, a na Instagramie i TikToku – zdjęcia i filmiki z koncertów i zza baru.</p>
     </div>
     <div class="socialGrid">
-      <div class="socialCol reveal" data-embed="instagram">
-        <div class="socialHead"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><div><b>Instagram</b><small class="handle" data-handle="instagram"></small></div><a class="btn btn-ink btn-sm socFollow" data-link="instagram" target="_blank" rel="noopener">Obserwuj</a></div>
-        <div class="embedBox" id="igEmbed"></div>
-      </div>
-      <div class="socialCol reveal" style="--d:.12s" data-embed="tiktok">
-        <div class="socialHead"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><div><b>TikTok</b><small class="handle" data-handle="tiktok"></small></div><a class="btn btn-ink btn-sm socFollow" data-link="tiktok" target="_blank" rel="noopener">Obserwuj</a></div>
-        <div class="embedBox" id="ttEmbed"></div>
+      <article class="socialCol socFb reveal" data-net="facebook">
+        <div class="socialHead"><span class="socIco fb"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V8.8c0-.5.3-.8.5-.8z"/></svg></span><div><b>Facebook</b><small>Najnowsze posty</small></div><a class="btn btn-ink btn-sm" data-link="facebook" target="_blank" rel="noopener">Obserwuj</a></div>
+        <div class="fbFrame" id="fbFrame"><div class="embedLoading"><span class="dots"><i></i><i></i><i></i></span>Wczytujemy posty z Facebooka…</div></div>
+        <a class="socMore" data-link="facebook" target="_blank" rel="noopener">Nie widzisz postów? Otwórz nasz profil na Facebooku →</a>
+      </article>
+      <div class="socialSide">
+        <article class="socialCol reveal" style="--d:.1s" data-net="instagram">
+          <div class="socialHead"><span class="socIco ig"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg></span><div><b>Instagram</b><small data-handle="instagram"></small></div></div>
+          <p class="socTxt">Zdjęcia z wieczorów na Strychu, nowe drinki i ciasta prosto z baru.</p>
+          <a class="btn btn-gold socBig" data-link="instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></svg>Obserwuj na Instagramie</a>
+        </article>
+        <article class="socialCol reveal" style="--d:.2s" data-net="tiktok">
+          <div class="socialHead"><span class="socIco tt"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg></span><div><b>TikTok</b><small data-handle="tiktok"></small></div></div>
+          <p class="socTxt">Krótkie filmiki z koncertów i z życia lokalu.</p>
+          <div class="socBtns"><a class="btn btn-gold socBig" data-link="tiktok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.4 2.3 1.9 3.8 4.2 4v3.4c-1.6 0-3-.5-4.2-1.3v6.4c0 3.4-2.6 5.9-5.9 5.9S4.7 18.9 4.7 15.6s2.6-5.9 5.9-5.9c.3 0 .6 0 .9.1V13a2.7 2.7 0 1 0 1.8 2.6V3z"/></svg>Obserwuj na TikToku</a><button class="btn btn-ink socBig" type="button" id="ttShow">▶ Pokaż filmiki tutaj</button></div>
+          <div class="ttBox" id="ttBox" hidden></div>
+        </article>
       </div>
     </div>
   </div>
@@ -692,7 +706,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.2.1 · aktualizacja 19.10.2026</span>
+      <span class="fVer">Strona v1.3 · aktualizacja 22.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -879,22 +893,30 @@ async function loadNews(){
 loadNews();
 if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'public',table:'site_news'},()=>{clearTimeout(nt);nt=setTimeout(loadNews,400)}).subscribe()}
 
-/* ---------- social: najnowsze posty (oficjalne osadzenia Instagram i TikTok) ---------- */
-(()=>{const user=(url,re)=>{const m=re.exec(url||'');return m?m[1]:''},ig=user(CONFIG.instagram,/instagram\.com\/([^/?#]+)/),tt=user(CONFIG.tiktok,/tiktok\.com\/@([^/?#]+)/);
-  const sec=$('#social');if(!ig&&!tt){sec.remove();$$('a[href="#social"]').forEach(a=>a.remove());return}
-  if(!ig)sec.querySelector('[data-embed="instagram"]').remove();if(!tt)sec.querySelector('[data-embed="tiktok"]').remove();
+/* ---------- social: Facebook (posty), Instagram i TikTok ---------- */
+(()=>{const sec=$('#social');if(!sec)return;
+  const user=(url,re)=>{const m=re.exec(url||'');return m?m[1]:''},ig=user(CONFIG.instagram,/instagram\.com\/([^/?#]+)/),tt=user(CONFIG.tiktok,/tiktok\.com\/@([^/?#]+)/);
+  if(!CONFIG.facebook)sec.querySelector('[data-net="facebook"]')?.remove();
+  if(!ig)sec.querySelector('[data-net="instagram"]')?.remove();if(!tt)sec.querySelector('[data-net="tiktok"]')?.remove();
+  if(!sec.querySelector('[data-net]')){sec.remove();$$('a[href="#social"]').forEach(a=>a.remove());return}
   $$('[data-handle="instagram"]').forEach(e=>e.textContent='@'+ig);$$('[data-handle="tiktok"]').forEach(e=>e.textContent='@'+tt);
-  $$('[data-link="instagram"]').forEach(a=>a.href=CONFIG.instagram);$$('[data-link="tiktok"]').forEach(a=>a.href=CONFIG.tiktok);
-  const fb=(name,href,handle)=>`<div class="embedFallback"><span class="dots"><i></i><i></i><i></i></span><b>@${esc(handle)}</b><span class="fbTxt">Wczytujemy najnowsze posty z ${name}…</span><a class="btn btn-gold btn-sm" href="${esc(href)}" target="_blank" rel="noopener">Otwórz ${name} →</a></div>`;
-  const igBox=$('#igEmbed'),ttBox=$('#ttEmbed');
-  if(igBox)igBox.innerHTML=`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/${esc(ig)}/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style="max-width:540px;min-width:280px;width:100%;border:0;background:transparent">${fb('Instagrama',CONFIG.instagram,ig)}</blockquote>`;
-  if(ttBox)ttBox.innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(tt)}" data-unique-id="${esc(tt)}" data-embed-type="creator" style="max-width:720px;min-width:280px;width:100%"><section>${fb('TikToka',CONFIG.tiktok,tt)}</section></blockquote>`;
-  const load=src=>new Promise(r=>{const sc=document.createElement('script');sc.async=true;sc.src=src;sc.onload=()=>r(true);sc.onerror=()=>r(false);document.body.appendChild(sc)});
-  const giveUp=box=>setTimeout(()=>{if(box&&!box.querySelector('iframe'))box.querySelectorAll('.embedFallback').forEach(f=>{f.classList.add('failed');const t=f.querySelector('.fbTxt');if(t)t.textContent='Podgląd postów nie wczytał się (np. przez blokadę treści zewnętrznych). Zobacz je bezpośrednio:'})},9000);
-  if(window.STRYCH_PREVIEW){[igBox,ttBox].forEach(giveUp);return}
-  new IntersectionObserver(async(es,o)=>{if(!es[0].isIntersecting)return;o.disconnect();
-    if(igBox){const ok=await load('https://www.instagram.com/embed.js');if(ok&&window.instgrm)instgrm.Embeds.process();giveUp(igBox)}
-    if(ttBox){await load('https://www.tiktok.com/embed.js');giveUp(ttBox)}},{rootMargin:'600px'}).observe(sec)})();
+  ['facebook','instagram','tiktok'].forEach(k=>$$(`[data-link="${k}"]`).forEach(a=>a.href=CONFIG[k]||'#'));
+  // Facebook: oficjalna wtyczka strony – oś czasu z najnowszymi postami (ładowana dopiero przy przewinięciu)
+  const box=$('#fbFrame');
+  if(box&&CONFIG.facebook){
+    const show=()=>{const w=Math.max(180,Math.min(500,Math.floor(box.clientWidth))),h=box.clientHeight||560;
+      if(window.STRYCH_PREVIEW){box.querySelector('.embedLoading').innerHTML='<b style="font:600 20px var(--serif);color:var(--ink)">Tu pojawią się najnowsze posty z Facebooka</b><span>(w podglądzie czatu Facebook się nie wczytuje)</span>';return}
+      const f=document.createElement('iframe');f.title='Najnowsze posty Cafe Strych na Facebooku';f.loading='lazy';f.allow='encrypted-media';f.setAttribute('scrolling','yes');f.style.width=w+'px';f.style.margin='0 auto';
+      f.src='https://www.facebook.com/plugins/page.php?href='+encodeURIComponent(CONFIG.facebook)+`&tabs=timeline&width=${w}&height=${h}&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=pl_PL`;
+      box.appendChild(f);setTimeout(()=>{const l=box.querySelector('.embedLoading');if(l)l.innerHTML='<span>Jeśli posty się nie pokazały, przeglądarka mogła zablokować treści z Facebooka.</span>'},8000)};
+    new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();show()}},{rootMargin:'500px'}).observe(box)}
+  // TikTok: filmiki dopiero po kliknięciu (TikTok ogranicza liczbę automatycznych wczytań)
+  const ttBtn=$('#ttShow'),ttBox=$('#ttBox');
+  if(ttBtn&&ttBox)ttBtn.addEventListener('click',()=>{ttBtn.remove();ttBox.hidden=false;
+    if(window.STRYCH_PREVIEW){ttBox.innerHTML='<p class="socTxt">Tu wczytają się filmiki z TikToka (w podglądzie czatu TikTok się nie wczytuje).</p>';return}
+    ttBox.innerHTML=`<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${esc(tt)}" data-unique-id="${esc(tt)}" data-embed-type="creator" style="max-width:100%;min-width:0"><section><div class="embedLoading" style="position:static"><span class="dots"><i></i><i></i><i></i></span>Wczytujemy filmiki…</div></section></blockquote>`;
+    const sc=document.createElement('script');sc.async=true;sc.src='https://www.tiktok.com/embed.js';document.body.appendChild(sc)});
+})();
 
 /* ---------- dialogs ---------- */
 document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))e.target.closest('dialog')?.close();const d=e.target.tagName==='DIALOG'?e.target:null;if(d)d.close()});
