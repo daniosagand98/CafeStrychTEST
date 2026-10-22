@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.5.2 – 22.10.2026
+- Pasek „Jak to działa?” w sekcji imprez przebudowany: numerowane kroki w równych kolumnach, telefon jako przycisk „Zadzwoń” (komputer, tablet i telefon).
+
 ## Strona v1.5.1 – 22.10.2026
 - Pola podglądu Instagrama, TikToka i Facebooka dopasowują się do wysokości postów (bez pustego białego miejsca i podwójnej ramki).
 
