@@ -43,6 +43,7 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
  eq(c,v){this.f.push(r=>r[c]===v);return this}neq(c,v){this.f.push(r=>r[c]!==v);return this}
  not(c,op,v){const l=String(v).replace(/[()]/g,'').split(',');this.f.push(r=>!l.includes(r[c]));return this}
  in(c,v){this.f.push(r=>v.includes(r[c]));return this}limit(n){this.lim=n;return this}
+ gte(c,v){this.f.push(r=>String(r[c])>=String(v));return this}gt(c,v){this.f.push(r=>String(r[c])>String(v));return this}lte(c,v){this.f.push(r=>String(r[c])<=String(v));return this}lt(c,v){this.f.push(r=>String(r[c])<String(v));return this}range(a,b){this.rng=[a,b];return this}
  maybeSingle(){this.one='maybe';return this}single(){this.one='single';return this}
  insert(d){this.op='insert';this.data=d;return this}update(d){this.op='update';this.data=d;return this}
  upsert(d,o={}){this.op='upsert';this.data=d;this.conf=(o.onConflict||'id').split(',');return this}
@@ -53,10 +54,11 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
   else if(this.op==='upsert'){out=[].concat(this.data).map(x=>{const ex=T.find(r=>this.conf.every(k=>x[k]!==undefined&&r[k]===x[k]));if(ex)return Object.assign(ex,x);const n={id:uid(),created_at:now,...x};T.push(n);return n})}
   else if(this.op==='update'){out=T.filter(r=>this.f.every(f=>f(r)));out.forEach(r=>Object.assign(r,this.data))}
   else if(this.op==='delete'){out=T.filter(r=>this.f.every(f=>f(r)));DB[this.t]=T.filter(r=>!out.includes(r))}
-  else{out=T.filter(r=>this.f.every(f=>f(r)));for(const[c,a]of[...this.ord].reverse())out=[...out].sort((x,y)=>String(x[c]??'').localeCompare(String(y[c]??''),'pl',{numeric:true})*(a?1:-1));if(this.lim)out=out.slice(0,this.lim)}
+  else{out=T.filter(r=>this.f.every(f=>f(r)));for(const[c,a]of[...this.ord].reverse())out=[...out].sort((x,y)=>String(x[c]??'').localeCompare(String(y[c]??''),'pl',{numeric:true})*(a?1:-1));if(this.lim)out=out.slice(0,this.lim);if(this.rng)out=out.slice(this.rng[0],this.rng[1]+1)}
   out=JSON.parse(JSON.stringify(out));
   if(this.one)return{data:out[0]??null,error:this.one==='single'&&!out[0]?{message:'Brak wiersza'}:null};
   return{data:out,error:null}}}
+(()=>{const M=['card','card','card','cash','cash','blik','transfer'];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;for(let d=1;d<=430;d++){const t=new Date();t.setDate(t.getDate()-d);if(t.getDay()===1&&rnd()<.6)continue;const n=4+Math.floor(rnd()*(t.getDay()>=5?16:9));for(let k=0;k<n;k++){const h=new Date(t);h.setHours(13+Math.floor(rnd()*10),Math.floor(rnd()*60));DB.pos_payments.push({id:uid(),order_id:'hist',amount:Math.round((25+rnd()*190)*100)/100,method:M[Math.floor(rnd()*M.length)],created_at:h.toISOString()})}}})();
 const ok=async()=>({data:{},error:null}),BLOBS={'demo-bug.png':'BUG_IMG'};
 return{from:t=>new Q(t),
  auth:{getSession:async()=>({data:{session:{user:ADMIN}}}),onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),signInWithPassword:ok,signUp:ok,signOut:async()=>{toast('Podgląd: wylogowanie wyłączone');return{error:null}},resetPasswordForEmail:ok,updateUser:ok},

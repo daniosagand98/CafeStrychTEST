@@ -12,6 +12,12 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.2 – 23.10.2026
+- Start pracownika: powitanie i „Dyspozycyjność” w jednej linii, „Najbliższa zmiana” i „Godziny w miesiącu” jako dwa małe kafelki obok siebie, odstępy między komunikatami.
+- Rezerwacje i Grafik: tytuł z przyciskiem w jednej linii, ‹ Dziś › i Tydzień/Miesiąc w jednym pasku, odstępy między kartami rezerwacji.
+- Daty zmian w formacie „Pt 23.10 • 12:00–20:00”.
+- Utarg: podsumowanie za miesiąc, rok lub wybrany okres (suma, płatności, średnio dziennie, karta/gotówka/BLIK/przelew, wykres dni lub miesięcy – kliknięcie dnia otwiera jego szczegóły), bez anulowanych rachunków.
+
 ## Aplikacja V4.1.1 – 23.10.2026
 - Logowanie: przycisk „Zaloguj” / „Utwórz konto” / „Wyślij link” na całą szerokość z odstępem od pola hasła (nie nachodzi na nie na komputerze).
 
