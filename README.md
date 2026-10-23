@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.1.1 – 23.10.2026
+- Logowanie: przycisk „Zaloguj” / „Utwórz konto” / „Wyślij link” na całą szerokość z odstępem od pola hasła (nie nachodzi na nie na komputerze).
+
 ## Aplikacja V4.1 + Strona v1.7.1 – 23.10.2026 (kadrowanie wymaga sql/supabase_v4_1.sql)
 - Logowanie: „Nie pamiętasz hasła?” – link do ustawienia nowego hasła na e-mail; komunikaty błędów logowania po polsku.
 - Menu POS: przycisk „Usuń” przy produkcie (stare rachunki zachowują nazwę i cenę).
