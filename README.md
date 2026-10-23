@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.5 – 23.10.2026 (wymaga sql/supabase_v4_5.sql)
+- Historia rachunków: administrator ma przy każdym rachunku „Usuń” (obok „Anuluj”). Przed usunięciem okno z ostrzeżeniem: kwota zniknie z utargu dnia/miesiąca/roku, wcześniejsze podsumowania (np. raport z kasy fiskalnej) mogą się nie zgadzać, nie da się cofnąć; trzeba zaznaczyć „Rozumiem” i kliknąć „Usuń na zawsze”. Usunięcie zapisuje się w „System i logi” (kto, rachunek, kwota). Baza pozwala na to tylko administratorowi (funkcja pos_delete_order).
+
 ## Aplikacja V4.4.1 – 23.10.2026 (wymaga sql/supabase_v4_4.sql)
 - Rachunek: bez „Przygotowanie”/„Gotowe”; „Płatność” na całą szerokość, pod nią „％ Rabat” obok „Anuluj rachunek”.
 - Okno rabatu: samo pole „Rabat w %” i podgląd „Do zapłaty”; 0 lub puste = bez rabatu.

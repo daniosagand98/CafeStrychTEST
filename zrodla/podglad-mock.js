@@ -63,6 +63,7 @@ const ok=async()=>({data:{},error:null}),BLOBS={'demo-bug.png':'BUG_IMG'};
 const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));const T=()=>DB.pos_order_items;
  if(fn==='pos_bump_item'){const l=T().find(r=>r.order_id===a.p_order&&r.menu_item_id===a.p_menu);if(!l){if(a.p_delta>0){const m=DB.menu_items.find(x=>x.id===a.p_menu);T().push({id:uid(),order_id:a.p_order,menu_item_id:a.p_menu,item_name:m.name,qty:a.p_delta,unit_price:m.price,tax_rate:m.tax_rate??23,created_at:new Date().toISOString()})}}else{l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
  if(fn==='pos_bump_line'){const l=T().find(r=>r.id===a.p_item);if(l){l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
+ if(fn==='pos_delete_order'){DB.pos_payments=DB.pos_payments.filter(r=>r.order_id!==a.p_order);DB.pos_order_items=DB.pos_order_items.filter(r=>r.order_id!==a.p_order);DB.pos_orders=DB.pos_orders.filter(r=>r.id!==a.p_order);return{data:null,error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
 return{rpc,from:t=>new Q(t),
