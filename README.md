@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.7 – 23.10.2026
+- Ustawienia → Przegląd → „Podgląd na urządzeniach” (tylko na komputerze): Komputer / iPhone / iPad. Aplikacja otwiera się w ramce urządzenia (iPhone 393×852 z wyspą i paskiem, iPad 820×1180 pionowo lub poziomo), w środku działa prawdziwa aplikacja na Twoim koncie – można klikać i przełączać Admin/Kierownik/Pracownik. Ramka sama dopasowuje się do ekranu (np. udostępnianie ekranu w wideorozmowie). Esc lub „Zamknij” wraca do komputera.
+
 ## Aplikacja V4.6.1 – 23.10.2026
 - Rabat działa też bez internetu (zapis w pamięci urządzenia, wysyłany przed płatnością). Offline nie działają tylko: anulowanie, edycja i usuwanie rachunków.
 
