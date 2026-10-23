@@ -60,7 +60,12 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
   return{data:out,error:null}}}
 (()=>{const M=['card','card','card','cash','cash','blik','transfer'];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;for(let d=1;d<=430;d++){const t=new Date();t.setDate(t.getDate()-d);if(t.getDay()===1&&rnd()<.6)continue;const n=4+Math.floor(rnd()*(t.getDay()>=5?16:9));for(let k=0;k<n;k++){const h=new Date(t);h.setHours(13+Math.floor(rnd()*10),Math.floor(rnd()*60));DB.pos_payments.push({id:uid(),order_id:'hist',amount:Math.round((25+rnd()*190)*100)/100,method:M[Math.floor(rnd()*M.length)],created_at:h.toISOString()})}}})();
 const ok=async()=>({data:{},error:null}),BLOBS={'demo-bug.png':'BUG_IMG'};
-return{from:t=>new Q(t),
+const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));const T=()=>DB.pos_order_items;
+ if(fn==='pos_bump_item'){const l=T().find(r=>r.order_id===a.p_order&&r.menu_item_id===a.p_menu);if(!l){if(a.p_delta>0){const m=DB.menu_items.find(x=>x.id===a.p_menu);T().push({id:uid(),order_id:a.p_order,menu_item_id:a.p_menu,item_name:m.name,qty:a.p_delta,unit_price:m.price,tax_rate:m.tax_rate??23,created_at:new Date().toISOString()})}}else{l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
+ if(fn==='pos_bump_line'){const l=T().find(r=>r.id===a.p_item);if(l){l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
+ if(fn==='site_settings')return{data:{www_bookings:true},error:null};
+ return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
+return{rpc,from:t=>new Q(t),
  auth:{getSession:async()=>({data:{session:{user:ADMIN}}}),onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),signInWithPassword:ok,signUp:ok,signOut:async()=>{toast('Podgląd: wylogowanie wyłączone');return{error:null}},resetPasswordForEmail:ok,updateUser:ok},
  storage:{from:()=>({upload:async(p,f)=>{BLOBS[p]=URL.createObjectURL(f);return{data:{path:p},error:null}},remove:ok,getPublicUrl:p=>({data:{publicUrl:BLOBS[p]||''}}),createSignedUrl:async p=>({data:{signedUrl:BLOBS[p]||'about:blank'},error:null}),createSignedUrls:async ps=>({data:ps.map(p=>({path:p,signedUrl:BLOBS[p]||null})),error:null})})},
  channel:()=>({on(){return this},subscribe(){return this}})};

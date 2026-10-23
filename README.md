@@ -12,6 +12,12 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.3 – 23.10.2026 (szybki POS: sql/supabase_v4_2.sql)
+- Dyspozycyjność: „Dostępny w godzinach”, „Niedostępny w godzinach” (np. bez 12:00–16:00), „Niedostępny cały dzień”. Kierownik widzi „✗ niedostępny 12:00–16:00” na pomarańczowo; przy wyborze do zmiany nie podpowiadają się te godziny.
+- Grafik i Rezerwacje: nawigacja „‹ 19–25 paź 2026 ›” z opisem (ten / następny tydzień) i przyciskiem „↺ Dziś”, gdy oglądasz inny okres; Tydzień/Miesiąc pod spodem.
+- Utarg: jasne opisy („Sprzedaż w poszczególnych dniach – kliknij dzień…”), dzień z dowolnej daty (starsze płatności dociągane z bazy), podsumowanie nie przelicza się przy każdym kliknięciu.
+- POS: dodawanie, +/−, usuwanie pozycji widać od razu, zapis w tle w kolejce (SQL v4.2: jedno atomowe zapytanie; bez SQL działa po staremu). Zmiany POS z innych urządzeń odświeżają tylko POS zamiast całej aplikacji i nie przerywają klikania. Płatność czeka na zapis wszystkich kliknięć. Nowy rachunek otwiera się natychmiast. Otwarty rachunek podświetla POS w menu.
+
 ## Aplikacja V4.2 – 23.10.2026
 - Start pracownika: powitanie i „Dyspozycyjność” w jednej linii, „Najbliższa zmiana” i „Godziny w miesiącu” jako dwa małe kafelki obok siebie, odstępy między komunikatami.
 - Rezerwacje i Grafik: tytuł z przyciskiem w jednej linii, ‹ Dziś › i Tydzień/Miesiąc w jednym pasku, odstępy między kartami rezerwacji.
