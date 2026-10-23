@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.6.1 – 23.10.2026
+- Rabat działa też bez internetu (zapis w pamięci urządzenia, wysyłany przed płatnością). Offline nie działają tylko: anulowanie, edycja i usuwanie rachunków.
+
 ## Aplikacja V4.6 – 23.10.2026 (pełna ochrona: sql/supabase_v4_6.sql)
 - POS odporny na brak internetu i zanik prądu: dodawanie/±/usuwanie pozycji, nowy rachunek i płatność zapisują się najpierw w pamięci urządzenia (skrzynka zmian w localStorage), potem wysyłają się po kolei. Bez internetu: czerwony pasek „📴 Brak internetu – zapisane w pamięci tego urządzenia (N czeka)”; po powrocie sieci wszystko wysyła się samo i pojawia się „✓ Wysłano zmiany zapisane offline (N)”.
 - Zamknięcie aplikacji / zanik prądu / restart telefonu: niewysłane zmiany zostają w pamięci i wysyłają się przy następnym uruchomieniu. Aplikacja otwiera się także bez internetu (service worker + kopia ostatnich danych), na ostatnio zapisanych danych.
