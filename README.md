@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.8 – 23.10.2026
+- Ustawienia → Przegląd → „Prywatność”: przełącznik „Ukryj kwoty na moim koncie” (tylko konto administratora). Włączony: wszystkie kwoty – ceny, rachunki, płatności, utarg, historia – jako „••• zł”, paski wykresu utargu ukryte. Ustawienie jest zapisane na koncie (działa na każdym urządzeniu, także w podglądzie iPhone/iPad i offline); inni użytkownicy widzą kwoty normalnie.
+
 ## Aplikacja V4.7 – 23.10.2026
 - Ustawienia → Przegląd → „Podgląd na urządzeniach” (tylko na komputerze): Komputer / iPhone / iPad. Aplikacja otwiera się w ramce urządzenia (iPhone 393×852 z wyspą i paskiem, iPad 820×1180 pionowo lub poziomo), w środku działa prawdziwa aplikacja na Twoim koncie – można klikać i przełączać Admin/Kierownik/Pracownik. Ramka sama dopasowuje się do ekranu (np. udostępnianie ekranu w wideorozmowie). Esc lub „Zamknij” wraca do komputera.
 
