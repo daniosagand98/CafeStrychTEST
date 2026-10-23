@@ -746,7 +746,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.7 · aktualizacja 23.10.2026</span>
+      <span class="fVer">Strona v1.7.1 · aktualizacja 23.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -920,18 +920,18 @@ renderMenu(false);requestAnimationFrame(movePill);
 /* ---------- news (from the Cafe Strych Manager app) ---------- */
 let NEWS=[];
 const fmtDate=(d,opt={day:'numeric',month:'long'})=>new Date(d.length===10?d+'T12:00':d).toLocaleDateString('pl-PL',opt);
-function newsCard(n,i){const feat=i===0&&NEWS.length>1,img=n.image_url?`<div class="nImg"><img src="${esc(n.image_url)}" alt="" loading="lazy"></div>`:`<div class="nImg noimg"><img src="img/${['szkic-koktajle','szkic-kawiarka','szkic-piwo','szkic-herbata'][i%4]}.webp" alt=""></div>`;
+function newsCard(n,i){const feat=i===0&&NEWS.length>1,pos=/^[\d.]+% [\d.]+%$/.test(n.image_pos||'')?n.image_pos:'50% 50%',img=n.image_url?`<div class="nImg"><img src="${esc(n.image_url)}" alt="" loading="lazy" style="object-position:${pos}"></div>`:`<div class="nImg noimg"><img src="img/${['szkic-koktajle','szkic-kawiarka','szkic-piwo','szkic-herbata'][i%4]}.webp" alt=""></div>`;
   const when=n.event_date?`📅 ${fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long'})}`:fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'});
   return `<article class="nCard reveal ${feat?'nFeat':''}" style="--d:${Math.min(i,5)*.08}s">${n.pinned?'<span class="pin">Przypięte</span>':''}${img}<div class="nBody"><span class="nDate">${esc(when)}</span><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:''}<button class="nMore" type="button" data-news="${esc(n.id)}">Czytaj więcej <span class="arr">→</span></button></div></article>`}
 function renderNews(){const g=$('#newsGrid');
   if(!NEWS.length){g.innerHTML=`<div class="newsEmpty reveal"><img src="img/szkic-kawiarka.webp" alt=""><div><b>Na razie cisza na Strychu…</b>Nowe wydarzenia pojawią się tu wkrótce. Zajrzyj też na nasze profile (linki w kontakcie) albo na <a href="${esc(CONFIG.facebook)}" target="_blank" rel="noopener">Facebook</a> – albo po prostu wpadnij na kawę.</div></div>`;observe(g);return}
   g.innerHTML=NEWS.slice(0,9).map(newsCard).join('');observe(g)}
 $('#newsGrid').addEventListener('click',e=>{const b=e.target.closest('[data-news]');if(!b)return;const n=NEWS.find(x=>String(x.id)===b.dataset.news);if(!n)return;
-  $('#newsDlgIn').innerHTML=`${n.image_url?`<img class="newsDlgImg" src="${esc(n.image_url)}" alt="">`:''}<div class="dlgIn"><div class="dlgTop"><div><span class="nDate">${esc(n.event_date?'📅 '+fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}):fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'}))}</span><h3 id="newsDlgTitle">${esc(n.title)}</h3></div><button class="x" type="button" data-close aria-label="Zamknij">×</button></div><p class="newsDlgBody">${esc(n.body||'')}</p><button class="btn btn-ink reserve" type="button">Zarezerwuj stolik</button></div>`;$('#newsDlg').showModal()});
+  $('#newsDlgIn').innerHTML=`${n.image_url?`<img class="newsDlgImg" src="${esc(n.image_url)}" alt="" style="object-position:${/^[\d.]+% [\d.]+%$/.test(n.image_pos||'')?n.image_pos:'50% 50%'}">`:''}<div class="dlgIn"><div class="dlgTop"><div><span class="nDate">${esc(n.event_date?'📅 '+fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}):fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'}))}</span><h3 id="newsDlgTitle">${esc(n.title)}</h3></div><button class="x" type="button" data-close aria-label="Zamknij">×</button></div><p class="newsDlgBody">${esc(n.body||'')}</p><button class="btn btn-ink reserve" type="button">Zarezerwuj stolik</button></div>`;$('#newsDlg').showModal()});
 async function loadNews(){
   if(window.STRYCH_PREVIEW){NEWS=window.STRYCH_PREVIEW.news||[];return renderNews()}
   if(!sb){NEWS=[];return renderNews()}
-  const r=await sb.from('site_news').select('id,title,body,image_url,event_date,pinned,created_at').eq('published',true).order('pinned',{ascending:false}).order('created_at',{ascending:false}).limit(12);
+  const r=await sb.from('site_news').select('*').eq('published',true).order('pinned',{ascending:false}).order('created_at',{ascending:false}).limit(12);
   NEWS=r.error?[]:(r.data||[]);if(r.error)console.warn('Aktualności:',r.error.message);renderNews()}
 loadNews();
 if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'public',table:'site_news'},()=>{clearTimeout(nt);nt=setTimeout(loadNews,400)}).subscribe()}
