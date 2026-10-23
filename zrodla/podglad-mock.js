@@ -48,7 +48,7 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
  insert(d){this.op='insert';this.data=d;return this}update(d){this.op='update';this.data=d;return this}
  upsert(d,o={}){this.op='upsert';this.data=d;this.conf=(o.onConflict||'id').split(',');return this}
  delete(){this.op='delete';return this}
- then(a,b){return Promise.resolve(this.run()).then(a,b)}
+ then(a,b){const off=()=>!navigator.onLine||window.__MOCK_OFFLINE;return new Promise(r=>setTimeout(r,40)).then(()=>off()?{data:null,error:{message:'TypeError: Failed to fetch'}}:this.run()).then(a,b)}
  run(){const T=DB[this.t]||(DB[this.t]=[]),now=new Date().toISOString();let out;
   if(this.op==='insert'){out=[].concat(this.data).map(x=>({id:uid(),created_at:now,...x}));T.push(...out)}
   else if(this.op==='upsert'){out=[].concat(this.data).map(x=>{const ex=T.find(r=>this.conf.every(k=>x[k]!==undefined&&r[k]===x[k]));if(ex)return Object.assign(ex,x);const n={id:uid(),created_at:now,...x};T.push(n);return n})}
@@ -60,9 +60,10 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
   return{data:out,error:null}}}
 (()=>{const M=['card','card','card','cash','cash','blik','transfer'];let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;for(let d=1;d<=430;d++){const t=new Date();t.setDate(t.getDate()-d);if(t.getDay()===1&&rnd()<.6)continue;const n=4+Math.floor(rnd()*(t.getDay()>=5?16:9));for(let k=0;k<n;k++){const h=new Date(t);h.setHours(13+Math.floor(rnd()*10),Math.floor(rnd()*60));DB.pos_payments.push({id:uid(),order_id:'hist',amount:Math.round((25+rnd()*190)*100)/100,method:M[Math.floor(rnd()*M.length)],created_at:h.toISOString()})}}})();
 const ok=async()=>({data:{},error:null}),BLOBS={'demo-bug.png':'BUG_IMG'};
-const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));const T=()=>DB.pos_order_items;
+const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));if(!navigator.onLine||window.__MOCK_OFFLINE)return{data:null,error:{message:'TypeError: Failed to fetch'}};const T=()=>DB.pos_order_items;
  if(fn==='pos_bump_item'){const l=T().find(r=>r.order_id===a.p_order&&r.menu_item_id===a.p_menu);if(!l){if(a.p_delta>0){const m=DB.menu_items.find(x=>x.id===a.p_menu);T().push({id:uid(),order_id:a.p_order,menu_item_id:a.p_menu,item_name:m.name,qty:a.p_delta,unit_price:m.price,tax_rate:m.tax_rate??23,created_at:new Date().toISOString()})}}else{l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
  if(fn==='pos_bump_line'){const l=T().find(r=>r.id===a.p_item);if(l){l.qty=Number(l.qty)+a.p_delta;if(l.qty<=0)DB.pos_order_items=T().filter(r=>r!==l)}return{data:null,error:null}}
+ if(fn==='pos_bump_op'){DB.__ops=DB.__ops||new Set();if(DB.__ops.has(a.p_op))return{data:'duplicate',error:null};DB.__ops.add(a.p_op);return a.p_menu?rpc('pos_bump_item',{p_order:a.p_order,p_menu:a.p_menu,p_delta:a.p_delta}):rpc('pos_bump_line',{p_item:a.p_item,p_delta:a.p_delta})}
  if(fn==='pos_delete_order'){DB.pos_payments=DB.pos_payments.filter(r=>r.order_id!==a.p_order);DB.pos_order_items=DB.pos_order_items.filter(r=>r.order_id!==a.p_order);DB.pos_orders=DB.pos_orders.filter(r=>r.id!==a.p_order);return{data:null,error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
