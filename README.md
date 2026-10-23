@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.0 + Strona v1.7 – 23.10.2026 (wymaga sql/supabase_v4_0.sql)
+- Ustawienia → Przegląd → „Moduły aplikacji”: admin włącza/wyłącza POS, Grafik, Rezerwacje, Listę zakupów. Wyłączony moduł znika z menu i pulpitu kierowników i pracowników (admin widzi go z oznaczeniem „wył.”), dane zostają w bazie. Zmiana działa od razu u wszystkich zalogowanych.
+- „Strona www → Rezerwacje ze strony”: po wyłączeniu przycisk „Rezerwacja” na stronie pokazuje „rezerwacje tylko telefonicznie” z numerem. Baza dodatkowo odrzuca prośby wysłane ze strony otwartej przed wyłączeniem. Wyłączenie modułu Rezerwacje też przełącza stronę na telefon.
+
 ## Strona v1.6 + Aplikacja V3.9.1 – 22.10.2026
 - Na życzenie klientki: sekcja „Na bieżąco” pokazuje tylko ikonki i nazwy Instagram / TikTok / Facebook z przyciskiem „Obserwuj” – bez podglądu postów.
 - Aplikacja: usunięta sekcja „Posty z social mediów” w Aktualnościach (tabela site_social_posts zostaje w bazie, nieużywana).

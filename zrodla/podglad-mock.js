@@ -37,7 +37,7 @@ const DB={
  activity_logs:[],bug_reports:[
   {id:uid(),description:'Przy dodawaniu rezerwacji wyskakuje błąd i nic się nie zapisuje.',reporter_id:'u2',reporter_name:'Anna Kowalska',reporter_email:'anna@demo.pl',page:'Rezerwacje',user_agent:'iPhone/iPad • Safari • 390×844',status:'new',image_path:'demo-bug.png',created_at:at(0,12,47)},
   {id:uid(),description:'W POS nie da się usunąć jednej sztuki – znika cała pozycja.',reporter_id:'u3',reporter_name:'Piotr Nowak',reporter_email:'piotr@demo.pl',page:'Rachunek 2',user_agent:'Android • Chrome • 412×915',status:'new',created_at:at(-1,21,13)},
-  {id:uid(),description:'Literówka w menu: „Cappucino”.',reporter_id:'u-admin',reporter_name:'Daniel Wawrzyniak',reporter_email:'admin@demo.pl',page:'Menu POS',user_agent:'Windows • Chrome • 1440×900',status:'done',created_at:at(-3,10,5)}],cafe_settings:[{id:1,qr_enabled:false}]};
+  {id:uid(),description:'Literówka w menu: „Cappucino”.',reporter_id:'u-admin',reporter_name:'Daniel Wawrzyniak',reporter_email:'admin@demo.pl',page:'Menu POS',user_agent:'Windows • Chrome • 1440×900',status:'done',created_at:at(-3,10,5)}],cafe_settings:[{id:1,qr_enabled:false,www_bookings:true,module_pos:true,module_schedule:true,module_bookings:true,module_shopping:true}]};
 class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.ord=[];this.one=null}
  select(){return this}order(c,o={}){this.ord.push([c,o.ascending!==false]);return this}
  eq(c,v){this.f.push(r=>r[c]===v);return this}neq(c,v){this.f.push(r=>r[c]!==v);return this}

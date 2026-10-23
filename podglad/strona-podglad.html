@@ -425,6 +425,12 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .doneSum dt{color:var(--muted)}.doneSum dd{margin:0;font-weight:600;color:var(--ink)}
 .doneNote{margin:0 auto 18px;max-width:400px;font-size:14px;color:var(--ink2)}.doneNote a{color:var(--brown);font-weight:700;text-decoration:none;white-space:nowrap}
 .doneBtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.phoneOnly{padding:14px 0 6px;text-align:center;animation:dlg .5s var(--ease)}.phoneOnly[hidden]{display:none}
+.poIco{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 14px;border-radius:50%;background:var(--peach2);color:var(--brown)}
+.poLead{margin:0 auto 16px;max-width:360px;font-size:16px;line-height:1.5;color:var(--ink2)}.poLead b{color:var(--ink)}
+.poPhone{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;background:var(--brown);color:var(--cream);font:700 22px var(--sans);letter-spacing:.02em;text-decoration:none;transition:transform .2s var(--ease),background .2s}
+.poPhone:hover{background:var(--brown2);transform:translateY(-2px)}
+.poHours{margin:12px 0 20px;font-size:13px;color:var(--muted)}
 .btn-ghostInk{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn-ghostInk::before{background:var(--paper2)}
 .newsDlgImg{width:100%;max-height:340px;object-fit:cover}
 .newsDlgBody{white-space:pre-line;color:var(--ink2)}
@@ -740,7 +746,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.6 · aktualizacja 22.10.2026</span>
+      <span class="fVer">Strona v1.7 · aktualizacja 23.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -759,6 +765,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
       <p class="formMsg" id="resMsg" role="alert"></p>
       <button class="btn btn-ink" type="submit" id="resBtn">Wyślij prośbę o rezerwację</button>
     </form>
+    <div class="phoneOnly" id="resPhone" hidden><div class="poIco" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><p class="poLead">Obecnie rezerwacje przyjmujemy <b>tylko telefonicznie</b>.</p><a class="poPhone" id="poPhone"></a><p class="poHours" id="poHours"></p><div class="doneBtns"><button class="btn btn-ghostInk" type="button" data-close>Zamknij</button></div></div>
     <div class="done" id="resDone" hidden><div class="tick">✓</div><h4 id="doneHello">Dziękujemy!</h4><p class="doneLead">Twoja prośba o rezerwację trafiła do obsługi.</p><dl class="doneSum" id="doneSum"></dl><p class="doneNote">📞 To jeszcze nie jest potwierdzenie – <b>zadzwonimy</b> na podany numer, żeby potwierdzić rezerwację. W pilnej sprawie: <a id="donePhone"></a></p><div class="doneBtns"><button class="btn btn-ink" type="button" data-close>Zamknij</button><button class="btn btn-ghostInk" type="button" id="doneAgain">Nowa rezerwacja</button></div></div>
   </div>
 </dialog>
@@ -950,7 +957,12 @@ const KIND={stolik:['Zarezerwuj stolik','Wyślij prośbę o rezerwację','np. ur
 function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];resForm.guests.placeholder=k==='stolik'?'np. 4':'np. 30'}
 resForm.kind.addEventListener('change',()=>setKind(resForm.kind.value));
 $('#doneAgain').addEventListener('click',()=>openReservation());
-function openReservation(wed=false,kind='stolik'){setKind(kind);$('#resDlg .dlgIn').classList.remove('isDone');$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
+let wwwBookings=true;
+async function loadSiteSettings(){if(!sb)return;try{const r=await sb.rpc('site_settings');if(!r.error&&r.data)wwwBookings=r.data.www_bookings!==false}catch(e){console.warn(e)}}
+loadSiteSettings();
+function showPhoneOnly(){const tel=CONFIG.phone.replace(/\s/g,'');$('#poPhone').textContent=CONFIG.phone;$('#poPhone').href='tel:'+tel;$('#poHours').textContent='Zadzwoń w godzinach otwarcia lokalu.';
+  resForm.hidden=true;$('#resDone').hidden=true;$('#resPhone').hidden=false;$('#resDlg .brush').textContent='Rezerwacja';$('#resTitle').textContent='Rezerwacje telefoniczne';$('#resDlg .dlgIn').classList.add('isDone')}
+function openReservation(wed=false,kind='stolik'){$('#resPhone').hidden=true;if(!wwwBookings){$('#newsDlg').open&&$('#newsDlg').close();showPhoneOnly();resDlg.showModal();loadSiteSettings();return}setKind(kind);$('#resDlg .dlgIn').classList.remove('isDone');$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
   const t=new Date(),min=isoDay(t);resForm.date.min=min;let d=new Date(t);if(wed){d.setDate(d.getDate()+((3-d.getDay()+7)%7||0));}else if(t.getHours()>=20)d.setDate(d.getDate()+1);
   if(!resForm.date.value||resForm.date.value<min||wed)resForm.date.value=isoDay(d);resDlg.showModal()}
 document.addEventListener('click',e=>{const b=e.target.closest('.reserve');if(b){e.preventDefault();openReservation(!!b.dataset.wed,b.dataset.type||'stolik')}});
@@ -976,7 +988,7 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
     $('#doneSum').innerHTML=[['Rodzaj',KN[f.kind.value]||'Stolik'],['Kiedy',start.toLocaleDateString('pl-PL',{weekday:'long',day:'numeric',month:'long'})+', '+f.time.value],['Ile osób',guests+' '+gN(guests)],['Telefon',phone]].map(([a,b])=>`<dt>${a}</dt><dd>${esc(b)}</dd>`).join('');
     const tel=CONFIG.phone.replace(/\s/g,'');$('#donePhone').textContent=CONFIG.phone;$('#donePhone').href='tel:'+tel;
     f.reset();f.hidden=true;$('#resDone').hidden=false;$('#resDlg .brush').textContent='Wysłano';$('#resDlg .dlgIn').classList.add('isDone');$('#resTitle').textContent='Prośba o rezerwację wysłana';resDlg.scrollTop=0}
-  catch(err){console.warn(err);msg.textContent='Nie udało się wysłać prośby. Zadzwoń do nas: '+CONFIG.phone}
+  catch(err){console.warn(err);await loadSiteSettings();if(!wwwBookings){showPhoneOnly();return}msg.textContent='Nie udało się wysłać prośby. Zadzwoń do nas: '+CONFIG.phone}
   finally{btn.disabled=false;btn.textContent=KIND[f.kind.value]?.[1]||'Wyślij prośbę o rezerwację'}});
 
 onScroll();
