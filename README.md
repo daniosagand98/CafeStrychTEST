@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.4 – 23.10.2026 (wymaga sql/supabase_v4_3.sql)
+- Rabat procentowy na rachunku: przycisk „％ Dodaj rabat” (kierownik/admin) – szybkie 5–100% lub dowolna wartość, podgląd kwoty. Rachunek pokazuje sumę, rabat i „Razem po rabacie”; płatność i utarg są po rabacie; na liście rachunków znaczek „−15%”, w utargu dnia dopisek „rabat 15%”. Baza pilnuje: rabat tylko kierownik/admin i tylko na otwartym rachunku.
+- Sprawdzenie menu: baza ma 182 produkty, strona 180 – nadmiarowe testowe „Piwo corona” i „Vódka 40 ml”; reszta (nazwy, ceny, VAT, kategorie) zgodna 1:1.
+
 ## Aplikacja V4.3.1 – 23.10.2026
 - Start pracownika bez przycisku „Dyspozycyjność” (zgłasza się ją w Grafiku → Dyspozycyjność).
 
