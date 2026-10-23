@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.3.1 – 23.10.2026
+- Start pracownika bez przycisku „Dyspozycyjność” (zgłasza się ją w Grafiku → Dyspozycyjność).
+
 ## Aplikacja V4.3 – 23.10.2026 (szybki POS: sql/supabase_v4_2.sql)
 - Dyspozycyjność: „Dostępny w godzinach”, „Niedostępny w godzinach” (np. bez 12:00–16:00), „Niedostępny cały dzień”. Kierownik widzi „✗ niedostępny 12:00–16:00” na pomarańczowo; przy wyborze do zmiany nie podpowiadają się te godziny.
 - Grafik i Rezerwacje: nawigacja „‹ 19–25 paź 2026 ›” z opisem (ten / następny tydzień) i przyciskiem „↺ Dziś”, gdy oglądasz inny okres; Tydzień/Miesiąc pod spodem.
