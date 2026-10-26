@@ -246,7 +246,7 @@ mark{background:var(--peach2);color:inherit;border-radius:3px;padding:0 2px}
 
 /* ---------- music ---------- */
 .music{min-height:88vh;display:grid;align-items:center;color:var(--cream);overflow:hidden;background:var(--dark)}
-.music .bg{position:absolute;inset:-12% 0;background:url(img/hero-witraz.webp) center/cover no-repeat;will-change:transform}
+.music .bg{position:absolute;inset:-12% 0;background:url(img/foto-pianino.webp) center 40%/cover no-repeat;will-change:transform}
 .music::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,17,11,.95) 0%,rgba(27,17,11,.78) 42%,rgba(27,17,11,.15) 100%)}
 .music .wrap{position:relative;z-index:2}
 .music .box{max-width:600px}
@@ -269,8 +269,18 @@ mark{background:var(--peach2);color:inherit;border-radius:3px;padding:0 2px}
 .gallery.compact button:nth-child(4){grid-row:auto}.gallery.compact button:nth-child(6){grid-column:auto}
 .gallery img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s;filter:saturate(.92)}
 .gallery button:hover img{transform:scale(1.08);filter:saturate(1.1)}
+.gallery button:not([data-cap])::after{display:none}
 .gallery button::after{content:attr(data-cap);position:absolute;left:12px;bottom:12px;padding:6px 12px;border-radius:999px;background:rgba(27,17,11,.75);color:var(--cream);font-size:13px;opacity:0;transform:translateY(8px);transition:.45s var(--ease)}
 .gallery button:hover::after{opacity:1;transform:none}
+.menuPhoto{position:relative;margin:0 0 28px;height:clamp(200px,26vw,320px);border-radius:22px;overflow:hidden;background:var(--paper2);box-shadow:0 24px 50px -30px rgba(42,27,17,.6)}
+.menuPhoto.hidden{display:none}
+.menuPhoto img{width:100%;height:100%;object-fit:cover;transition:opacity .35s}
+.menuPhoto figcaption{position:absolute;left:18px;bottom:16px;max-width:calc(100% - 36px);padding:8px 14px;border-radius:999px;background:rgba(27,17,11,.72);color:var(--cream);font:italic 500 15px var(--serif);backdrop-filter:blur(4px)}
+.menuPhoto figcaption:empty{display:none}
+.evPhoto{position:relative;margin:0 0 22px;height:clamp(220px,32vw,380px);border-radius:22px;overflow:hidden}
+.evPhoto img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.evPhoto figcaption{position:absolute;inset:auto 0 0 0;padding:40px 22px 18px;background:linear-gradient(transparent,rgba(20,12,8,.85));color:var(--cream);display:flex;flex-direction:column;gap:3px}
+.evPhoto figcaption b{font:600 22px var(--serif)}.evPhoto figcaption span{font-size:14px;opacity:.9}
 .lightbox{position:fixed;inset:0;z-index:250;display:grid;place-items:center;padding:20px;background:rgba(15,9,6,.94);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .lightbox.open{opacity:1;visibility:visible;transition:opacity .4s}
 .lightbox img{max-width:min(1400px,92vw);max-height:80vh;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:scale(.96);transition:transform .5s var(--ease),opacity .3s}
@@ -521,7 +531,8 @@ dialog[open]{animation:dlg .5s var(--ease)}
 <!-- HERO -->
 <section class="hero" id="start">
   <div class="slides" id="slides">
-    <div class="slide active" style="--img:url(img/hero-witraz.webp)"></div>
+    <div class="slide active" style="--img:url(img/foto-bar-pianino.webp)"></div>
+    <div class="slide" style="--img:url(img/hero-witraz.webp)"></div>
     <div class="slide" style="--img:url(img/hero-antresola.webp)"></div>
     <div class="slide" style="--img:url(img/strych-antresola.webp)"></div>
   </div>
@@ -626,6 +637,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
       <label class="search reveal"><span class="sr">Szukaj w karcie</span><input id="menuSearch" type="search" placeholder="Szukaj w karcie… np. mojito" autocomplete="off"></label>
     </div>
     <div class="tabs" id="tabs" role="tablist"><span class="tabPill" id="tabPill"></span></div>
+    <figure class="menuPhoto reveal" id="menuPhoto"><img id="menuPhotoImg" data-k="foto-czekolada-tosty" src="img/foto-czekolada-tosty.webp" alt="" loading="lazy"><figcaption id="menuPhotoCap"></figcaption></figure>
     <div class="menuPanel" id="menuPanel"></div>
     <div class="menuFoot"><span>Ceny w zł</span><span>Wykaz składników z wyróżnieniem alergenów dostępny u obsługi</span></div>
   </div>
@@ -657,6 +669,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
       <h2>Zarezerwuj <em>salę</em> albo cały lokal</h2>
       <p>Urodziny, wieczór panieński, spotkanie firmowe, chrzciny czy kameralny koncert – Strych można zarezerwować na wyłączność.</p>
     </div>
+    <figure class="evPhoto reveal"><img src="img/foto-planszowki.webp" alt="Znajomi przy planszówce na Strychu" loading="lazy"><figcaption><b>Spotkania ze znajomymi</b><span>Planszówki, deska przekąsek i piwo z beczki – zarezerwuj stolik albo całą salę.</span></figcaption></figure>
     <div class="eventGrid">
       <article class="eventCard reveal"><span class="evIco">🪑</span><h3>Stolik</h3><p>Dla par, rodzin i znajomych. Wybierz dzień i godzinę – potwierdzimy telefonicznie.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="stolik">Zarezerwuj stolik <span class="arr">→</span></button></article>
       <article class="eventCard reveal" style="--d:.1s"><span class="evIco">🏠</span><h3>Sala</h3><p>Osobna sala dla Twojej grupy – na urodziny, imieniny, spotkanie po latach czy firmowe.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="sala">Zapytaj o salę <span class="arr">→</span></button></article>
@@ -746,7 +759,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.7.2 · aktualizacja 26.10.2026</span>
+      <span class="fVer">Strona v1.8 · aktualizacja 26.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -800,10 +813,26 @@ const CONFIG={
 /* ====== MENU (z karty, październik 2026) ====== */
 const MENU=__MENU__;
 const TABS=__TABS__;
-const GALLERY=[
-  // tylko zdjęcia po remoncie 2024 – nowe dopisuj tutaj: ['nazwa-pliku-bez-.webp','Podpis']
-  ['hero-witraz','Sala z witrażem'],['hero-antresola','Sala z antresolą i białym piecem'],['strych-antresola','Antresola na strychu'],
-  ['strych-stolik','Stolik pod dachem'],['brama','Malowana brama od podwórza']
+// galeria: zdjęcia z aplikacji (Ustawienia → Galeria strony); ta lista to zapas, gdyby baza nie odpowiadała
+let GALLERY=[
+  ['img/foto-bar-pianino.webp','Bar pod schodami, pianino i gitary'],
+  ['img/foto-piec.webp','Żeliwny piec – zimą zawsze napalony'],
+  ['img/foto-pianino.webp','Pianino dla gości – zagraj coś!'],
+  ['img/foto-ciasta.webp','Ciasta domowej roboty'],
+  ['img/foto-planszowki.webp','Planszówki ze znajomymi'],
+  ['img/foto-czekolada-tosty.webp','Gorąca czekolada, tosty i nalewki'],
+  ['img/foto-shoty.webp','Nalewki na desce Strychu'],
+  ['img/foto-piwo-nalewanie.webp','Tyskie prosto z nalewaka'],
+  ['img/foto-koktajle.webp','Kolorowe koktajle'],
+  ['img/foto-deska-serow.webp','Deska serów i wędlin'],
+  ['img/foto-deska-desery.webp','Deska wędlin, lody i koktajle'],
+  ['img/foto-krupnik.webp','Krupnik, drinki i przekąski'],
+  ['img/foto-fartuch.webp','Precel z twarożkiem i orzeszki'],
+  ['img/hero-witraz.webp','Sala z witrażem'],
+  ['img/hero-antresola.webp','Sala z antresolą i białym piecem'],
+  ['img/strych-antresola.webp','Antresola na strychu'],
+  ['img/strych-stolik.webp','Stolik pod dachem'],
+  ['img/brama.webp','Malowana brama od podwórza']
 ];
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -885,6 +914,7 @@ renderHours();setInterval(renderHours,60000);
 /* ---------- menu ---------- */
 let currentTab=TABS[0][0];
 const tabsEl=$('#tabs'),panel=$('#menuPanel'),pill=$('#tabPill');
+const MPHOTO={kawa:['foto-czekolada-tosty','Gorąca czekolada z bitą śmietaną i chrupiące tosty','50% 42%'],herbata:['foto-piec','Herbata smakuje najlepiej przy piecu','50% 45%'],bezalko:['foto-koktajle','Koktajle – także bez procentów','50% 55%'],piwo:['foto-piwo-nalewanie','Tyskie prosto z nalewaka','50% 58%'],wino:['foto-deska-desery','Coś do wina: deska, lody i koktajle','50% 60%'],drinki:['foto-shoty','Nalewki i shoty na desce Strychu','50% 55%'],alkohole:['foto-krupnik','Krupnik, drinki i coś mocniejszego','50% 62%'],jedzenie:['foto-deska-serow','Deska serów i wędlin – do podziału','50% 55%']};
 const SKETCH={kawa:'szkic-kawiarka',herbata:'szkic-herbata',bezalko:'szkic-koktajle',piwo:'szkic-piwo',wino:'szkic-koktajle',drinki:'szkic-koktajle',alkohole:'szkic-piwo',jedzenie:'szkic-nachos'};
 tabsEl.insertAdjacentHTML('beforeend',TABS.map(([id,name])=>`<button type="button" role="tab" data-tab="${id}">${esc(name)}</button>`).join(''));
 function movePill(){const b=tabsEl.querySelector('button.active');if(!b)return;pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px'}
@@ -900,7 +930,8 @@ function renderMenu(animate=true){const q=$('#menuSearch').value.trim(),ql=q.toL
   const draw=()=>{if(q){const out=MENU.map(sec=>[sec,sec.items.filter(([n,d])=>(n+' '+d).toLocaleLowerCase('pl').includes(ql))]).filter(x=>x[1].length);
       panel.innerHTML=out.length?twoCols(out,q):`<p class="noHits">Nic nie znaleźliśmy dla „${esc(q)}”. Zapytaj obsługę – może jest spod lady 😉</p>`}
     else panel.innerHTML=twoCols(MENU.filter(s=>s.tab===currentTab).map(s=>[s,s.items]));
-    panel.classList.remove('swap');$('#menuSketch').src='img/'+(SKETCH[currentTab]||'szkic-kawiarka')+'.webp'};
+    panel.classList.remove('swap');$('#menuSketch').src='img/'+(SKETCH[currentTab]||'szkic-kawiarka')+'.webp';
+    const ph=MPHOTO[currentTab],box=$('#menuPhoto');box.classList.toggle('hidden',!!q||!ph);if(ph&&!q){const im=$('#menuPhotoImg');if(im.dataset.k!==ph[0]){im.dataset.k=ph[0];im.style.opacity=0;setTimeout(()=>{im.src='img/'+ph[0]+'.webp';im.style.objectPosition=ph[2];im.alt=ph[1];$('#menuPhotoCap').textContent=ph[1];im.onload=()=>im.style.opacity=1;if(im.complete)im.style.opacity=1},180)}else{$('#menuPhotoCap').textContent=ph[1];im.style.objectPosition=ph[2]}}};
   if(animate&&!reduce){panel.classList.add('swap');setTimeout(draw,220)}else draw();
   tabsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('active',!q&&b.dataset.tab===currentTab));pill.style.opacity=q?0:1;movePill()}
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;$('#menuSearch').value='';currentTab=b.dataset.tab;renderMenu();b.scrollIntoView({block:'nearest',inline:'center',behavior:reduce?'auto':'smooth'})});
@@ -908,9 +939,12 @@ let st;$('#menuSearch').addEventListener('input',()=>{clearTimeout(st);st=setTim
 renderMenu(false);requestAnimationFrame(movePill);
 
 /* ---------- gallery + lightbox ---------- */
-(()=>{const g=$('#gallery');g.classList.toggle('compact',GALLERY.length<8);g.innerHTML=GALLERY.map(([f,c],i)=>`<button type="button" class="reveal zoom" style="--d:${(i%4)*.08}s" data-i="${i}" data-cap="${esc(c)}"><img src="img/${f}.webp" alt="${esc(c)}" loading="lazy"></button>`).join('');observe(g);
+(()=>{const g=$('#gallery');
+  const draw=()=>{g.classList.toggle('compact',GALLERY.length<8);g.innerHTML=GALLERY.map(([f,c],i)=>`<button type="button" class="reveal zoom" style="--d:${(i%4)*.08}s" data-i="${i}" ${c?`data-cap="${esc(c)}"`:''}><img src="${esc(f)}" alt="${esc(c||'Cafe Strych')}" loading="lazy"></button>`).join('');observe(g)};draw();
+  const loadGal=async()=>{if(!sb||window.STRYCH_PREVIEW)return;try{const r=await sb.from('site_gallery').select('image_url,caption,sort_order,created_at').eq('published',true).order('sort_order').order('created_at');if(!r.error&&r.data?.length){GALLERY=r.data.map(x=>[x.image_url,x.caption||'']);draw()}}catch(e){console.warn('Galeria:',e)}};loadGal();
+  if(sb){let gt;sb.channel('www-gallery').on('postgres_changes',{event:'*',schema:'public',table:'site_gallery'},()=>{clearTimeout(gt);gt=setTimeout(loadGal,500)}).subscribe()}
   const lb=$('#lb'),img=$('#lbImg'),cap=$('#lbCap');let i=0;
-  const show=k=>{i=(k+GALLERY.length)%GALLERY.length;img.style.opacity=0;setTimeout(()=>{img.src='img/'+GALLERY[i][0]+'.webp';img.alt=GALLERY[i][1];cap.textContent=GALLERY[i][1];img.onload=()=>img.style.opacity=1;if(img.complete)img.style.opacity=1},120)};
+  const show=k=>{i=(k+GALLERY.length)%GALLERY.length;img.style.opacity=0;setTimeout(()=>{img.src=GALLERY[i][0];img.alt=GALLERY[i][1]||'Cafe Strych';cap.textContent=GALLERY[i][1]||'';img.onload=()=>img.style.opacity=1;if(img.complete)img.style.opacity=1},120)};
   const open=k=>{show(k);lb.classList.add('open');document.body.style.overflow='hidden';$('#lbClose').focus()},close=()=>{lb.classList.remove('open');document.body.style.overflow=''};
   g.addEventListener('click',e=>{const b=e.target.closest('button');if(b)open(+b.dataset.i)});
   $('#lbClose').onclick=close;$('#lbPrev').onclick=()=>show(i-1);$('#lbNext').onclick=()=>show(i+1);lb.onclick=e=>{if(e.target===lb)close()};
