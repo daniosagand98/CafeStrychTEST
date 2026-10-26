@@ -12,13 +12,15 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V4.9.1 – 26.10.2026
+- Stopka: tylko nazwa, wersja i autor (bez opisu zmian). Menu konta bez „Zgłoszenia błędów” i przełącznika prywatności – są w Ustawieniach administratora; czerwony znaczek liczby zgłoszeń na „D” zostaje. Okno aktualności bez podpowiedzi pod polami „od/do”.
+
 ## Aplikacja V4.9 + Strona v1.7.2 – 26.10.2026 (wymaga sql/supabase_v4_7.sql)
 - Aktualności: „Pokaż na stronie od / do” (data i godzina) – wpis pojawia się i znika sam; w aplikacji status „⏰ Pojawi się …” / „Widoczne do …” / „Zniknęło …”. Baza pilnuje tego także po stronie serwera.
 - Pulpit: bez kafelka „Pracownicy” i bez „Następna zmiana”.
 - POS: czytelna lista otwartych rachunków (nazwa, numer, godzina otwarcia, liczba sztuk, kwota – nic się nie nakłada).
 - Zgłoszenia błędów: czerwony znaczek z liczbą otwartych zgłoszeń na przycisku konta („D”) i pozycja w menu konta; powiadomienie push do administratorów o nowym zgłoszeniu (funkcja notify-booking wdrożona, wersja 8).
 - Pracownik: „Utarg” w POS – utarg dnia (dziś / wczoraj) z podziałem na karta/gotówka/BLIK/przelew, lista płatności, „📋 Kopiuj raport” i „🖨 Drukuj”.
-- Menu konta administratora: szybkie ustawienie prywatności.
 
 ## Aplikacja V4.8 – 23.10.2026
 - Ustawienia administratora: opcje prywatności konta.
