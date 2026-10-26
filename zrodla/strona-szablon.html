@@ -746,7 +746,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.7.1 · aktualizacja 23.10.2026</span>
+      <span class="fVer">Strona v1.7.2 · aktualizacja 26.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -932,7 +932,7 @@ async function loadNews(){
   if(window.STRYCH_PREVIEW){NEWS=window.STRYCH_PREVIEW.news||[];return renderNews()}
   if(!sb){NEWS=[];return renderNews()}
   const r=await sb.from('site_news').select('*').eq('published',true).order('pinned',{ascending:false}).order('created_at',{ascending:false}).limit(12);
-  NEWS=r.error?[]:(r.data||[]);if(r.error)console.warn('Aktualności:',r.error.message);renderNews()}
+  const now=new Date();NEWS=r.error?[]:(r.data||[]).filter(n=>(!n.publish_at||new Date(n.publish_at)<=now)&&(!n.expire_at||new Date(n.expire_at)>now));if(r.error)console.warn('Aktualności:',r.error.message);renderNews()}
 loadNews();
 if(sb){let nt;sb.channel('www-news').on('postgres_changes',{event:'*',schema:'public',table:'site_news'},()=>{clearTimeout(nt);nt=setTimeout(loadNews,400)}).subscribe()}
 
