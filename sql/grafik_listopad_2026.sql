@@ -6,6 +6,11 @@
 -- Weronika, Natalia). Zmiany, które już są w grafiku, nie zostaną zdublowane.
 -- Uruchom w Supabase: SQL Editor → New query → wklej całość → Run.
 -- =====================================================================
+-- Zmiany kończące się po północy (do 24:00 / 02:00) – baza wcześniej wymagała,
+-- żeby koniec był później niż początek. Aplikacja liczy takie zmiany poprawnie.
+alter table public.work_shifts drop constraint if exists work_shifts_check;
+alter table public.work_shifts add constraint work_shifts_check check (end_time <> start_time);
+
 do $$
 declare r record; v_emp uuid; v_admin uuid; n_add int := 0; n_skip int := 0; braki text := '';
 begin
