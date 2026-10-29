@@ -7,8 +7,10 @@
 -- Uruchom w Supabase: SQL Editor → New query → wklej całość → Run.
 -- =====================================================================
 do $$
-declare r record; v_emp uuid; n_add int := 0; n_skip int := 0; braki text := '';
+declare r record; v_emp uuid; v_admin uuid; n_add int := 0; n_skip int := 0; braki text := '';
 begin
+  select id into v_admin from public.profiles where role = 'admin' limit 1;
+  if v_admin is null then raise exception 'Brak konta administratora w profiles.'; end if;
   for r in select * from (values
   ('Martyna', date '2026-11-01', time '12:00', time '00:00'),
   ('Krzysztof', date '2026-11-02', time '12:00', time '00:00'),
@@ -66,8 +68,8 @@ begin
                 where employee_id = v_emp and shift_date = r.dzien and start_time = r.od) then
       n_skip := n_skip + 1; continue;
     end if;
-    insert into public.work_shifts (employee_id, shift_date, start_time, end_time)
-    values (v_emp, r.dzien, r.od, r.do_);
+    insert into public.work_shifts (employee_id, shift_date, start_time, end_time, created_by)
+    values (v_emp, r.dzien, r.od, r.do_, v_admin);
     n_add := n_add + 1;
   end loop;
   raise notice 'Dodano zmian: %, pominięto (już były): %', n_add, n_skip;
