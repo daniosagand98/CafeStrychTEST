@@ -2,6 +2,21 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
+<!-- Jarvis: zgłaszanie błędów do centrum błędów + synchronizacja usuniętych zgłoszeń (klucz tylko do zgłaszania, bez dostępu do danych) -->
+<script>(function(){var K="jk_yxgVMa1_CPPZ5jNDX5xpfvsiVnkkwDNk",U="https://tpoyenlvzzkhtjkmazao.supabase.co/functions/v1/jarvis-ingest",S="Cafe Strych strona",L="warning",n=0,seen={};
+function post(b){return fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify(b)});}
+function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;d=d||{};
+post({title:t,message:String(m||"").slice(0,3000),level:lv||L,source:S,url:location.href,ref:d.ref?String(d.ref):undefined,details:d}).catch(function(){});}catch(e){}}
+window.addEventListener("error",function(e){if(e&&e.message)send(e.message,(e.error&&e.error.stack)||"",{file:String(e.filename||"").split("?")[0],line:e.lineno,col:e.colno});});
+window.addEventListener("unhandledrejection",function(e){var r=e&&e.reason||{};send("Nieobsłużony błąd: "+String(r.message||r).slice(0,160),r.stack||"",{});});
+window.JarvisReport=function(t,m,d,lv){send(t,m,d,lv||"error");};
+/* co usunięto / rozwiązano w Jarvisie — aplikacja stosuje to u siebie */
+var cache=null;window.JarvisSync=function(){if(cache&&Date.now()-cache.t<30000)return cache.p;var p=post({action:"sync"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});cache={t:Date.now(),p:p};return p;};
+function done(){try{return JSON.parse(localStorage.getItem("jarvis.sync."+S)||"{}")}catch(e){return{}}}function mark(o){try{localStorage.setItem("jarvis.sync."+S,JSON.stringify(o))}catch(e){}}
+window.JarvisSyncList=async function(list,opt){opt=opt||{};var id=opt.id||"id",st=opt.status||"status",fx=opt.fixed||"fixed";try{var s=await window.JarvisSync();if(!s)return{list:list,changed:false};var del=new Set(s.delete||[]),fix=new Set(s.fixed||[]),seenF=done(),ch=false;
+var out=list.filter(function(r){if(del.has(String(r[id]))){ch=true;return false}return true}).map(function(r){var k=String(r[id]);if(fix.has(k)&&!seenF[k]){seenF[k]=1;if(r[st]!==fx){ch=true;var c=Object.assign({},r);c[st]=fx;return c}}return r});mark(seenF);return{list:out,changed:ch}}catch(e){return{list:list,changed:false}}};
+window.JarvisSyncTable=async function(client,table,fixedPatch){try{var s=await window.JarvisSync();if(!s)return;if(s.delete&&s.delete.length)await client.from(table).delete().in("id",s.delete);var seenF=done(),f=(s.fixed||[]).filter(function(k){return!seenF[k]});if(fixedPatch&&f.length){await client.from(table).update(fixedPatch).in("id",f);f.forEach(function(k){seenF[k]=1});mark(seenF);}}catch(e){}};
+})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1b110b">
 <title>Cafe Strych – kawiarnia, bar i pub w najstarszym domu Gdyni</title>
@@ -153,6 +168,12 @@ h2 em{font-family:var(--script);font-weight:700;font-style:normal;color:var(--br
 .nImg{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--paper2)}
 .nCard.nFeat .nImg{flex:1.15;aspect-ratio:auto;min-height:340px}
 .nImg img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.nImg[data-news]{cursor:zoom-in}
+.nImg .nBg{position:absolute;inset:0;display:none;filter:blur(20px) brightness(.55) saturate(1.1);transform:scale(1.2)}
+.nImg.poster{aspect-ratio:4/5}.nImg.poster .nBg{display:block}
+.nImg.poster .nMain{position:relative;object-fit:contain;object-position:50% 50%!important}
+.nCard:hover .nImg.poster img.nMain{transform:none}
+.nCard.nFeat .nImg.poster{min-height:460px}
 .nCard:hover .nImg img{transform:scale(1.06)}
 .nImg.noimg{display:grid;place-items:center}
 .nImg.noimg img{width:46%;height:auto;object-fit:contain;opacity:.8}
@@ -442,7 +463,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
 .poPhone:hover{background:var(--brown2);transform:translateY(-2px)}
 .poHours{margin:12px 0 20px;font-size:13px;color:var(--muted)}
 .btn-ghostInk{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn-ghostInk::before{background:var(--paper2)}
-.newsDlgImg{width:100%;max-height:340px;object-fit:cover}
+.newsDlgImg{display:block;width:100%;height:auto;max-height:none;object-fit:contain;background:#140b08}
 .newsDlgBody{white-space:pre-line;color:var(--ink2)}
 
 /* data i godzina: ten sam wygląd i szerokość co inne pola na iPhonie/Androidzie */
@@ -509,6 +530,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal,.fadeUp,.heroTitle .ch{opacity:1!important;transform:none!important}
 }
+@media(max-width:640px){.nCard.nFeat .nImg.poster{min-height:0;aspect-ratio:4/5}}
 </style>
 </head>
 <body>
@@ -759,7 +781,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.8 · aktualizacja 26.10.2026</span>
+      <span class="fVer">Strona v1.8.1 · aktualizacja 29.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -954,14 +976,14 @@ renderMenu(false);requestAnimationFrame(movePill);
 /* ---------- news (from the Cafe Strych Manager app) ---------- */
 let NEWS=[];
 const fmtDate=(d,opt={day:'numeric',month:'long'})=>new Date(d.length===10?d+'T12:00':d).toLocaleDateString('pl-PL',opt);
-function newsCard(n,i){const feat=i===0&&NEWS.length>1,pos=/^[\d.]+% [\d.]+%$/.test(n.image_pos||'')?n.image_pos:'50% 50%',img=n.image_url?`<div class="nImg"><img src="${esc(n.image_url)}" alt="" loading="lazy" style="object-position:${pos}"></div>`:`<div class="nImg noimg"><img src="img/${['szkic-koktajle','szkic-kawiarka','szkic-piwo','szkic-herbata'][i%4]}.webp" alt=""></div>`;
+function newsCard(n,i){const feat=i===0&&NEWS.length>1,pos=/^[\d.]+% [\d.]+%$/.test(n.image_pos||'')?n.image_pos:'50% 50%',img=n.image_url?`<div class="nImg" data-news="${esc(n.id)}"><img class="nBg" src="${esc(n.image_url)}" alt="" aria-hidden="true" loading="lazy"><img class="nMain" src="${esc(n.image_url)}" alt="" loading="lazy" style="object-position:${pos}" onload="if(this.naturalHeight>this.naturalWidth*1.05)this.parentNode.classList.add('poster')"></div>`:`<div class="nImg noimg"><img src="img/${['szkic-koktajle','szkic-kawiarka','szkic-piwo','szkic-herbata'][i%4]}.webp" alt=""></div>`;
   const when=n.event_date?`📅 ${fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long'})}`:fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'});
   return `<article class="nCard reveal ${feat?'nFeat':''}" style="--d:${Math.min(i,5)*.08}s">${n.pinned?'<span class="pin">Przypięte</span>':''}${img}<div class="nBody"><span class="nDate">${esc(when)}</span><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:''}<button class="nMore" type="button" data-news="${esc(n.id)}">Czytaj więcej <span class="arr">→</span></button></div></article>`}
 function renderNews(){const g=$('#newsGrid');
   if(!NEWS.length){g.innerHTML=`<div class="newsEmpty reveal"><img src="img/szkic-kawiarka.webp" alt=""><div><b>Na razie cisza na Strychu…</b>Nowe wydarzenia pojawią się tu wkrótce. Zajrzyj też na nasze profile (linki w kontakcie) albo na <a href="${esc(CONFIG.facebook)}" target="_blank" rel="noopener">Facebook</a> – albo po prostu wpadnij na kawę.</div></div>`;observe(g);return}
   g.innerHTML=NEWS.slice(0,9).map(newsCard).join('');observe(g)}
 $('#newsGrid').addEventListener('click',e=>{const b=e.target.closest('[data-news]');if(!b)return;const n=NEWS.find(x=>String(x.id)===b.dataset.news);if(!n)return;
-  $('#newsDlgIn').innerHTML=`${n.image_url?`<img class="newsDlgImg" src="${esc(n.image_url)}" alt="" style="object-position:${/^[\d.]+% [\d.]+%$/.test(n.image_pos||'')?n.image_pos:'50% 50%'}">`:''}<div class="dlgIn"><div class="dlgTop"><div><span class="nDate">${esc(n.event_date?'📅 '+fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}):fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'}))}</span><h3 id="newsDlgTitle">${esc(n.title)}</h3></div><button class="x" type="button" data-close aria-label="Zamknij">×</button></div><p class="newsDlgBody">${esc(n.body||'')}</p><button class="btn btn-ink reserve" type="button">Zarezerwuj stolik</button></div>`;$('#newsDlg').showModal()});
+  $('#newsDlgIn').innerHTML=`${n.image_url?`<img class="newsDlgImg" src="${esc(n.image_url)}" alt="${esc(n.title)}">`:''}<div class="dlgIn"><div class="dlgTop"><div><span class="nDate">${esc(n.event_date?'📅 '+fmtDate(n.event_date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}):fmtDate(n.created_at,{day:'numeric',month:'long',year:'numeric'}))}</span><h3 id="newsDlgTitle">${esc(n.title)}</h3></div><button class="x" type="button" data-close aria-label="Zamknij">×</button></div><p class="newsDlgBody">${esc(n.body||'')}</p><button class="btn btn-ink reserve" type="button">Zarezerwuj stolik</button></div>`;$('#newsDlg').showModal()});
 async function loadNews(){
   if(window.STRYCH_PREVIEW){NEWS=window.STRYCH_PREVIEW.news||[];return renderNews()}
   if(!sb){NEWS=[];return renderNews()}

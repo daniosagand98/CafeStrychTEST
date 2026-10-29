@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.0.3 + Strona v1.8.1 – 29.10.2026
+- Plakaty w aktualnościach: pionowe zdjęcie (np. grafik muzyków) na karcie pokazuje się w całości na rozmytym tle, a po kliknięciu (także w zdjęcie) w oknie – w pełnym rozmiarze, bez przycinania. W aplikacji podgląd rozpoznaje plakat („na stronie pokaże się w całości”). Zdjęcia aktualności zapisywane w 2000 px (czytelny drobny tekst).
+- Szablon strony zawiera skrypt zgłaszania błędów do Jarvisa (dodany w commitach #1–#4), więc przebudowa strony go nie usuwa.
+
 ## Aplikacja V5.0 + Strona v1.8 – 26.10.2026 (wymaga sql/supabase_v4_8.sql)
 - 13 nowych zdjęć od klientki (img/foto-*.webp, zmniejszone do 1600 px, baner 2400 px): pierwszy slajd banera (bar z pianinem), zdjęcie przy każdej zakładce menu (zmienia się z zakładką, z podpisem), tło sekcji „Muzyka” (pianino), zdjęcie w „Imprezy” (planszówki), wszystkie w galerii.
 - Galeria do samodzielnej obsługi: Ustawienia → „Galeria strony” (oraz menu konta kierownika „Galeria (strona)”): dodawanie kilku zdjęć naraz (automatycznie zmniejszane), opis każdego zdjęcia, kolejność ↑↓, ukrywanie i usuwanie. Strona pobiera galerię z bazy (tabela site_gallery) i odświeża się na żywo; gdy baza nie odpowiada – pokazuje zapasową listę. Na start w bazie są wszystkie zdjęcia strony z opisami.
