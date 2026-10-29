@@ -63,7 +63,7 @@ begin
   ) as t(imie, dzien, od, do_)
   loop
     select id into v_emp from public.employees
-     where split_part(trim(full_name), ' ', 1) ilike r.imie
+     where active is not false and split_part(trim(full_name), ' ', 1) ilike r.imie
      order by created_at limit 1;
     if v_emp is null then
       if position(r.imie in braki) = 0 then braki := braki || r.imie || ' '; end if;
