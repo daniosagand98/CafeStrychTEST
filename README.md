@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.8.3 – 29.10.2026
+- Ceny rezerwacji sali (1200 zł) i całego lokalu (5000 zł) na kartach w sekcji Imprezy.
+- sql/grafik_listopad_2026.sql – grafik na listopad z kartki.
+
 ## Strona v1.8.2 – 29.10.2026
 - Rezerwacja sali (do 20 osób) i całego lokalu (do 40 osób) tylko telefonicznie u właścicielki: +48 693 971 009. Przyciski na stronie i wybór w formularzu pokazują ten numer zamiast formularza.
 
