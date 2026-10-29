@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.8.2 – 29.10.2026
+- Rezerwacja sali (do 20 osób) i całego lokalu (do 40 osób) tylko telefonicznie u właścicielki: +48 693 971 009. Przyciski na stronie i wybór w formularzu pokazują ten numer zamiast formularza.
+
 ## Aplikacja V5.0.3 + Strona v1.8.1 – 29.10.2026
 - Plakaty w aktualnościach: pionowe zdjęcie (np. grafik muzyków) na karcie pokazuje się w całości na rozmytym tle, a po kliknięciu (także w zdjęcie) w oknie – w pełnym rozmiarze, bez przycinania. W aplikacji podgląd rozpoznaje plakat („na stronie pokaże się w całości”). Zdjęcia aktualności zapisywane w 2000 px (czytelny drobny tekst).
 - Szablon strony zawiera skrypt zgłaszania błędów do Jarvisa (dodany w commitach #1–#4), więc przebudowa strony go nie usuwa.

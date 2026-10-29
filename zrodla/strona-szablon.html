@@ -694,8 +694,8 @@ dialog[open]{animation:dlg .5s var(--ease)}
     <figure class="evPhoto reveal"><img src="img/foto-planszowki.webp" alt="Znajomi przy planszówce na Strychu" loading="lazy"><figcaption><b>Spotkania ze znajomymi</b><span>Planszówki, deska przekąsek i piwo z beczki – zarezerwuj stolik albo całą salę.</span></figcaption></figure>
     <div class="eventGrid">
       <article class="eventCard reveal"><span class="evIco">🪑</span><h3>Stolik</h3><p>Dla par, rodzin i znajomych. Wybierz dzień i godzinę – potwierdzimy telefonicznie.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="stolik">Zarezerwuj stolik <span class="arr">→</span></button></article>
-      <article class="eventCard reveal" style="--d:.1s"><span class="evIco">🏠</span><h3>Sala</h3><p>Osobna sala dla Twojej grupy – na urodziny, imieniny, spotkanie po latach czy firmowe.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="sala">Zapytaj o salę <span class="arr">→</span></button></article>
-      <article class="eventCard featured reveal" style="--d:.2s"><span class="evIco">🔑</span><h3>Cały lokal</h3><p>Strych tylko dla Was – impreza zamknięta, wesele w kameralnym gronie, event lub sesja zdjęciowa.</p><button class="btn btn-gold btn-sm reserve" type="button" data-type="lokal">Zapytaj o lokal <span class="arr">→</span></button></article>
+      <article class="eventCard reveal" style="--d:.1s"><span class="evIco">🏠</span><h3>Sala</h3><p>Osobna sala dla Twojej grupy (do 20 osób) – na urodziny, imieniny, spotkanie po latach czy firmowe. Rezerwacja tylko telefonicznie u właścicielki.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="sala">Zadzwoń w sprawie sali <span class="arr">→</span></button></article>
+      <article class="eventCard featured reveal" style="--d:.2s"><span class="evIco">🔑</span><h3>Cały lokal</h3><p>Strych tylko dla Was (do 40 osób) – impreza zamknięta, wesele w kameralnym gronie, event lub sesja zdjęciowa. Rezerwacja tylko telefonicznie u właścicielki.</p><button class="btn btn-gold btn-sm reserve" type="button" data-type="lokal">Zadzwoń w sprawie lokalu <span class="arr">→</span></button></article>
     </div>
     <div class="eventInfo reveal"><div class="eiHead"><b>Jak to działa?</b><small>3 proste kroki</small></div><ol class="eiSteps"><li><i>1</i>Wyślij zapytanie z datą i liczbą gości</li><li><i>2</i>Oddzwonimy, żeby ustalić szczegóły i menu</li><li><i>3</i>Potwierdzamy termin</li></ol><a class="eventPhone" id="evPhone"></a></div>
   </div>
@@ -781,7 +781,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.8.1 · aktualizacja 29.10.2026</span>
+      <span class="fVer">Strona v1.8.2 · aktualizacja 29.10.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -794,13 +794,13 @@ dialog[open]{animation:dlg .5s var(--ease)}
     <form class="form" id="resForm" novalidate>
       <div class="row2"><label>Imię i nazwisko<input name="fullname" required maxlength="60" autocomplete="name"></label><label>Telefon<input name="phone" type="tel" required maxlength="20" autocomplete="tel" placeholder="np. 600 100 200"></label></div>
       <div class="row2"><label>Data<input name="date" type="date" required></label><label>Godzina<input name="time" type="time" required step="900" value="18:00"></label></div>
-      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala</option><option value="lokal">Cały lokal (impreza zamknięta)</option></select></label><label>Liczba osób<input name="guests" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="np. 4"></label></div>
+      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala (tylko telefonicznie)</option><option value="lokal">Cały lokal (tylko telefonicznie)</option></select></label><label>Liczba osób<input name="guests" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="np. 4"></label></div>
       <label>Uwagi (opcjonalnie)<textarea name="notes" maxlength="400" placeholder="np. urodziny, stolik na strychu, przy piecu…"></textarea></label>
       <label class="check"><input type="checkbox" name="consent" required><span>Zgadzam się na kontakt telefoniczny w sprawie tej rezerwacji. Dane wykorzystamy tylko do jej obsługi.</span></label>
       <p class="formMsg" id="resMsg" role="alert"></p>
       <button class="btn btn-ink" type="submit" id="resBtn">Wyślij prośbę o rezerwację</button>
     </form>
-    <div class="phoneOnly" id="resPhone" hidden><div class="poIco" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><p class="poLead">Obecnie rezerwacje przyjmujemy <b>tylko telefonicznie</b>.</p><a class="poPhone" id="poPhone"></a><p class="poHours" id="poHours"></p><div class="doneBtns"><button class="btn btn-ghostInk" type="button" data-close>Zamknij</button></div></div>
+    <div class="phoneOnly" id="resPhone" hidden><div class="poIco" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><p class="poLead" id="poLead">Obecnie rezerwacje przyjmujemy <b>tylko telefonicznie</b>.</p><a class="poPhone" id="poPhone"></a><p class="poHours" id="poHours"></p><div class="doneBtns"><button class="btn btn-ghostInk" type="button" data-close>Zamknij</button></div></div>
     <div class="done" id="resDone" hidden><div class="tick">✓</div><h4 id="doneHello">Dziękujemy!</h4><p class="doneLead">Twoja prośba o rezerwację trafiła do obsługi.</p><dl class="doneSum" id="doneSum"></dl><p class="doneNote">📞 To jeszcze nie jest potwierdzenie – <b>zadzwonimy</b> na podany numer, żeby potwierdzić rezerwację. W pilnej sprawie: <a id="donePhone"></a></p><div class="doneBtns"><button class="btn btn-ink" type="button" data-close>Zamknij</button><button class="btn btn-ghostInk" type="button" id="doneAgain">Nowa rezerwacja</button></div></div>
   </div>
 </dialog>
@@ -825,7 +825,7 @@ const CONFIG={
   supabaseKey:'sb_publishable_55XUZSnWLqML_VKscgI1Ow_AAWJiCTa',
   address:'Plac Kaszubski 7 (w podwórzu), 81-350 Gdynia',
   mapQuery:'Cafe Strych, Plac Kaszubski 7, Gdynia',
-  phone:'+48 58 620 30 38',
+  phone:'+48 58 620 30 38',ownerPhone:'693 971 009',
   facebook:'https://www.facebook.com/pages/Cafe-Strych/171438269537963',
   instagram:'https://www.instagram.com/cafe_strych/',   // pusty = ukryte
   tiktok:'https://www.tiktok.com/@cafe_strych',          // pusty = ukryte
@@ -1005,14 +1005,14 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-close]'))e.targ
 const resDlg=$('#resDlg'),resForm=$('#resForm');
 const KIND={stolik:['Zarezerwuj stolik','Wyślij prośbę o rezerwację','np. urodziny, stolik na strychu, przy piecu…'],sala:['Zapytaj o salę','Wyślij zapytanie o salę','np. urodziny 30 osób, potrzebny tort i nagłośnienie…'],lokal:['Zapytaj o cały lokal','Wyślij zapytanie o lokal','np. impreza zamknięta, menu, godziny, dekoracje…']};
 function setKind(k){k=KIND[k]?k:'stolik';resForm.kind.value=k;$('#resTitle').textContent=KIND[k][0];$('#resBtn').textContent=KIND[k][1];resForm.notes.placeholder=KIND[k][2];resForm.guests.placeholder=k==='stolik'?'np. 4':'np. 30'}
-resForm.kind.addEventListener('change',()=>setKind(resForm.kind.value));
+resForm.kind.addEventListener('change',()=>{const k=resForm.kind.value;if(k==='sala'||k==='lokal'){setKind('stolik');showPhoneOnly(k)}else setKind(k)});
 $('#doneAgain').addEventListener('click',()=>openReservation());
 let wwwBookings=true;
 async function loadSiteSettings(){if(!sb)return;try{const r=await sb.rpc('site_settings');if(!r.error&&r.data)wwwBookings=r.data.www_bookings!==false}catch(e){console.warn(e)}}
 loadSiteSettings();
-function showPhoneOnly(){const tel=CONFIG.phone.replace(/\s/g,'');$('#poPhone').textContent=CONFIG.phone;$('#poPhone').href='tel:'+tel;$('#poHours').textContent='Zadzwoń w godzinach otwarcia lokalu.';
-  resForm.hidden=true;$('#resDone').hidden=true;$('#resPhone').hidden=false;$('#resDlg .brush').textContent='Rezerwacja';$('#resTitle').textContent='Rezerwacje telefoniczne';$('#resDlg .dlgIn').classList.add('isDone')}
-function openReservation(wed=false,kind='stolik'){$('#resPhone').hidden=true;if(!wwwBookings){$('#newsDlg').open&&$('#newsDlg').close();showPhoneOnly();resDlg.showModal();loadSiteSettings();return}setKind(kind);$('#resDlg .dlgIn').classList.remove('isDone');$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
+function showPhoneOnly(kind){const owner=kind==='sala'||kind==='lokal',num=owner?CONFIG.ownerPhone:CONFIG.phone,tel=(owner?'+48':'')+num.replace(/\s/g,'');$('#poPhone').textContent=owner?'+48 '+num:num;$('#poPhone').href='tel:'+tel;$('#poLead').innerHTML=owner?(kind==='sala'?'Rezerwację <b>sali</b> (do 20 osób)':'Rezerwację <b>całego lokalu</b> (do 40 osób)')+' przyjmuje <b>właścicielka – tylko telefonicznie</b>.':'Obecnie rezerwacje przyjmujemy <b>tylko telefonicznie</b>.';$('#poHours').textContent=owner?'Zadzwoń bezpośrednio pod ten numer – obsługa lokalu nie przyjmuje rezerwacji sali ani całego lokalu.':'Zadzwoń w godzinach otwarcia lokalu.';
+  resForm.hidden=true;$('#resDone').hidden=true;$('#resPhone').hidden=false;$('#resDlg .brush').textContent='Rezerwacja';$('#resTitle').textContent=owner?(kind==='sala'?'Rezerwacja sali':'Rezerwacja całego lokalu'):'Rezerwacje telefoniczne';$('#resDlg .dlgIn').classList.add('isDone')}
+function openReservation(wed=false,kind='stolik'){$('#resPhone').hidden=true;if(kind==='sala'||kind==='lokal'){$('#newsDlg').open&&$('#newsDlg').close();showPhoneOnly(kind);resDlg.showModal();return}if(!wwwBookings){$('#newsDlg').open&&$('#newsDlg').close();showPhoneOnly();resDlg.showModal();loadSiteSettings();return}setKind(kind);$('#resDlg .dlgIn').classList.remove('isDone');$('#resDlg .brush').textContent='Rezerwacja';$('#newsDlg').open&&$('#newsDlg').close();resForm.hidden=false;$('#resDone').hidden=true;$('#resMsg').textContent='';
   const t=new Date(),min=isoDay(t);resForm.date.min=min;let d=new Date(t);if(wed){d.setDate(d.getDate()+((3-d.getDay()+7)%7||0));}else if(t.getHours()>=20)d.setDate(d.getDate()+1);
   if(!resForm.date.value||resForm.date.value<min||wed)resForm.date.value=isoDay(d);resDlg.showModal()}
 document.addEventListener('click',e=>{const b=e.target.closest('.reserve');if(b){e.preventDefault();openReservation(!!b.dataset.wed,b.dataset.type||'stolik')}});
