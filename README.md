@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.0.5 – 29.10.2026
+- Lokal: „Edytuj” w prawym górnym rogu kafelka sali, „+ Dodaj stolik” w edycji sali; „Wróć” w Lokal i Menu POS po prawej, równo z tytułem.
+- Kafelki na Start (Sprzedaż, Otwarte rachunki, Rezerwacje) i w Lokal (Sale, Stoliki, Miejsca siedzące) w jednej linii.
+
 ## Aplikacja V5.0.4 + Strona v1.8.4 – 29.10.2026
 - Lokal: tylko sale i przypisane do nich stoliki (bez „miejsc” i bez górnego „+ Stolik”); w edycji sali i stolika „Usuń” obok „Zapisz”; usunięcie sali pyta o potwierdzenie i wymienia jej stoliki.
 - Strona: przy sali/lokalu przycisk „Wróć” do formularza rezerwacji – wpisane dane zostają.
