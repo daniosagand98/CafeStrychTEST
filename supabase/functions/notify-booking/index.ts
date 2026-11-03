@@ -1,5 +1,6 @@
 // Cafe Strych – powiadomienia push o nowych rezerwacjach i zgłoszeniach błędów (Supabase Edge Function)
 // V4.7: {"type":"bug","id":...} → powiadomienie dla administratorów o nowym zgłoszeniu błędu.
+// V5.1.1: {"type":"message","id":...} → powiadomienie dla pracowników, do których kierownik wysłał wiadomość.
 // Wywołuje ją baza danych (trigger po dodaniu rezerwacji – patrz supabase_v3_6.sql).
 // Wysyła powiadomienie na telefony kierowników i administratorów, którzy je włączyli.
 //
@@ -22,8 +23,9 @@ Deno.serve(async (req) => {
     const body = await req.json();
     id = String(body?.id ?? body?.record?.id ?? "");
     if (body?.type === "bug") type = "bug";
+    if (body?.type === "message") type = "message";
   } catch { /* puste body */ }
-  if (!/^[0-9a-f-]{36}$/i.test(id)) return json({ error: "brak id" }, 400);
+  if (!/^[0-9a-f-]{36}$/i.test(id) && !(type === "message" && /^\d+$/.test(id))) return json({ error: "brak id" }, 400);
   if (!Deno.env.get("VAPID_PUBLIC_KEY") || !Deno.env.get("VAPID_PRIVATE_KEY")) {
     console.error("Brak sekretów VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY – dodaj je w Edge Functions → Secrets");
     return json({ error: "brak sekretów VAPID" }, 500);
@@ -34,6 +36,7 @@ Deno.serve(async (req) => {
   });
 
   if (type === "bug") return await notifyBug(sb, id);
+  if (type === "message") return await notifyMessage(sb, id);
 
   // Ochrona przed nadużyciem: wysyłamy tylko dla prawdziwej, świeżej rezerwacji i tylko raz.
   const { data: booking, error } = await sb.from("bookings").select("*").eq("id", id).maybeSingle();
@@ -125,6 +128,63 @@ async function notifyBug(sb: any, id: string) {
   let sent = 0, removed = 0;
   await Promise.all(subs.map(async (s: { id: string; endpoint: string; p256dh: string; auth: string }) => {
     try { await webpush.sendNotification({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, payload, { TTL: 86400 }); sent++; }
+    catch (e) {
+      const code = (e as { statusCode?: number }).statusCode;
+      if (code === 404 || code === 410) { await sb.from("push_subscriptions").delete().eq("id", s.id); removed++; }
+      else console.error("push error", code, (e as Error).message);
+    }
+  }));
+  return json({ sent, removed });
+}
+
+// ---------- V5.1.1: wiadomości od kierownika → pracownicy ----------
+// deno-lint-ignore no-explicit-any
+async function notifyMessage(sb: any, id: string) {
+  const { data: msg, error } = await sb.from("announcements").select("*").eq("id", id).maybeSingle();
+  if (error || !msg) return json({ skipped: "nie ma takiej wiadomości" });
+  if (msg.push_sent_at) return json({ skipped: "już wysłano" });
+  if (Date.now() - new Date(msg.created_at ?? Date.now()).getTime() > 15 * 60 * 1000) return json({ skipped: "wiadomość nie jest nowa" });
+  const claim = await sb.from("announcements").update({ push_sent_at: new Date().toISOString() }).eq("id", id).is("push_sent_at", null).select("id");
+  if (!claim.data?.length) return json({ skipped: "już wysłano" });
+
+  const { data: profiles } = await sb.from("profiles").select("id, email, full_name, active");
+  const active = (profiles ?? []).filter((p: { active?: boolean }) => p.active !== false);
+  const targets: string[] = Array.isArray(msg.target_employee_ids) ? msg.target_employee_ids.map(String) : [];
+  const ids = new Set<string>();
+  if (targets.length) {
+    // pracownik z listy „Pracownicy” → jego konto (powiązanie, e-mail albo imię i nazwisko)
+    const { data: emps } = await sb.from("employees").select("*").in("id", targets);
+    const low = (v: unknown) => String(v ?? "").trim().toLowerCase();
+    for (const e of emps ?? []) {
+      const direct = e.user_id ?? e.profile_id;
+      if (direct) { ids.add(String(direct)); continue; }
+      const p = active.find((x: { email?: string; full_name?: string }) =>
+        (e.email && low(x.email) === low(e.email)) || (e.full_name && low(x.full_name) === low(e.full_name)));
+      if (p) ids.add(p.id);
+    }
+  } else {
+    for (const p of active) ids.add(p.id);   // wiadomość do wszystkich
+  }
+  if (msg.created_by) ids.delete(String(msg.created_by));
+  if (!ids.size) return json({ sent: 0, reason: "odbiorcy nie mają kont w aplikacji" });
+
+  const { data: subs } = await sb.from("push_subscriptions").select("id, endpoint, p256dh, auth, notify_messages").in("user_id", [...ids]);
+  const list = (subs ?? []).filter((s: { notify_messages?: boolean }) => s.notify_messages !== false);
+  if (!list.length) return json({ sent: 0, reason: "nikt z odbiorców nie włączył powiadomień" });
+
+  webpush.setVapidDetails(Deno.env.get("VAPID_SUBJECT") ?? "mailto:admin@example.com", Deno.env.get("VAPID_PUBLIC_KEY")!, Deno.env.get("VAPID_PRIVATE_KEY")!);
+  const author = active.find((p: { id: string }) => p.id === msg.created_by)?.full_name || "Kierownik";
+  const text = String(msg.message ?? msg.content ?? "").replace(/\s+/g, " ").trim();
+  const appUrl = (Deno.env.get("APP_URL") ?? "./").replace(/\/?$/, "/");
+  const payload = JSON.stringify({
+    title: `✉️ Wiadomość od: ${author}`,
+    body: text.slice(0, 160) + (text.length > 160 ? "…" : ""),
+    tag: `msg-${msg.id}`,
+    url: `${appUrl}?msg=1`,
+  });
+  let sent = 0, removed = 0;
+  await Promise.all(list.map(async (s: { id: string; endpoint: string; p256dh: string; auth: string }) => {
+    try { await webpush.sendNotification({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, payload, { TTL: 86400, urgency: "high" }); sent++; }
     catch (e) {
       const code = (e as { statusCode?: number }).statusCode;
       if (code === 404 || code === 410) { await sb.from("push_subscriptions").delete().eq("id", s.id); removed++; }

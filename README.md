@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.1.1 – 03.11.2026
+- Powiadomienia push o wiadomościach od kierownika dla pracowników. „🔔 Powiadomienia” w menu konta jest teraz dostępne dla każdego.
+- SQL: sql/supabase_v5_1_1.sql. Funkcja notify-booking: wklej nowy supabase/functions/notify-booking/index.ts w Supabase → Edge Functions → notify-booking → Code → Deploy.
+
 ## Aplikacja V5.1 – 03.11.2026
 - Historia rachunków dla kierownika i administratora: kto i o której otworzył rachunek, dodał lub usunął pozycję, dał rabat, przyjął płatność, anulował. Wpisy poza godzinami pracy lokalu są oznaczone. Menu konta → „Historia rachunków”, Ustawienia → „Historia rachunków” oraz przycisk 🕓 na każdym rachunku.
 - SQL: sql/supabase_v4_9.sql (historię zapisuje baza – nie da się jej ominąć ani edytować z aplikacji).
