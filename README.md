@@ -12,6 +12,13 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.2 + Strona v1.8.5 – 03.11.2026
+- POS: „＋ Inny produkt” – produkt spoza menu (nazwa, cena, ilość, VAT) tylko na ten rachunek; działa też offline.
+- Grafik: pracownik widzi grafik całego zespołu, swoje zmiany wyróżnione.
+- Rezerwacje: bez pola „Czas trwania”; stolik maksymalnie 10 osób (więcej – sala u właścicielki).
+- Strona: e-mail strychgdynia@op.pl w Kontakcie i stopce; stolik do 10 osób.
+- SQL: sql/supabase_v5_1_3.sql (usunięcie starej zasady bookings_room_valid).
+
 ## Aplikacja V5.1.2 – 03.11.2026
 - Kierownik ma te same prawa do rachunków co administrator: anuluje opłacony rachunek i usuwa z historii każdy rachunek (z tym samym ostrzeżeniem).
 - SQL: sql/supabase_v5_1_2.sql.

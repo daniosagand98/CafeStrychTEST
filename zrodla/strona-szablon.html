@@ -693,7 +693,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <figure class="evPhoto reveal"><img src="img/foto-planszowki.webp" alt="Znajomi przy planszówce na Strychu" loading="lazy"><figcaption><b>Spotkania ze znajomymi</b><span>Planszówki, deska przekąsek i piwo z beczki – zarezerwuj stolik albo całą salę.</span></figcaption></figure>
     <div class="eventGrid">
-      <article class="eventCard reveal"><span class="evIco">🪑</span><h3>Stolik</h3><p>Dla par, rodzin i znajomych. Wybierz dzień i godzinę – potwierdzimy telefonicznie.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="stolik">Zarezerwuj stolik <span class="arr">→</span></button></article>
+      <article class="eventCard reveal"><span class="evIco">🪑</span><h3>Stolik</h3><p>Dla par, rodzin i znajomych – do 10 osób. Wybierz dzień i godzinę – potwierdzimy telefonicznie.</p><button class="btn btn-ink btn-sm reserve" type="button" data-type="stolik">Zarezerwuj stolik <span class="arr">→</span></button></article>
       <article class="eventCard reveal" style="--d:.1s"><span class="evIco">🏠</span><h3>Sala</h3><p>Osobna sala dla Twojej grupy (do 20 osób) – na urodziny, imieniny, spotkanie po latach czy firmowe. Rezerwacja tylko telefonicznie u właścicielki.</p><div class="evPrice"><div class="epTot"><span>Koszt rezerwacji</span><b>1200 zł</b></div><ul><li><span>do wykorzystania na barze</span><span>1000 zł</span></li><li><span>opłata za rezerwację</span><span>200 zł</span></li></ul><div class="epDep">Zadatek przy rezerwacji: <b>400 zł</b> (bezzwrotny)</div></div><button class="btn btn-ink btn-sm reserve" type="button" data-type="sala">Zadzwoń w sprawie sali <span class="arr">→</span></button></article>
       <article class="eventCard featured reveal" style="--d:.2s"><span class="evIco">🔑</span><h3>Cały lokal</h3><p>Strych tylko dla Was (do 40 osób) – impreza zamknięta, wesele w kameralnym gronie, event lub sesja zdjęciowa. Rezerwacja tylko telefonicznie u właścicielki.</p><div class="evPrice"><div class="epTot"><span>Koszt rezerwacji</span><b>5000 zł</b></div><ul><li><span>do wykorzystania na barze</span><span>4500 zł</span></li><li><span>opłata za rezerwację</span><span>500 zł</span></li></ul><div class="epDep">Zadatek przy rezerwacji: <b>1000 zł</b></div></div><button class="btn btn-gold btn-sm reserve" type="button" data-type="lokal">Zadzwoń w sprawie lokalu <span class="arr">→</span></button></article>
     </div>
@@ -742,6 +742,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
       <div class="cCard reveal">
         <div class="cRow"><span class="ico">📍</span><div><b>Adres</b><span id="cAddress"></span><br><a id="cRoute" target="_blank" rel="noopener">Wyznacz trasę →</a></div></div>
         <div class="cRow"><span class="ico">📞</span><div><b>Telefon</b><a id="cPhone"></a></div></div>
+        <div class="cRow"><span class="ico">✉️</span><div><b>E-mail</b><a href="mailto:strychgdynia@op.pl">strychgdynia@op.pl</a></div></div>
         <div class="cRow"><span class="ico">🕰️</span><div style="flex:1"><b>Godziny otwarcia</b><table class="hours" id="hours"></table></div></div>
         <div class="cRow"><span class="ico">💬</span><div><b>Znajdziesz nas też tu</b><div class="socials" id="cSocial"></div></div></div>
       </div>
@@ -772,6 +773,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
         <b>Kontakt</b>
         <span class="fLine">📍 <span id="fAddress"></span></span>
         <a class="fLine" id="fPhone"></a>
+        <a class="fLine" href="mailto:strychgdynia@op.pl">✉️ strychgdynia@op.pl</a>
         <button class="fLine fReserve reserve" type="button">🗓️ Zarezerwuj stolik</button>
       </div>
       <div class="fCol">
@@ -781,7 +783,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.8.4 · aktualizacja 29.10.2026</span>
+      <span class="fVer">Strona v1.8.5 · aktualizacja 03.11.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>
@@ -794,7 +796,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     <form class="form" id="resForm" novalidate>
       <div class="row2"><label>Imię i nazwisko<input name="fullname" required maxlength="60" autocomplete="name"></label><label>Telefon<input name="phone" type="tel" required maxlength="20" autocomplete="tel" placeholder="np. 600 100 200"></label></div>
       <div class="row2"><label>Data<input name="date" type="date" required></label><label>Godzina<input name="time" type="time" required step="900" value="18:00"></label></div>
-      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala (tylko telefonicznie)</option><option value="lokal">Cały lokal (tylko telefonicznie)</option></select></label><label>Liczba osób<input name="guests" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="np. 4"></label></div>
+      <div class="row2"><label>Rodzaj rezerwacji<select name="kind"><option value="stolik">Stolik</option><option value="sala">Sala (tylko telefonicznie)</option><option value="lokal">Cały lokal (tylko telefonicznie)</option></select></label><label>Liczba osób<input name="guests" type="number" inputmode="numeric" min="1" max="10" step="1" required placeholder="np. 4"></label></div>
       <label>Uwagi (opcjonalnie)<textarea name="notes" maxlength="400" placeholder="np. urodziny, stolik na strychu, przy piecu…"></textarea></label>
       <label class="check"><input type="checkbox" name="consent" required><span>Zgadzam się na kontakt telefoniczny w sprawie tej rezerwacji. Dane wykorzystamy tylko do jej obsługi.</span></label>
       <p class="formMsg" id="resMsg" role="alert"></p>
@@ -1023,7 +1025,7 @@ resForm.addEventListener('submit',async e=>{e.preventDefault();const f=resForm,m
   if(!/^[+\d][\d\s-]{6,}$/.test(phone))return msg.textContent='Podaj poprawny numer telefonu.';
   if(!f.date.value||!f.time.value||isNaN(start))return msg.textContent='Wybierz datę i godzinę.';
   if(!Number.isInteger(guests)||guests<1)return msg.textContent='Wpisz liczbę osób.';
-  if(guests>120)return msg.textContent='Dla grup powyżej 120 osób zadzwoń do nas: '+CONFIG.phone;
+  if(guests>10)return msg.textContent='Stolik rezerwujemy maksymalnie dla 10 osób. Większą grupę zaprosimy do sali – zadzwoń do właścicielki: +48 '+CONFIG.ownerPhone;
   if(f.kind.value==='stolik'){const why=tableSlotCheck(start);if(why)return msg.textContent=why}
   if(start<new Date(Date.now()+30*60000))return msg.textContent='Rezerwację online przyjmujemy najpóźniej 30 minut wcześniej – na teraz zadzwoń: '+CONFIG.phone;
   if(!f.consent.checked)return msg.textContent='Zaznacz zgodę na kontakt w sprawie rezerwacji.';
