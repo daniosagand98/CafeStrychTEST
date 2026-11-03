@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.3.2 – 03.11.2026
+- Rezerwacja: „Liczba osób” obok „Nazwa / nazwisko” – krótszy formularz.
+
 ## Aplikacja V5.3.1 – 03.11.2026
 - Czat: „Wyświetlono” – w prywatnej rozmowie ✓ Wysłano / ✓✓ Wyświetlono z godziną; w czacie ogólnym kto wyświetlił (kliknięcie pokazuje pełną listę: kto i kiedy, kto jeszcze nie).
 - Usuwanie kont: administrator usuwa konta pracowników i kierowników (Ustawienia → Konta i role), kierownik – konta pracowników (Pracownicy → Konta w aplikacji). Konta administratora nie da się usunąć.
