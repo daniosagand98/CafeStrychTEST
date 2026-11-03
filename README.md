@@ -12,6 +12,13 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.3 – 03.11.2026
+- 💬 Czat (nowa zakładka): czat ogólny z oznaczaniem osób (@imię) i wiadomości prywatne; licznik nieprzeczytanych, powiadomienia push (oznaczenie ma osobne powiadomienie).
+- 🔁 Zamiany zmian: pracownik oddaje lub zamienia swoją zmianę (konkretnej osobie albo „ktokolwiek chętny”), druga osoba przyjmuje, kierownik zatwierdza – grafik zmienia się sam. Zatwierdzanie można wyłączyć w Ustawieniach → Grafik. Powiadomienia push na każdym etapie.
+- ✨ Propozycja grafiku (kierownik): układa zmiany na tydzień lub miesiąc z dyspozycyjności, równo rozkładając godziny; godziny zmian w poszczególne dni do ustawienia; przed dodaniem można wszystko poprawić.
+- Usunięte informacje o etacie pracownika.
+- SQL: sql/supabase_v5_3.sql. Funkcja notify-booking: wklej nowy supabase/functions/notify-booking/index.ts → Deploy.
+
 ## Aplikacja V5.2 + Strona v1.8.5 – 03.11.2026
 - POS: „＋ Inny produkt” – produkt spoza menu (nazwa, cena, ilość, VAT) tylko na ten rachunek; działa też offline.
 - Grafik: pracownik widzi grafik całego zespołu, swoje zmiany wyróżnione.
