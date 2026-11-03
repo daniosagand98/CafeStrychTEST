@@ -41,6 +41,7 @@ const DB={
   A(17,10,0,'o1','Stolik 1','open',null,null,null,'u3','Piotr Nowak'),A(17,10,40,'o1','Stolik 1','add','Tyskie Gronie 0,5 l',2,14,'u3','Piotr Nowak'),A(17,32,7,'o1','Stolik 1','add','Pajda chleba',1,12,'u3','Piotr Nowak'),
   A(18,0,0,'o2','Urodziny Kasi','open',null,null,null,'u2','Anna Kowalska'),A(18,1,15,'o2','Urodziny Kasi','add','Aperol Spritz',4,32,'u2','Anna Kowalska'),A(18,3,50,'o2','Urodziny Kasi','add','Mojito',3,30,'u2','Anna Kowalska'),A(18,30,0,'o2','Urodziny Kasi','discount',null,null,null,'u2','Anna Kowalska','rabat: 0% → 10%'),
   A(8,12,33,'o1','Stolik 1','add','Tyskie Gronie 0,5 l',1,14,'u3','Piotr Nowak'),A(8,13,2,'o1','Stolik 1','remove','Tyskie Gronie 0,5 l',-1,14,'u3','Piotr Nowak')]})(),
+ company_devices:[{id:'dev0',name:'Tablet sala',created_at:new Date(Date.now()-864e5*3).toISOString(),last_seen_at:new Date(Date.now()-36e5).toISOString(),active:true}],
  activity_logs:[],bug_reports:[
   {id:uid(),description:'Przy dodawaniu rezerwacji wyskakuje błąd i nic się nie zapisuje.',reporter_id:'u2',reporter_name:'Anna Kowalska',reporter_email:'anna@demo.pl',page:'Rezerwacje',user_agent:'iPhone/iPad • Safari • 390×844',status:'new',image_path:'demo-bug.png',created_at:at(0,12,47)},
   {id:uid(),description:'W POS nie da się usunąć jednej sztuki – znika cała pozycja.',reporter_id:'u3',reporter_name:'Piotr Nowak',reporter_email:'piotr@demo.pl',page:'Rachunek 2',user_agent:'Android • Chrome • 412×915',status:'new',created_at:at(-1,21,13)},
@@ -97,6 +98,8 @@ const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));if(!navigator.on
  if(fn==='swap_decide'){const w=DB.shift_swaps.find(x=>x.id===a.p_swap);if(a.p_approve){const s1=DB.work_shifts.find(x=>x.id===w.shift_id);if(s1)s1.employee_id=w.to_employee;const s2=w.other_shift_id&&DB.work_shifts.find(x=>x.id===w.other_shift_id);if(s2)s2.employee_id=w.from_employee}w.status=a.p_approve?'approved':'rejected';return{data:w.status,error:null}}
  if(fn==='swap_cancel'){const w=DB.shift_swaps.find(x=>x.id===a.p_swap);w.status='cancelled';return{data:null,error:null}}
  if(fn==='admin_delete_account'){DB.profiles=DB.profiles.filter(x=>x.id!==a.p_user);return{data:'deleted',error:null}}
+ if(fn==='check_company_device'){const n=localStorage.getItem('cs_company_device_name');return{data:a.p_token&&n?{id:'dev1',name:n}:null,error:null}}
+ if(fn==='register_company_device'){DB.company_devices=DB.company_devices||[];DB.company_devices.push({id:'dev1',name:a.p_name,created_at:new Date().toISOString(),active:true});return{data:'dev1',error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
 return{rpc,from:t=>new Q(t),

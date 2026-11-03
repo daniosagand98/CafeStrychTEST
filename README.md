@@ -12,6 +12,12 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.4 – 03.11.2026
+- Tablety firmowe: pracownik na swoim telefonie ma tylko Start (wiadomości), Grafik, Czat i Moje konto (dokumenty). POS, Rezerwacje i Zakupy ma dopiero po zalogowaniu na tablecie zarejestrowanym jako firmowy (Menu konta / Ustawienia → 📱 Tablety firmowe). Kierownik i administrator – bez ograniczeń.
+- Blokada działa też w bazie (zapis do rachunków, rezerwacji i zakupów tylko z tabletu firmowego lub przez kierownika).
+- Na tablecie u góry: nazwa tabletu i osoby – kliknięcie wylogowuje (zmiana osoby).
+- SQL: sql/supabase_v5_4.sql.
+
 ## Aplikacja V5.3.2 – 03.11.2026
 - Rezerwacja: „Liczba osób” obok „Nazwa / nazwisko” – krótszy formularz.
 
