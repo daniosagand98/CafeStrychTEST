@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.1.2 – 03.11.2026
+- Kierownik ma te same prawa do rachunków co administrator: anuluje opłacony rachunek i usuwa z historii każdy rachunek (z tym samym ostrzeżeniem).
+- SQL: sql/supabase_v5_1_2.sql.
+
 ## Aplikacja V5.1.1 – 03.11.2026
 - Powiadomienia push o wiadomościach od kierownika dla pracowników. „🔔 Powiadomienia” w menu konta jest teraz dostępne dla każdego.
 - SQL: sql/supabase_v5_1_1.sql. Funkcja notify-booking: wklej nowy supabase/functions/notify-booking/index.ts w Supabase → Edge Functions → notify-booking → Code → Deploy.
