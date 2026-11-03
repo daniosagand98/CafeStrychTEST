@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.3.1 – 03.11.2026
+- Czat: „Wyświetlono” – w prywatnej rozmowie ✓ Wysłano / ✓✓ Wyświetlono z godziną; w czacie ogólnym kto wyświetlił (kliknięcie pokazuje pełną listę: kto i kiedy, kto jeszcze nie).
+- Usuwanie kont: administrator usuwa konta pracowników i kierowników (Ustawienia → Konta i role), kierownik – konta pracowników (Pracownicy → Konta w aplikacji). Konta administratora nie da się usunąć.
+- SQL: sql/supabase_v5_3_1.sql.
+
 ## Aplikacja V5.3 – 03.11.2026
 - 💬 Czat (nowa zakładka): czat ogólny z oznaczaniem osób (@imię) i wiadomości prywatne; licznik nieprzeczytanych, powiadomienia push (oznaczenie ma osobne powiadomienie).
 - 🔁 Zamiany zmian: pracownik oddaje lub zamienia swoją zmianę (konkretnej osobie albo „ktokolwiek chętny”), druga osoba przyjmuje, kierownik zatwierdza – grafik zmienia się sam. Zatwierdzanie można wyłączyć w Ustawieniach → Grafik. Powiadomienia push na każdym etapie.

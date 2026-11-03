@@ -77,7 +77,7 @@ class Q{constructor(t){this.t=t;this.f=[];this.op='select';this.lim=null;this.or
   {id:uid(),channel:dm('u-admin','u3'),sender_id:'u3',sender_name:'Piotr Nowak',body:'Mogę jutro przyjść godzinę później?',mentions:[],created_at:ago(60)},
   {id:uid(),channel:dm('u-admin','u3'),sender_id:'u-admin',sender_name:'Daniel Wawrzyniak',body:'Jasne, nie ma problemu.',mentions:[],created_at:ago(55)},
   {id:uid(),channel:dm('u-admin','u2'),sender_id:'u2',sender_name:'Anna Kowalska',body:'Wyślę Ci zdjęcie faktury za cytryny.',mentions:[],created_at:ago(12)}];
- DB.chat_reads=[{user_id:'u-admin',channel:'general',last_read_at:ago(100)},{user_id:'u-admin',channel:dm('u-admin','u3'),last_read_at:ago(50)}];
+ DB.chat_reads=[{user_id:'u-admin',channel:'general',last_read_at:ago(100)},{user_id:'u-admin',channel:dm('u-admin','u3'),last_read_at:ago(50)},{user_id:'u2',channel:'general',last_read_at:ago(20)},{user_id:'u3',channel:'general',last_read_at:ago(145)},{user_id:'u3',channel:dm('u-admin','u3'),last_read_at:ago(40)}];
  const W=DB.work_shifts,sh=(e,o)=>W.find(x=>x.employee_id===e&&x.shift_date===dISO(o));
  DB.shift_swaps=[{id:uid(),created_at:ago(300),shift_id:sh('e2',3).id,from_employee:'e2',to_employee:'e1',other_shift_id:sh('e1',6).id,note:'Mam wtedy wesele siostry – zamienisz się?',status:'open'},
   {id:uid(),created_at:ago(800),shift_id:sh('e3',5).id,from_employee:'e3',to_employee:'e4',other_shift_id:null,note:null,status:'accepted',accepted_at:ago(400)},
@@ -96,6 +96,7 @@ const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));if(!navigator.on
  if(fn==='swap_respond'){const w=DB.shift_swaps.find(x=>x.id===a.p_swap);if(!a.p_accept){if(!w.to_employee)return{data:'skip',error:null};w.status='rejected';return{data:'rejected',error:null}}w.status='accepted';w.to_employee=w.to_employee||'e1';return{data:'accepted',error:null}}
  if(fn==='swap_decide'){const w=DB.shift_swaps.find(x=>x.id===a.p_swap);if(a.p_approve){const s1=DB.work_shifts.find(x=>x.id===w.shift_id);if(s1)s1.employee_id=w.to_employee;const s2=w.other_shift_id&&DB.work_shifts.find(x=>x.id===w.other_shift_id);if(s2)s2.employee_id=w.from_employee}w.status=a.p_approve?'approved':'rejected';return{data:w.status,error:null}}
  if(fn==='swap_cancel'){const w=DB.shift_swaps.find(x=>x.id===a.p_swap);w.status='cancelled';return{data:null,error:null}}
+ if(fn==='admin_delete_account'){DB.profiles=DB.profiles.filter(x=>x.id!==a.p_user);return{data:'deleted',error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
 return{rpc,from:t=>new Q(t),
