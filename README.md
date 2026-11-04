@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.4.1 – 04.11.2026
+- Dolny pasek liczony na żywo z widocznej wysokości ekranu (iPhone składany, obrót, powrót do aplikacji); przy otwartej klawiaturze pasek się chowa.
+
 ## Aplikacja V5.4 – 03.11.2026
 - Tablety firmowe: pracownik na swoim telefonie ma tylko Start (wiadomości), Grafik, Czat i Moje konto (dokumenty). POS, Rezerwacje i Zakupy ma dopiero po zalogowaniu na tablecie zarejestrowanym jako firmowy (Menu konta / Ustawienia → 📱 Tablety firmowe). Kierownik i administrator – bez ograniczeń.
 - Blokada działa też w bazie (zapis do rachunków, rezerwacji i zakupów tylko z tabletu firmowego lub przez kierownika).
