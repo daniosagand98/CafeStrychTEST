@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.5.1 – 06.11.2026
+- Edycja rezerwacji: przyciski obok siebie – Zapisz, 📱 Wyślij SMS (z danych w formularzu), Usuń.
+
 ## Aplikacja V5.5 – 06.11.2026
 - Rezerwacje: pole „Telefon gościa”; po zatwierdzeniu rezerwacji okno z gotową treścią i przyciskiem „📱 Wyślij SMS” – otwiera SMS-y z wpisanym numerem i treścią potwierdzenia.
 - „System i logi”: kto dodał, zatwierdził, odrzucił, zmienił lub usunął rezerwację (SQL: sql/supabase_v5_5.sql).
