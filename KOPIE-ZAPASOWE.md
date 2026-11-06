@@ -55,6 +55,6 @@ Kopie są zaszyfrowane (AES-256), więc nawet jeśli ktoś pobierze plik, bez ha
 
 ## Pliki na OVH – przywracanie
 
-- Cała strona do stanu z danego dnia: panel OVH → Hosting → **FTP - SSH → Przywróć kopię zapasową**.
-- Pojedynczy plik: FileZilla, login FTP z dopiskiem `-snap1` (wczoraj), `-snap2` (przedwczoraj) itd.
+- Cała strona do stanu z danego dnia: panel OVH → Hosting → **FTP - SSH → Przywróć kopię zapasową** (potrzebny dostęp do panelu OVH – na razie ma go poprzednia firma).
+- Pojedynczy plik: FileZilla, login z dopiskiem `-snap1` (wczoraj), `-snap2` (przedwczoraj) itd. (wymaga dostępu przez FTP).
 - Najprościej: na GitHubie jest zawsze aktualna wersja – wystarczy **Actions → „Wgraj na OVH” → Run workflow**.
