@@ -1,5 +1,5 @@
 /* Cafe Strych Manager – service worker V4.6: powiadomienia push + aplikacja dostępna bez internetu */
-const CACHE = 'cs-app-v4.6';
+const CACHE = 'cs-app-v5.5.4';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './logo.webp', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './favicon-32.png'];
 const LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 
@@ -37,6 +37,8 @@ self.addEventListener('fetch', e => {
 self.addEventListener('push', e => {
   let d = {};
   try { d = e.data ? e.data.json() : {}; } catch { d = { body: e.data ? e.data.text() : '' }; }
+  // V5.5.4: otwarta aplikacja od razu pobiera nowe dane (np. nowa rezerwacja ze strony)
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(ws => ws.forEach(w => w.postMessage({ type: 'refresh', tag: d.tag || '' }))).catch(() => {}));
   e.waitUntil(self.registration.showNotification(d.title || 'Cafe Strych', {
     body: d.body || '',
     icon: 'icon-192.png',
