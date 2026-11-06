@@ -1,0 +1,100 @@
+# Cafe Strych – automatyczna kopia zapasowa bazy Supabase i plików (zdjęcia, dokumenty).
+# Codziennie ok. 4:30 w nocy (czasu polskiego) + ręcznie: Actions → „Kopia zapasowa” → Run workflow.
+# Kopia jest ZASZYFROWANA hasłem BACKUP_PASSWORD i trzymana 30 dni w zakładce Actions (Artifacts).
+# Sekrety (Settings → Secrets and variables → Actions):
+#   SUPABASE_DB_URL      – Supabase → Connect → „Session pooler” (URI z hasłem do bazy)
+#   SUPABASE_SERVICE_KEY – Supabase → Project Settings → API Keys → secret / service_role
+#   BACKUP_PASSWORD      – dowolne mocne hasło do szyfrowania kopii (ZAPISZ JE – bez niego kopii nie da się otworzyć)
+# Jak przywrócić – patrz KOPIE-ZAPASOWE.md
+
+name: Kopia zapasowa
+
+on:
+  schedule:
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: kopia-zapasowa
+  cancel-in-progress: false
+
+env:
+  SUPABASE_URL: https://dhqsjwanjrcblrhevfcq.supabase.co
+
+jobs:
+  kopia:
+    name: Kopia bazy i plików
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Sprawdź sekrety
+        env:
+          A: ${{ secrets.SUPABASE_DB_URL }}
+          B: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          C: ${{ secrets.BACKUP_PASSWORD }}
+        run: |
+          if [ -z "$A" ] || [ -z "$B" ] || [ -z "$C" ]; then
+            echo "::error::Brak sekretów SUPABASE_DB_URL, SUPABASE_SERVICE_KEY lub BACKUP_PASSWORD (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
+      - name: Zainstaluj narzędzia PostgreSQL 17
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-common >/dev/null
+          sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh -y >/dev/null
+          sudo apt-get install -y -qq postgresql-client-17 >/dev/null
+          /usr/lib/postgresql/17/bin/pg_dump --version
+
+      - name: Kopia bazy (tabele aplikacji)
+        env:
+          DB: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir -p kopia
+          /usr/lib/postgresql/17/bin/pg_dump "$DB" --schema=public -Fc -f kopia/baza-public.dump
+          /usr/lib/postgresql/17/bin/pg_dump "$DB" --schema=public --schema-only -f kopia/baza-public-struktura.sql
+          ls -la kopia
+
+      - name: Kopia kont użytkowników i listy plików
+        continue-on-error: true
+        env:
+          DB: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          /usr/lib/postgresql/17/bin/pg_dump "$DB" --data-only --table=auth.users --table=auth.identities -Fc -f kopia/konta-auth.dump || echo "::warning::Nie udało się skopiować kont (auth) – kopia tabel aplikacji jest kompletna."
+          /usr/lib/postgresql/17/bin/psql "$DB" -At -F $'\t' -c "select bucket_id, name from storage.objects where name not like '%/.emptyFolderPlaceholder' order by 1,2" > kopia/pliki-lista.tsv
+          wc -l kopia/pliki-lista.tsv
+
+      - name: Kopia plików (zdjęcia strony, dokumenty pracowników, zrzuty zgłoszeń)
+        continue-on-error: true
+        env:
+          KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          mkdir -p kopia/pliki
+          ok=0; bad=0
+          while IFS=$'\t' read -r bucket name; do
+            [ -z "$bucket" ] && continue
+            out="kopia/pliki/$bucket/$name"; mkdir -p "$(dirname "$out")"
+            enc=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$name")
+            if curl -sfL -H "Authorization: Bearer $KEY" -H "apikey: $KEY" "$SUPABASE_URL/storage/v1/object/authenticated/$bucket/$enc" -o "$out"; then ok=$((ok+1)); else bad=$((bad+1)); rm -f "$out"; fi
+          done < kopia/pliki-lista.tsv
+          echo "Pobrano plików: $ok, błędów: $bad"
+          [ "$bad" -gt 0 ] && echo "::warning::Nie pobrano $bad plików." || true
+
+      - name: Spakuj i zaszyfruj
+        env:
+          PASS: ${{ secrets.BACKUP_PASSWORD }}
+        run: |
+          d=$(TZ=Europe/Warsaw date +%Y-%m-%d_%H%M)
+          echo "NAZWA=cafe-strych-kopia-$d" >> "$GITHUB_ENV"
+          tar -czf kopia.tar.gz kopia
+          openssl enc -aes-256-cbc -pbkdf2 -iter 200000 -salt -in kopia.tar.gz -out "cafe-strych-kopia-$d.tar.gz.enc" -pass env:PASS
+          rm -rf kopia kopia.tar.gz
+          ls -la *.enc
+
+      - name: Zapisz kopię (30 dni)
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.NAZWA }}
+          path: "*.enc"
+          retention-days: 30
+          compression-level: 0

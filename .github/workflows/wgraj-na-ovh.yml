@@ -59,6 +59,7 @@ jobs:
             zrodla/**
             supabase/**
             *.md
+            KOPIE-ZAPASOWE.md
           log-level: standard
 
       - name: Gotowe
