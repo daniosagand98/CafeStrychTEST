@@ -1,5 +1,5 @@
 # Cafe Strych – automatyczna kopia zapasowa bazy Supabase i plików (zdjęcia, dokumenty).
-# Codziennie ok. 4:30 w nocy (czasu polskiego) + ręcznie: Actions → „Kopia zapasowa” → Run workflow.
+# Na razie tylko ręcznie: Actions → „Kopia zapasowa” → Run workflow (nocne kopie wyłączone – patrz niżej).
 # Kopia jest ZASZYFROWANA hasłem BACKUP_PASSWORD i trzymana 30 dni w zakładce Actions (Artifacts).
 # Sekrety (Settings → Secrets and variables → Actions):
 #   SUPABASE_DB_URL      – Supabase → Connect → „Session pooler” (URI z hasłem do bazy)
@@ -10,8 +10,9 @@
 name: Kopia zapasowa
 
 on:
-  schedule:
-    - cron: "30 3 * * *"
+  # Automatyczna kopia co noc – WYŁĄCZONA na razie. Aby włączyć, usuń znaki # z dwóch linii poniżej.
+  # schedule:
+  #   - cron: "30 3 * * *"
   workflow_dispatch:
 
 concurrency:
