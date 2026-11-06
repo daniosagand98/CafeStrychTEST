@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.5 – 06.11.2026
+- Rezerwacje: pole „Telefon gościa”; po zatwierdzeniu rezerwacji okno z gotową treścią i przyciskiem „📱 Wyślij SMS” – otwiera SMS-y z wpisanym numerem i treścią potwierdzenia.
+- „System i logi”: kto dodał, zatwierdził, odrzucił, zmienił lub usunął rezerwację (SQL: sql/supabase_v5_5.sql).
+- Menu pod imieniem u administratora bez pozycji, które są w Ustawieniach (zostały: Moje konto, Ustawienia, Powiadomienia, Zgłoś błąd, Wyloguj).
+
 ## Aplikacja V5.4.2 + Strona v1.8.6 – 06.11.2026
 - Zgłaszanie błędów pomija „błędy” wstrzykiwane przez wbudowane przeglądarki Facebooka/Instagrama (np. _AutofillCallbackHandler) – to nie są błędy strony.
 
