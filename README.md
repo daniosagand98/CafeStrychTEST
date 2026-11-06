@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.5.3 – 06.11.2026
+- Stopka: „Created and designed by DWSystem” z linkiem do dwsystem.eu.
+
 ## Aplikacja V5.5.2 – 06.11.2026
 - Czat: konto daniosagand@gmail.com przypięte na górze jako „Administrator aplikacji” – każdy może napisać z pytaniem.
 
