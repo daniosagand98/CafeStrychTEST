@@ -1,0 +1,65 @@
+# Cafe Strych – wgrywanie strony i aplikacji na serwer OVH jednym przyciskiem.
+# Uruchomienie: GitHub → Actions → „Wgraj na OVH” → Run workflow.
+# Dane do FTP są w sekretach repozytorium (Settings → Secrets and variables → Actions):
+#   FTP_SERVER   – np. ftp.cluster0XX.hosting.ovh.net
+#   FTP_USERNAME – login FTP z panelu OVH
+#   FTP_PASSWORD – hasło FTP
+# Wysyłane są tylko pliki strony (index.html, img/, .htaccess) i aplikacji (panel/).
+# Za pierwszym razem idzie wszystko, potem tylko zmienione pliki.
+
+name: Wgraj na OVH
+
+on:
+  workflow_dispatch:
+    inputs:
+      protokol:
+        description: "Połączenie (zostaw ftps; jeśli się nie połączy – wybierz ftp)"
+        type: choice
+        options: [ftps, ftp]
+        default: ftps
+
+concurrency:
+  group: wgraj-na-ovh
+  cancel-in-progress: false
+
+jobs:
+  wgraj:
+    name: Wgrywanie na cafestrychgdynia.pl
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Pobierz pliki z repozytorium
+        uses: actions/checkout@v4
+
+      - name: Sprawdź, czy są dane do FTP
+        env:
+          S: ${{ secrets.FTP_SERVER }}
+          U: ${{ secrets.FTP_USERNAME }}
+          P: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          if [ -z "$S" ] || [ -z "$U" ] || [ -z "$P" ]; then
+            echo "::error::Brak danych FTP. Dodaj sekrety FTP_SERVER, FTP_USERNAME i FTP_PASSWORD (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
+      - name: Wyślij na serwer
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ inputs.protokol }}
+          server-dir: ./www/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            podglad/**
+            sql/**
+            zrodla/**
+            supabase/**
+            *.md
+          log-level: standard
+
+      - name: Gotowe
+        run: echo "✅ Strona i aplikacja wgrane na OVH. Otwórz https://cafestrychgdynia.pl i https://cafestrychgdynia.pl/panel/"
