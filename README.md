@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.5.2 – 06.11.2026
+- Czat: konto daniosagand@gmail.com przypięte na górze jako „Administrator aplikacji” – każdy może napisać z pytaniem.
+
 ## Aplikacja V5.5.1 – 06.11.2026
 - Edycja rezerwacji: przyciski obok siebie – Zapisz, 📱 Wyślij SMS (z danych w formularzu), Usuń.
 
