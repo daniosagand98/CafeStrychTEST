@@ -1,7 +1,7 @@
 # Wgranie strony i aplikacji na cafestrychgdynia.pl (OVH)
 
 Program do wgrywania: **FileZilla** (darmowa).
-Połączenie: host `sftp://ftp.cluster131.hosting.ovh.net`, port **22**, login `cafestr`, hasło z maila od poprzedniej firmy.
+Połączenie: SFTP, port **22** – adres serwera, login i hasło z maila od poprzedniej firmy (zapisane w FileZilli).
 Na serwerze pracujesz w katalogu **`www`**.
 
 Paczka do wgrania: **`na-serwer.zip`** (rozpakuj u siebie). Zawiera dokładnie:

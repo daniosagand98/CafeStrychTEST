@@ -1,8 +1,8 @@
 # Cafe Strych – wgrywanie strony i aplikacji na serwer OVH jednym przyciskiem.
 # Uruchomienie: GitHub → Actions → „Wgraj na OVH” → Run workflow.
 # Dane do SFTP są w sekretach repozytorium (Settings → Secrets and variables → Actions):
-#   FTP_SERVER   – ftp.cluster131.hosting.ovh.net
-#   FTP_USERNAME – cafestr
+#   FTP_SERVER   – adres serwera SFTP (jak w FileZilli)
+#   FTP_USERNAME – login SFTP (jak w FileZilli)
 #   FTP_PASSWORD – hasło SFTP (z maila od poprzedniej firmy – to samo co w FileZilli)
 # Wysyłane są tylko pliki strony (index.html, img/, .htaccess) i aplikacji (panel/) do folderu www.
 # Niczego na serwerze nie usuwa – tylko nadpisuje pliki nowszymi wersjami.

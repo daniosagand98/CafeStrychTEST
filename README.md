@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.6 – 06.11.2026 (poprawki po audycie)
+- Wylogowanie czyści z urządzenia zapisane dane aplikacji (ważne na wspólnych tabletach).
+- Serwer (.htaccess): dodatkowe nagłówki bezpieczeństwa (HTTPS na stałe, ochrona przed osadzaniem w obcych stronach, blokada plików technicznych).
+- SQL: sql/supabase_v5_6_bezpieczenstwo.sql (ochrona ról i kont, usunięcie starych zasad, zamiany zmian tylko przez aplikację, limit próśb o rezerwację ze strony) oraz sql/audyt_bezpieczenstwa.sql (tylko odczyt – raport zasad w bazie).
+
 ## Aplikacja V5.5.5 – 06.11.2026
 - Czat: „Administrator aplikacji” na samym dole, pod wiadomościami prywatnymi.
 
