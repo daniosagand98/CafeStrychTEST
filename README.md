@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.5.5 – 06.11.2026
+- Czat: „Administrator aplikacji” na samym dole, pod wiadomościami prywatnymi.
+
 ## Aplikacja V5.5.4 – 06.11.2026
 - Nowe rezerwacje i inne zmiany pojawiają się bez restartu: odświeżenie po powrocie do aplikacji, co minutę, po powiadomieniu push i po odzyskaniu internetu; ponowne łączenie kanału na żywo po uśpieniu telefonu.
 - Wgrać także panel/sw.js.
