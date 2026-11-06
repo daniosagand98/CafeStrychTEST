@@ -5,7 +5,7 @@
 <!-- Jarvis: zgłaszanie błędów do centrum błędów + synchronizacja usuniętych zgłoszeń (klucz tylko do zgłaszania, bez dostępu do danych) -->
 <script>(function(){var K="jk_yxgVMa1_CPPZ5jNDX5xpfvsiVnkkwDNk",U="https://tpoyenlvzzkhtjkmazao.supabase.co/functions/v1/jarvis-ingest",S="Cafe Strych strona",L="warning",n=0,seen={};
 function post(b){return fetch(U,{method:"POST",headers:{"Content-Type":"application/json","x-jarvis-key":K},body:JSON.stringify(b)});}
-function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;d=d||{};
+function send(t,m,d,lv){try{t=String(t||"Błąd").slice(0,200);if(n>=10||/^Script error\.?$/.test(t)||/_AutofillCallbackHandler|__gCrWeb|instantSearchSDKJSBridge|webkit\.messageHandlers|zaloJSV2/.test(t))return;var f=t+"|"+String(m||"").slice(0,80);if(seen[f])return;seen[f]=1;n++;d=d||{};
 post({title:t,message:String(m||"").slice(0,3000),level:lv||L,source:S,url:location.href,ref:d.ref?String(d.ref):undefined,details:d}).catch(function(){});}catch(e){}}
 window.addEventListener("error",function(e){if(e&&e.message)send(e.message,(e.error&&e.error.stack)||"",{file:String(e.filename||"").split("?")[0],line:e.lineno,col:e.colno});});
 window.addEventListener("unhandledrejection",function(e){var r=e&&e.reason||{};send("Nieobsłużony błąd: "+String(r.message||r).slice(0,160),r.stack||"",{});});
@@ -783,7 +783,7 @@ dialog[open]{animation:dlg .5s var(--ease)}
     </div>
     <div class="fBottom">
       <span>© <span id="year">2026</span> Cafe Strych, Gdynia</span>
-      <span class="fVer">Strona v1.8.5 · aktualizacja 03.11.2026</span>
+      <span class="fVer">Strona v1.8.6 · aktualizacja 06.11.2026</span>
       <a class="fMade" href="https://dwsystem.eu" target="_blank" rel="noopener">Projekt i wykonanie <b>DWSystem</b></a>
     </div>
   </div>

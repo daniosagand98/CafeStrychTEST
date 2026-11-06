@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.4.2 + Strona v1.8.6 – 06.11.2026
+- Zgłaszanie błędów pomija „błędy” wstrzykiwane przez wbudowane przeglądarki Facebooka/Instagrama (np. _AutofillCallbackHandler) – to nie są błędy strony.
+
 ## Aplikacja V5.4.1 – 04.11.2026
 - Dolny pasek liczony na żywo z widocznej wysokości ekranu (iPhone składany, obrót, powrót do aplikacji); przy otwartej klawiaturze pasek się chowa.
 
