@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.6.1 – 11.11.2026
+- Po odrzuceniu rezerwacji: okno z gotowym SMS-em o braku wolnych miejsc i przyciskiem „📱 Wyślij SMS o odmowie”. W edycji rezerwacji przycisk SMS wysyła odmowę, gdy status to „Odrzucona”.
+- Poprawiona odmiana dnia tygodnia w SMS-ach („na środę”, „na sobotę”).
+
 ## Aplikacja V5.6 – 06.11.2026 (poprawki po audycie)
 - Wylogowanie czyści z urządzenia zapisane dane aplikacji (ważne na wspólnych tabletach).
 - Serwer (.htaccess): dodatkowe nagłówki bezpieczeństwa (HTTPS na stałe, ochrona przed osadzaniem w obcych stronach, blokada plików technicznych).
