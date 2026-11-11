@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.6.2 – 11.11.2026
+- Start → Dzisiejsze rezerwacje: odrzucona rezerwacja ma znacznik „✕ Rezerwacja odrzucona” i jest przekreślona; nie wlicza się do licznika rezerwacji i gości.
+
 ## Aplikacja V5.6.1 – 11.11.2026
 - Po odrzuceniu rezerwacji: okno z gotowym SMS-em o braku wolnych miejsc i przyciskiem „📱 Wyślij SMS o odmowie”. W edycji rezerwacji przycisk SMS wysyła odmowę, gdy status to „Odrzucona”.
 - Poprawiona odmiana dnia tygodnia w SMS-ach („na środę”, „na sobotę”).
