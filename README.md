@@ -12,6 +12,9 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## V5.8.1 – 20.11.2026
+- Nowy produkt: kategoria wybierana z listy istniejących (albo „＋ Nowa kategoria…”), VAT podpowiada się z wybranej kategorii.
+
 ## Strona v1.9 – 20.11.2026
 - Przygotowane Google Analytics 4 z banerem zgody na cookies: statystyki ładują się dopiero po „Akceptuję”, w stopce link „Ustawienia cookies”.
 - Zdarzenia: wysłana rezerwacja, kliknięcie telefonu, kliknięcie e-maila.
