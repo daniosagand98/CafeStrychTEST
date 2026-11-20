@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## V5.7.1 – 20.11.2026
+- Pracownik (na tablecie firmowym) może dać rabat i anulować rachunek – otwarty i opłacony.
+- Usuwanie rachunków na zawsze – tylko kierownik i administrator.
+- SQL: `sql/supabase_v5_7_1.sql`.
+
 ## Aplikacja V5.7 – 20.11.2026
 - Pracownik (na tablecie firmowym) przyjmuje płatność i zamyka rachunek. Rabat i anulowanie – kierownik.
 - Kierownik aktywuje i blokuje konta pracowników: Pracownicy → Konta w aplikacji (konta czekające na aktywację są na górze). Role zmienia tylko administrator.
