@@ -39,7 +39,7 @@ jobs:
       - name: Przygotuj pliki do wysłania
         run: |
           mkdir -p wysylka
-          cp index.html .htaccess wysylka/
+          cp index.html polityka-prywatnosci.html .htaccess wysylka/
           cp -r img panel wysylka/
           find wysylka -type f | sort
           du -sh wysylka

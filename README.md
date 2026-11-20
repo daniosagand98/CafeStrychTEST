@@ -15,6 +15,7 @@ Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `z
 ## Strona v1.9 – 20.11.2026
 - Przygotowane Google Analytics 4 z banerem zgody na cookies: statystyki ładują się dopiero po „Akceptuję”, w stopce link „Ustawienia cookies”.
 - Zdarzenia: wysłana rezerwacja, kliknięcie telefonu, kliknięcie e-maila.
+- Polityka prywatności (`polityka-prywatnosci.html`, administrator: AB Inwestor sp. z o.o.) – link w stopce, w banerze cookies i przy zgodzie w formularzu rezerwacji; workflow „Wgraj na OVH” wysyła też ten plik.
 - Włączenie: wpisać identyfikator `G-…` w `CONFIG.gaId` w `zrodla/strona-szablon.html` i przebudować stronę.
 
 ## V5.8 – 20.11.2026
