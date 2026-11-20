@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## V5.8.2 – 20.11.2026
+- Nowa wersja aplikacji bez wyłączania: co 5 minut i po powrocie do aplikacji sprawdza, czy na serwerze jest nowsza wersja; pokazuje pasek „Jest nowa wersja – Odśwież”, a po powrocie do aplikacji (bez otwartego okna i niewysłanych zmian z POS) odświeża się sama.
+- Liczba nieprzeczytanych wiadomości z czatu także na ikonie aplikacji (tam, gdzie system to obsługuje).
+
 ## V5.8.1 – 20.11.2026
 - Nowy produkt: kategoria wybierana z listy istniejących (albo „＋ Nowa kategoria…”), VAT podpowiada się z wybranej kategorii.
 
