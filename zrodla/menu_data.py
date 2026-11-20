@@ -53,10 +53,13 @@ T = [
   ('Shrek', 'syrop miętowy, sok jabłkowy, sok grejpfrutowy, sok pomarańczowy', [18]),
   ('Czerwony Kapturek', 'syrop Grenadina, cytryna, sok jabłkowy, sok grejpfrutowy', [18]),
   ('Lemoniada', 'zaufaj nam :)', [18]),
+  ('Synek Mamusi', '', [25]),
  ]),
  dict(id='grzance-bezalko', name='Grzańce bezalkoholowe', tab='bezalko', sizes=[''], vat=8, items=[
   ('Wino czerwone z przyprawami 0,2 l', '', [20]),
   ('Piwo z przyprawami 0,5 l', '', [21]),
+  ('Cydr jabłkowy półsłodki z przyprawami', '', [22]),
+  ('Miód pitny z przyprawami', '', [20]),
  ]),
  dict(id='piwo-bezalko', name='Piwo bezalkoholowe', tab='bezalko', sizes=['0,5 l'], vat=8, items=[
   ('Miłosław IPA 0,0%', '', [17]),
