@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## V5.8 – 20.11.2026
+- Dzielenie rachunku: przycisk „✂ Podziel” przenosi wybrane pozycje (także część sztuk) na nowy rachunek przy tym samym stoliku.
+- Dzielić może pracownik i kierownik, na tablecie firmowym i z internetem; podział zapisuje się w historii obu rachunków.
+- SQL: `sql/supabase_v5_8.sql`.
+
 ## V5.7.1 – 20.11.2026
 - Pracownik (na tablecie firmowym) może dać rabat i anulować rachunek – otwarty i opłacony.
 - Usuwanie rachunków na zawsze – tylko kierownik i administrator.

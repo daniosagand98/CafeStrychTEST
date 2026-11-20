@@ -100,6 +100,7 @@ const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));if(!navigator.on
  if(fn==='admin_delete_account'){DB.profiles=DB.profiles.filter(x=>x.id!==a.p_user);return{data:'deleted',error:null}}
  if(fn==='check_company_device'){const n=localStorage.getItem('cs_company_device_name');return{data:a.p_token&&n?{id:'dev1',name:n}:null,error:null}}
  if(fn==='register_company_device'){DB.company_devices=DB.company_devices||[];DB.company_devices.push({id:'dev1',name:a.p_name,created_at:new Date().toISOString(),active:true});return{data:'dev1',error:null}}
+ if(fn==='pos_split_order'){const o=DB.pos_orders.find(x=>x.id===a.p_order);DB.pos_orders.unshift({id:a.p_new,order_no:a.p_no,table_id:o.table_id,customer_name:a.p_name,status:'new',source:'pos',created_at:new Date().toISOString(),discount_pct:0});for(const e of a.p_items){const l=T().find(r=>r.id===e.id);if(!l||e.qty>l.qty)return{data:null,error:{message:'Pozycja nie należy do tego rachunku.'}};l.qty-=e.qty;T().push({...l,id:uid(),order_id:a.p_new,qty:e.qty,created_at:new Date().toISOString()})}DB.pos_order_items=T().filter(r=>r.qty>0);return{data:a.p_new,error:null}}
  if(fn==='set_account_active'){const x=DB.profiles.find(p=>p.id===a.p_user);if(x)x.active=a.p_active;return{data:null,error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
