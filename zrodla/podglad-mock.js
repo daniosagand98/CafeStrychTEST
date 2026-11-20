@@ -100,6 +100,7 @@ const rpc=async(fn,a)=>{await new Promise(r=>setTimeout(r,120));if(!navigator.on
  if(fn==='admin_delete_account'){DB.profiles=DB.profiles.filter(x=>x.id!==a.p_user);return{data:'deleted',error:null}}
  if(fn==='check_company_device'){const n=localStorage.getItem('cs_company_device_name');return{data:a.p_token&&n?{id:'dev1',name:n}:null,error:null}}
  if(fn==='register_company_device'){DB.company_devices=DB.company_devices||[];DB.company_devices.push({id:'dev1',name:a.p_name,created_at:new Date().toISOString(),active:true});return{data:'dev1',error:null}}
+ if(fn==='set_account_active'){const x=DB.profiles.find(p=>p.id===a.p_user);if(x)x.active=a.p_active;return{data:null,error:null}}
  if(fn==='site_settings')return{data:{www_bookings:true},error:null};
  return{data:null,error:{code:'PGRST202',message:'Could not find the function '+fn}}};
 return{rpc,from:t=>new Q(t),

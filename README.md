@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Aplikacja V5.7 – 20.11.2026
+- Pracownik (na tablecie firmowym) przyjmuje płatność i zamyka rachunek. Rabat i anulowanie – kierownik.
+- Kierownik aktywuje i blokuje konta pracowników: Pracownicy → Konta w aplikacji (konta czekające na aktywację są na górze). Role zmienia tylko administrator.
+- SQL: sql/supabase_v5_7.sql.
+
 ## Aplikacja V5.6.2 – 11.11.2026
 - Start → Dzisiejsze rezerwacje: odrzucona rezerwacja ma znacznik „✕ Rezerwacja odrzucona” i jest przekreślona; nie wlicza się do licznika rezerwacji i gości.
 
