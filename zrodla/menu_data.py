@@ -53,13 +53,10 @@ T = [
   ('Shrek', 'syrop miętowy, sok jabłkowy, sok grejpfrutowy, sok pomarańczowy', [18]),
   ('Czerwony Kapturek', 'syrop Grenadina, cytryna, sok jabłkowy, sok grejpfrutowy', [18]),
   ('Lemoniada', 'zaufaj nam :)', [18]),
-  ('Synek Mamusi', '', [25]),
  ]),
  dict(id='grzance-bezalko', name='Grzańce bezalkoholowe', tab='bezalko', sizes=[''], vat=8, items=[
   ('Wino czerwone z przyprawami 0,2 l', '', [20]),
   ('Piwo z przyprawami 0,5 l', '', [21]),
-  ('Cydr jabłkowy półsłodki z przyprawami', '', [22]),
-  ('Miód pitny z przyprawami', '', [20]),
  ]),
  dict(id='piwo-bezalko', name='Piwo bezalkoholowe', tab='bezalko', sizes=['0,5 l'], vat=8, items=[
   ('Miłosław IPA 0,0%', '', [17]),
@@ -138,6 +135,11 @@ T = [
   ('Melancholia', 'whisky Johnnie Walker, Martini Bianco, sok grejpfrutowy', [32]),
   ('Krwawy Zdzisiu', 'rum czarny Bacardi, likier Campari, sok pomarańczowy, syrop marakuja', [32]),
   ('Na Pożegnanie', 'tequila srebrna, rum Malibu, sok pomarańczowy', [32]),
+  ('Synek Mamusi', '', [25]),
+ ]),
+ dict(id='grzance', name='Grzańce', tab='drinki', sizes=[''], vat=23, items=[
+  ('Cydr jabłkowy półsłodki z przyprawami', '', [22]),
+  ('Miód pitny z przyprawami', '', [20]),
  ]),
  dict(id='shoty', name='Shoty', tab='drinki', sizes=['40 ml'], vat=23, items=[
   ('Wściekły Pies', 'wódka, sok malinowy, Tabasco', [12]),
@@ -195,7 +197,7 @@ TABS = [('kawa','Kawa i czekolada'),('herbata','Herbata'),('bezalko','Bez procen
 POS_CAT = {'kawa':'Kawa','czekolada':'Czekolada','herbata':'Herbata','herbata-po-naszemu':'Herbata po naszemu','napoje':'Napoje i soki',
  'koktajle-bezalko':'Koktajle bezalkoholowe','grzance-bezalko':'Grzańce bezalkoholowe','piwo-bezalko':'Piwo bezalkoholowe','wino-bezalko':'Wino bezalkoholowe',
  'piwo-beczka':'Piwo z beczki','piwo-butelka':'Piwo z butelki','syropy-piwo':'Dodatki','wino':'Wino','prosecco':'Wino','wermuty':'Wermuty',
- 'drinki':'Drinki','nasze-drinki':'Drinki – nasze','shoty':'Shoty','wodka':'Wódka','wodki-smakowe':'Wódka','nalewki':'Nalewki',
+ 'drinki':'Drinki','nasze-drinki':'Drinki – nasze','grzance':'Grzańce','shoty':'Shoty','wodka':'Wódka','wodki-smakowe':'Wódka','nalewki':'Nalewki',
  'whisky':'Whisky','likiery':'Likiery i kremy','kremy':'Likiery i kremy','gin':'Gin, rum, brandy','rum':'Gin, rum, brandy','brandy':'Gin, rum, brandy',
  'na-slodko':'Desery','przekaski':'Przekąski','zakaski':'Zakąski'}
 
