@@ -16,7 +16,7 @@ Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `z
 - Przygotowane Google Analytics 4 z banerem zgody na cookies: statystyki ładują się dopiero po „Akceptuję”, w stopce link „Ustawienia cookies”.
 - Zdarzenia: wysłana rezerwacja, kliknięcie telefonu, kliknięcie e-maila.
 - Polityka prywatności (`polityka-prywatnosci.html`, administrator: AB Inwestor sp. z o.o.) – link w stopce, w banerze cookies i przy zgodzie w formularzu rezerwacji; workflow „Wgraj na OVH” wysyła też ten plik.
-- Włączenie: wpisać identyfikator `G-…` w `CONFIG.gaId` w `zrodla/strona-szablon.html` i przebudować stronę.
+- Tag Google `GTM-KWMKN7D9` wpisany w `CONFIG.gaId` (`zrodla/strona-szablon.html`).
 
 ## V5.8 – 20.11.2026
 - Dzielenie rachunku: przycisk „✂ Podziel” przenosi wybrane pozycje (także część sztuk) na nowy rachunek przy tym samym stoliku.

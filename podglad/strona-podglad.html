@@ -844,7 +844,7 @@ const CONFIG={
   facebook:'https://www.facebook.com/pages/Cafe-Strych/171438269537963',
   instagram:'https://www.instagram.com/cafe_strych/',   // pusty = ukryte
   tiktok:'https://www.tiktok.com/@cafe_strych',          // pusty = ukryte
-  gaId:'',   // Google Analytics 4 – identyfikator pomiaru, np. 'G-ABC123XYZ' (pusty = statystyki wyłączone)
+  gaId:'GTM-KWMKN7D9',   // tag Google / Google Analytics 4 ('GTM-…' albo 'G-…'; pusty = statystyki wyłączone)
   // godziny: indeks 0 = niedziela … 6 = sobota; zamknięcie po północy wpisz normalnie (np. '02:00')
   hours:[['12:00','00:00'],['12:00','00:00'],['12:00','00:00'],['12:00','00:00'],['12:00','00:00'],['12:00','02:00'],['12:00','02:00']]
 };
@@ -854,8 +854,8 @@ function ckGet(){try{return localStorage.getItem(CK_KEY)}catch(e){return null}}
 function ckSet(v){try{localStorage.setItem(CK_KEY,v)}catch(e){}}
 function gaLoad(){const id=CONFIG.gaId;if(!id||window.__gaOn||window.STRYCH_PREVIEW)return;window.__gaOn=1;
   window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};
-  gtag('js',new Date());gtag('config',id,{anonymize_ip:true});
-  const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(id);document.head.appendChild(s)}
+  gtag('js',new Date());const gtm=/^GTM-/.test(id);if(!gtm)gtag('config',id);
+  const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/'+(gtm?'gtm.js':'gtag/js')+'?id='+encodeURIComponent(id);document.head.appendChild(s)}
 function track(name,params){try{if(window.__gaOn&&window.gtag)gtag('event',name,params||{})}catch(e){}}
 function ckBar(){if(document.querySelector('.ckBar'))return;const b=document.createElement('div');b.className='ckBar';b.setAttribute('role','dialog');b.setAttribute('aria-label','Pliki cookies');
   b.innerHTML='<b>🍪 Pliki cookies</b><p>Za Twoją zgodą używamy Google Analytics, żeby wiedzieć, jak korzystacie ze strony (anonimowe statystyki odwiedzin). Bez zgody strona działa tak samo. <a href="polityka-prywatnosci.html" style="color:inherit">Polityka prywatności</a></p><div class="ckBtns"><button type="button" class="ckNo">Odrzuć</button><button type="button" class="ckYes">Akceptuję</button></div>';
