@@ -12,6 +12,10 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## V5.8.3 – 20.11.2026
+- Sprawdzanie nowej wersji lżejsze: co 5 minut tylko krótkie zapytanie HEAD (kilkaset bajtów), całą aplikację pobiera dopiero, gdy plik na serwerze się zmienił.
+- Samo odświeża się wyłącznie po powrocie do aplikacji po co najmniej 10 minutach przerwy, poza POS, rezerwacjami i zakupami, bez otwartego okna i niewysłanych zmian; w pozostałych przypadkach tylko pasek „Odśwież”.
+
 ## V5.8.2 – 20.11.2026
 - Nowa wersja aplikacji bez wyłączania: co 5 minut i po powrocie do aplikacji sprawdza, czy na serwerze jest nowsza wersja; pokazuje pasek „Jest nowa wersja – Odśwież”, a po powrocie do aplikacji (bez otwartego okna i niewysłanych zmian z POS) odświeża się sama.
 - Liczba nieprzeczytanych wiadomości z czatu także na ikonie aplikacji (tam, gdzie system to obsługuje).
