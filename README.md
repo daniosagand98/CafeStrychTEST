@@ -12,6 +12,11 @@
 
 Na serwerze klienta: zawartość głównego katalogu (bez `sql/`, `podglad/`, `zrodla/`) → katalog główny domeny, aplikacja dostępna pod `/panel/`.
 
+## Strona v1.9 – 20.11.2026
+- Przygotowane Google Analytics 4 z banerem zgody na cookies: statystyki ładują się dopiero po „Akceptuję”, w stopce link „Ustawienia cookies”.
+- Zdarzenia: wysłana rezerwacja, kliknięcie telefonu, kliknięcie e-maila.
+- Włączenie: wpisać identyfikator `G-…` w `CONFIG.gaId` w `zrodla/strona-szablon.html` i przebudować stronę.
+
 ## V5.8 – 20.11.2026
 - Dzielenie rachunku: przycisk „✂ Podziel” przenosi wybrane pozycje (także część sztuk) na nowy rachunek przy tym samym stoliku.
 - Dzielić może pracownik i kierownik, na tablecie firmowym i z internetem; podział zapisuje się w historii obu rachunków.
