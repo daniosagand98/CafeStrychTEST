@@ -28,6 +28,16 @@ T = [
   ('Syrop do czekolady', 'dyniowy, kokosowy, migdałowy, orzechowy, karmelowy, różany, czarny bez, miętowy, waniliowy, cynamonowy', [3]),
  ]),
  # ---------- HERBATA ----------
+ dict(id='kawa-czekolada-alko', name='Kawa i czekolada z alkoholem', tab='kawa', sizes=[''], vat=23, note='30 ml alkoholu i bita śmietana', items=[
+  ('Kawa z kremem Baileys', '', [30]),
+  ('Kawa z whisky Jameson', '', [30]),
+  ('Kawa z kremem Advocaat', '', [26]),
+  ('Kawa z likierem Amaretto', '', [26]),
+  ('Czekolada z kremem Baileys', '', [30]),
+  ('Czekolada z whisky Jameson', '', [30]),
+  ('Czekolada z kremem Advocaat', '', [26]),
+  ('Czekolada z likierem Amaretto', '', [26]),
+ ]),
  dict(id='herbata', name='Herbata', tab='herbata', sizes=['0,3 l'], vat=23, sketch='szkic-herbata', items=[
   ('Herbata w torebce', 'do wyboru: Ceylon / Earl Grey / miętowa / zielona / owoce leśne', [13]),
   ('Herbata liściasta', 'zapytaj obsługę o dostępne smaki :)', [17]),
@@ -194,7 +204,7 @@ T = [
 TABS = [('kawa','Kawa i czekolada'),('herbata','Herbata'),('bezalko','Bez procentów'),('piwo','Piwo'),('wino','Wino'),('drinki','Drinki i shoty'),('alkohole','Mocniejsze'),('jedzenie','Do jedzenia')]
 
 # Nazwy kategorii w POS (krótsze, sortowane alfabetycznie w aplikacji)
-POS_CAT = {'kawa':'Kawa','czekolada':'Czekolada','herbata':'Herbata','herbata-po-naszemu':'Herbata po naszemu','napoje':'Napoje i soki',
+POS_CAT = {'kawa':'Kawa','czekolada':'Czekolada','kawa-czekolada-alko':'Kawa i czekolada z alkoholem','herbata':'Herbata','herbata-po-naszemu':'Herbata po naszemu','napoje':'Napoje i soki',
  'koktajle-bezalko':'Koktajle bezalkoholowe','grzance-bezalko':'Grzańce bezalkoholowe','piwo-bezalko':'Piwo bezalkoholowe','wino-bezalko':'Wino bezalkoholowe',
  'piwo-beczka':'Piwo z beczki','piwo-butelka':'Piwo z butelki','syropy-piwo':'Dodatki','wino':'Wino','prosecco':'Wino','wermuty':'Wermuty',
  'drinki':'Drinki','nasze-drinki':'Drinki – nasze','grzance':'Grzańce','shoty':'Shoty','wodka':'Wódka','wodki-smakowe':'Wódka','nalewki':'Nalewki',
