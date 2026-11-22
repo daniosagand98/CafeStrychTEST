@@ -49,6 +49,11 @@ T = [
   ('Herbata Strychowa', 'czarna z imbirem, cynamonem, miodem, jabłkiem i pomarańczą', [18,23]),
   ('Herbata Babuni', 'czarna z konfiturą · smaki: jagodowa, truskawkowa, wiśniowa, malinowa', [18,None]),
  ]),
+ dict(id='herbata-alko', name='Herbata z alkoholem', tab='herbata', sizes=[''], vat=23, note='Herbata czarna i 40 ml alkoholu', items=[
+  ('Herbata z rumem Captain Morgan', 'rum brązowy', [26]),
+  ('Herbata z wódką Luksusowa', '', [21]),
+  ('Herbata z wódką wiśniową', '', [21]),
+ ]),
  # ---------- BEZALKOHOLOWE ----------
  dict(id='napoje', name='Napoje i soki', tab='bezalko', sizes=['0,3 l','1,0 l'], vat=23, items=[
   ('Coca-Cola', '', [10,22]),
@@ -204,7 +209,7 @@ T = [
 TABS = [('kawa','Kawa i czekolada'),('herbata','Herbata'),('bezalko','Bez procentów'),('piwo','Piwo'),('wino','Wino'),('drinki','Drinki i shoty'),('alkohole','Mocniejsze'),('jedzenie','Do jedzenia')]
 
 # Nazwy kategorii w POS (krótsze, sortowane alfabetycznie w aplikacji)
-POS_CAT = {'kawa':'Kawa','czekolada':'Czekolada','kawa-czekolada-alko':'Kawa i czekolada z alkoholem','herbata':'Herbata','herbata-po-naszemu':'Herbata po naszemu','napoje':'Napoje i soki',
+POS_CAT = {'kawa':'Kawa','czekolada':'Czekolada','kawa-czekolada-alko':'Kawa i czekolada z alkoholem','herbata':'Herbata','herbata-po-naszemu':'Herbata po naszemu','herbata-alko':'Herbata z alkoholem','napoje':'Napoje i soki',
  'koktajle-bezalko':'Koktajle bezalkoholowe','grzance-bezalko':'Grzańce bezalkoholowe','piwo-bezalko':'Piwo bezalkoholowe','wino-bezalko':'Wino bezalkoholowe',
  'piwo-beczka':'Piwo z beczki','piwo-butelka':'Piwo z butelki','syropy-piwo':'Dodatki','wino':'Wino','prosecco':'Wino','wermuty':'Wermuty',
  'drinki':'Drinki','nasze-drinki':'Drinki – nasze','grzance':'Grzańce','shoty':'Shoty','wodka':'Wódka','wodki-smakowe':'Wódka','nalewki':'Nalewki',
